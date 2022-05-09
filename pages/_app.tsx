@@ -1,10 +1,19 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Navbar } from '../components';
 import Drawer from '../components/Drawer';
 import DrawerItem from '../components/Drawer/DrawerItem';
 import '../styles/globals.css';
+import { extendTheme } from '@chakra-ui/react';
+
+const theme = extendTheme({
+  fonts: {
+    body: 'Quicksand, sans-serif',
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +26,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Navbar
+        onMenuClick={() => {
+          setIsOpen(!isOpen);
+        }}
+      />
       <div className='flex'>
         <Drawer isOpen={isOpen}>
           <Link passHref href='/account'>
@@ -42,8 +56,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Link>
           <DrawerItem icon='logout' label='Logout' />
         </Drawer>
-        <div className='full'>
-          <Component {...pageProps} />;
+        <div className='w-full'>
+          <ChakraProvider theme={theme}>
+            <Component {...pageProps} />
+          </ChakraProvider>
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ export interface Props {
 const Avatar = ({ name, color, variant }: Props) => (
   <div
     className={clsx(
-      'flex justify-center items-center font-bold rounded-full text-white',
+      'cursor-pointer flex justify-center items-center font-bold rounded-full text-white',
       {
         'h-12 w-12 text-2xl': variant === 'sm',
         'h-16 w-16 text-3xl': variant === 'md',
