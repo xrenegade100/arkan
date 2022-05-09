@@ -6,7 +6,15 @@ import Drawer from '../components/Drawer';
 import DrawerItem from '../components/Drawer/DrawerItem';
 
 const Home: NextPage = () => {
-  return <>Home</>;
+  const [isOpen, setIsOpen] = useState(false);
+  const [path, setPath] = useState('');
+  const router = useRouter();
+
+  useEffect(() => {
+    setPath(router.pathname);
+  }, [router.pathname]);
+
+  return <>Analisi</>;
 };
 
 export default Home;

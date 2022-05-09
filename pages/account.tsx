@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import Drawer from '../components/Drawer';
 import DrawerItem from '../components/Drawer/DrawerItem';
 
-const Home: NextPage = () => {
-  return <>Home</>;
+const Account: NextPage = () => {
+  return <>Account</>;
 };
 
-export default Home;
+export default Account;
