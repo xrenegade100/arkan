@@ -17,7 +17,7 @@ const Drawer: any & { DrawerItem: React.FC<DrawerItemProps> } = forwardRef(
           filter: 'drop-shadow(0px 3.15852px 3.15852px rgba(0, 0, 0, 0.25))',
         }}
         className={clsx(
-          'w-1/5 bg-primary-main rounded-br-[138px] flex flex-col items-center',
+          'w-screen md:w-72 bg-primary-main rounded-br-[138px] flex flex-col items-center',
           {
             hidden: !isOpen,
           }

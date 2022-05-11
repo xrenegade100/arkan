@@ -7,9 +7,10 @@ import LogoIcon from '../LogoIcon';
 
 type Props = {
   onMenuClick?: () => any;
+  hambugerIcon?: string;
 };
 
-const Navbar = ({ onMenuClick }: Props) => {
+const Navbar = ({ onMenuClick, hambugerIcon }: Props) => {
   const [path, setPath] = useState('');
   const router = useRouter();
 
@@ -21,33 +22,37 @@ const Navbar = ({ onMenuClick }: Props) => {
     <nav className='flex h-14 w-screen bg-primary-dark items-center justify-between'>
       <button
         onClick={onMenuClick}
-        className='-ml-10 material-icons text-white w-60'
+        className='material-icons pr-32 text-white w-60'
       >
-        menu
+        {hambugerIcon}
       </button>
-      <div className='flex text-center'>
+      <div className='w-60 flex flex-1 justify-center'>
         <Link href='/' passHref>
           <LogoIcon size='base' />
         </Link>
       </div>
-      <div className='flex items-center text-white mr-3 w-60'>
-        <button
-          className={clsx('p-4 hover:bg-secondary-main font-bold uppercase', {
-            'bg-secondary-main': path === '/segnala',
-          })}
-        >
-          <Link href='/segnala'>Segnala</Link>
-        </button>
-        <button
-          className={clsx(
-            'p-4 hover:bg-secondary-main font-bold uppercase mr-4',
-            {
-              'bg-secondary-main': path === '/feed',
-            }
-          )}
-        >
-          <Link href='/feed'>Feed</Link>
-        </button>
+      <div className='flex items-center text-white w-60'>
+        <Link href='/segnala'>
+          <button
+            className={clsx('p-4 hover:bg-secondary-main font-bold uppercase', {
+              'bg-secondary-main': path === '/segnala',
+            })}
+          >
+            Segnala
+          </button>
+        </Link>
+        <Link href='/feed'>
+          <button
+            className={clsx(
+              'p-4 hover:bg-secondary-main font-bold uppercase mr-4',
+              {
+                'bg-secondary-main': path === '/feed',
+              }
+            )}
+          >
+            Feed
+          </button>
+        </Link>
         <Avatar color='#333' name='Giovanni' />
       </div>
     </nav>

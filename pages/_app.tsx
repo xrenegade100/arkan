@@ -8,6 +8,7 @@ import Drawer from '../components/Drawer';
 import DrawerItem from '../components/Drawer/DrawerItem';
 import '../styles/globals.css';
 import { extendTheme } from '@chakra-ui/react';
+import clsx from 'clsx';
 
 const theme = extendTheme({
   fonts: {
@@ -27,11 +28,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Navbar
+        hambugerIcon={isOpen ? 'close' : 'menu'}
         onMenuClick={() => {
           setIsOpen(!isOpen);
         }}
       />
-      <div className='flex'>
+      <div className='absolute'>
         <Drawer isOpen={isOpen}>
           <Link passHref href='/account'>
             <DrawerItem
@@ -56,11 +58,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Link>
           <DrawerItem icon='logout' label='Logout' />
         </Drawer>
-        <div className='flex justify-center w-full'>
-          <ChakraProvider theme={theme}>
-            <Component {...pageProps} />
-          </ChakraProvider>
-        </div>
+      </div>
+      <div
+        className={clsx('flex justify-center w-full', {
+          'hidden md:flex': isOpen,
+        })}
+      >
+        <ChakraProvider theme={theme}>
+          <Component {...pageProps} />
+        </ChakraProvider>
       </div>
     </>
   );
