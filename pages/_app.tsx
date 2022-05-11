@@ -28,6 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Navbar
+        isLock
         hambugerIcon={isOpen ? 'close' : 'menu'}
         onMenuClick={() => {
           setIsOpen(!isOpen);
