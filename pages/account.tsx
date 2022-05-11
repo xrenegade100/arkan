@@ -1,12 +1,14 @@
 import type { NextPage } from 'next';
 import {
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   InputGroup,
   InputRightElement,
+  Button,
 } from '@chakra-ui/react';
-import { Avatar, Button } from '../components';
+import { Avatar } from '../components';
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
 
@@ -42,80 +44,154 @@ const ModificaAccount: NextPage = () => {
         </span>
       </div>
       <div className='pt-8'>
-        <FormControl isRequired>
-          <FormLabel htmlFor='email'>
-            <span className='font-bold'>Vecchia password</span>
-          </FormLabel>
-          <InputGroup size='sm'>
-            <Input
-              type={showVecchiaPassword ? 'text' : 'password'}
-              size='lg'
-              bgColor={'white'}
-              className='text-sm'
-              textColor='gray.600'
-            />
-            <InputRightElement>
-              <span
-                onClick={handleClickVecchiaPassword}
-                className='cursor-pointer select-none material-icons-outlined h-2 pr-3'
+        <Formik
+          initialValues={{ nuovaPassword: '', confermaPassword: '' }}
+          validate={(values) => {
+            let errors = {};
+            if (
+              values.confermaPassword &&
+              values.nuovaPassword !== values.confermaPassword
+            ) {
+              errors = {
+                ...errors,
+                nuovaPassword: 'Le password non coincidono',
+                confermaPassword: 'Le password non coincidono',
+              };
+            }
+            return errors;
+          }}
+          onSubmit={(values, actions) => {}}
+        >
+          {(props) => (
+            <Form>
+              <Field name='vecchiaPassword' validate={() => {}}>
+                {({ field, form }: any) => (
+                  <FormControl isRequired>
+                    <FormLabel htmlFor='email'>
+                      <span className='font-bold'>Vecchia password</span>
+                    </FormLabel>
+                    <InputGroup size='sm'>
+                      <Input
+                        type={showVecchiaPassword ? 'text' : 'password'}
+                        size='lg'
+                        bgColor={'white'}
+                        className='text-sm'
+                        textColor='gray.600'
+                      />
+                      <InputRightElement>
+                        <span
+                          onClick={handleClickVecchiaPassword}
+                          className='cursor-pointer select-none material-icons-outlined h-2 pr-3'
+                        >
+                          {showVecchiaPassword
+                            ? 'visibility_off'
+                            : 'visibility'}
+                        </span>
+                      </InputRightElement>
+                    </InputGroup>
+                  </FormControl>
+                )}
+              </Field>
+              <Field
+                name='nuovaPassword'
+                validate={(value: string) => {
+                  if (value && value.length < 8) {
+                    return 'Inserisci almeno 8 caratteri';
+                  } else if (!value) {
+                    return 'La password non può essere vuota';
+                  }
+                  return undefined;
+                }}
               >
-                {showVecchiaPassword ? 'visibility_off' : 'visibility'}
-              </span>
-            </InputRightElement>
-          </InputGroup>
-        </FormControl>
-      </div>
-      <div>
-        <FormControl isRequired>
-          <FormLabel htmlFor='email'>
-            {' '}
-            <span className='font-bold'>Nuova password</span>
-          </FormLabel>
-          <InputGroup size='sm'>
-            <Input
-              type={showNuovaPassword ? 'text' : 'password'}
-              size='lg'
-              bgColor={'white'}
-              textColor='gray.600'
-            />
-            <InputRightElement>
-              <span
-                onClick={handleClickNuovaPassword}
-                className='cursor-pointer select-none material-icons-outlined h-2  pr-3'
+                {({ field, form }: any) => (
+                  <FormControl
+                    isRequired
+                    isInvalid={
+                      form.errors.nuovaPassword && form.touched.nuovaPassword
+                    }
+                  >
+                    <FormLabel htmlFor='email'>
+                      <span className='font-bold'>Nuova password</span>
+                    </FormLabel>
+                    <InputGroup size='sm'>
+                      <Input
+                        {...field}
+                        type={showNuovaPassword ? 'text' : 'password'}
+                        size='lg'
+                        bgColor={'white'}
+                        textColor='gray.600'
+                      />
+                      <InputRightElement>
+                        <span
+                          onClick={handleClickNuovaPassword}
+                          className='cursor-pointer select-none material-icons-outlined h-2  pr-3'
+                        >
+                          {showNuovaPassword ? 'visibility_off' : 'visibility'}
+                        </span>
+                      </InputRightElement>
+                    </InputGroup>
+                    <FormErrorMessage>
+                      {form.errors.nuovaPassword}
+                    </FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+              <Field name='confermaPassword'>
+                {({ field, form }: any) => (
+                  <FormControl
+                    isRequired
+                    isInvalid={
+                      form.errors.confermaPassword &&
+                      form.touched.confermaPassword
+                    }
+                  >
+                    <FormLabel htmlFor='email'>
+                      <span className='font-bold'>Conferma password</span>
+                    </FormLabel>
+                    <InputGroup size='sm'>
+                      <Input
+                        {...field}
+                        type={showConfermaPassword ? 'text' : 'password'}
+                        size='lg'
+                        bgColor={'white'}
+                        textColor='gray.600'
+                      />
+                      <InputRightElement>
+                        <span
+                          onClick={handleClickConfermaPassword}
+                          className='cursor-pointer select-none material-icons-outlined h-2  pr-3'
+                        >
+                          {showConfermaPassword
+                            ? 'visibility_off'
+                            : 'visibility'}
+                        </span>
+                      </InputRightElement>
+                    </InputGroup>
+                    <FormErrorMessage>
+                      {form.errors.confermaPassword}
+                    </FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+              <Button
+                width='100%'
+                style={{
+                  fontWeight: 'bold',
+                }}
+                bgColor={'#1976D2'}
+                _hover={{
+                  bgColor: '#63A4FF',
+                }}
+                mt={8}
+                colorScheme=''
+                isLoading={props.isSubmitting}
+                type='submit'
               >
-                {showNuovaPassword ? 'visibility_off' : 'visibility'}
-              </span>
-            </InputRightElement>
-          </InputGroup>
-        </FormControl>
-      </div>
-      <div>
-        <FormControl isRequired>
-          <FormLabel htmlFor='email'>
-            <span className='font-bold'>Conferma password</span>
-          </FormLabel>
-          <InputGroup size='sm'>
-            <Input
-              type={showConfermaPassword ? 'text' : 'password'}
-              size='lg'
-              bgColor={'white'}
-              textColor='gray.600'
-            />
-            <InputRightElement>
-              <span
-                onClick={handleClickConfermaPassword}
-                className='cursor-pointer select-none material-icons-outlined h-2  pr-3'
-              >
-                {showConfermaPassword ? 'visibility_off' : 'visibility'}
-              </span>
-            </InputRightElement>
-          </InputGroup>
-        </FormControl>
-      </div>
-      <div className='pt-4'>
-        <Button>
-          <span>Modifica</span>
-        </Button>
+                Submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );
