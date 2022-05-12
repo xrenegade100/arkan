@@ -20,7 +20,7 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
   }, [router.pathname]);
 
   return (
-    <nav className='flex h-14 w-screen bg-primary-dark items-center justify-between'>
+    <nav className='flex h-14 bg-primary-dark items-center justify-between'>
       {!isLock && (
         <button
           onClick={onMenuClick}

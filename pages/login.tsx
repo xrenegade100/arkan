@@ -22,7 +22,7 @@ const Login: NextPage = () => {
         alt='sfondo'
       />
       <div
-        className='flex flex-col items-center mt-6 rounded-3xl w-3/4 z-50'
+        className='flex flex-col items-center mt-5 rounded-3xl w-3/4 z-50'
         style={{
           boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
         }}
@@ -112,7 +112,7 @@ const Login: NextPage = () => {
                   oppure
                 </h1>
                 <a onClick={() => {}}>
-                  <Image src='/signwithgoogle.png' alt='google' />
+                  <Image src='/google.png' alt='google' />
                 </a>
               </div>
               <div className='flex justify-around item-center mt-8 mb-12'>
