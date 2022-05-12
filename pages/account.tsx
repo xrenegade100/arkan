@@ -187,7 +187,7 @@ const ModificaAccount: NextPage = () => {
                 isLoading={props.isSubmitting}
                 type='submit'
               >
-                Submit
+                Modifica
               </Button>
             </Form>
           )}

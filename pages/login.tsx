@@ -11,9 +11,8 @@ import { LogoIcon } from '../components';
 import React from 'react';
 
 const Login: NextPage = () => {
-  const [showNuovaPassword, setShowNuovaPassword] = React.useState(false);
-  const handleClickNuovaPassword = () =>
-    setShowNuovaPassword(!showNuovaPassword);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickPassword = () => setShowPassword(!showPassword);
   return (
     <>
       <Image
@@ -73,7 +72,7 @@ const Login: NextPage = () => {
                 <div className='w-full'>
                   <InputGroup size='sm'>
                     <Input
-                      type={showNuovaPassword ? 'text' : 'password'}
+                      type={showPassword ? 'text' : 'password'}
                       size='lg'
                       bgColor={'white'}
                       className='text-sm'
@@ -81,10 +80,10 @@ const Login: NextPage = () => {
                     />
                     <InputRightElement>
                       <span
-                        onClick={handleClickNuovaPassword}
+                        onClick={handleClickPassword}
                         className='material-icons-outlined h-2  pr-3'
                       >
-                        {showNuovaPassword ? 'visibility_off' : 'visibility'}
+                        {showPassword ? 'visibility_off' : 'visibility'}
                       </span>
                     </InputRightElement>
                   </InputGroup>
