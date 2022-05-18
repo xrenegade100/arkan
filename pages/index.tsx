@@ -641,7 +641,7 @@ const Home: NextPage = () => {
           <ModalBody>
             <div className='flex flex-col items-center justify-between'>
               <span>{text}</span>
-              <Image src={src} />
+              <Image src={src} alt='Dark pattern example' />
             </div>
           </ModalBody>
           <ModalFooter>
