@@ -27,14 +27,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Navbar
-        isLock
-        hambugerIcon={isOpen ? 'close' : 'menu'}
-        onMenuClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      />
-      <div className='absolute'>
+      <div className='fixed w-full h-[56px] z-50 top-0'>
+        <Navbar
+          hambugerIcon={isOpen ? 'close' : 'menu'}
+          onMenuClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        />
+      </div>
+      <div className='fixed z-[40]'>
         <Drawer isOpen={isOpen}>
           <Link passHref href='/account'>
             <DrawerItem
@@ -61,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Drawer>
       </div>
       <div
-        className={clsx('flex justify-center w-full', {
+        className={clsx('flex justify-center w-full mt-[56px]', {
           'hidden md:flex': isOpen,
         })}
       >
