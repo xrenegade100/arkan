@@ -49,7 +49,7 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
       )}
       {!isLock && (
         <div className='flex items-center text-white w-60'>
-          <Link href='/segnala'>
+          <Link href='/segnala' passHref>
             <button
               className={clsx(
                 'p-4 hover:bg-secondary-main font-bold uppercase',
@@ -61,7 +61,7 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
               Segnala
             </button>
           </Link>
-          <Link href='/feed'>
+          <Link href='/feed' passHref>
             <button
               className={clsx(
                 'p-4 hover:bg-secondary-main font-bold uppercase mr-4',
@@ -78,7 +78,7 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
       )}
       {isLock && (
         <div className='flex items-center text-white w-60'>
-          <Link href='/login'>
+          <Link href='/login' passHref>
             <button
               className={clsx(
                 'p-4 hover:bg-secondary-main font-bold uppercase',
@@ -90,7 +90,7 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
               Login
             </button>
           </Link>
-          <Link href='/registrazione'>
+          <Link href='/registrazione' passHref>
             <button
               className={clsx(
                 'p-4 hover:bg-secondary-main font-bold uppercase mr-4',

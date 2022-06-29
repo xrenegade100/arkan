@@ -79,7 +79,7 @@ const ConfermaSegnalazione: NextPage = () => {
                 color: 'white',
               }}
             >
-              Effettua un'altra segnalazione
+              Effettua un&apos;altra segnalazione
             </Button>
           </div>
         </div>
