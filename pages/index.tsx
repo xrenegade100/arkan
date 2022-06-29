@@ -19,6 +19,7 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalFooter,
+  ModalOverlay,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
@@ -635,6 +636,7 @@ const Home: NextPage = () => {
         isCentered
         scrollBehavior='inside'
       >
+        <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign={'center'}>{title}</ModalHeader>
           <ModalCloseButton />
