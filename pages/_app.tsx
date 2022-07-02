@@ -35,7 +35,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
         />
       </div>
-      <div className='fixed z-[40]'>
+      <div
+        className={clsx('z-[40] transition-all', {
+          fixed: isOpen,
+          '-ml-[288px] absolute': !isOpen,
+        })}
+      >
         <Drawer isOpen={isOpen}>
           <Link passHref href='/account'>
             <DrawerItem
