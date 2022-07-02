@@ -89,6 +89,7 @@ const ModificaAccount: NextPage = () => {
                           <InputGroup size='xs'>
                             <Input
                               w={250}
+                              defaultValue='BraindeadHermit'
                               type='text'
                               size='sm'
                               rounded={6}
@@ -178,6 +179,7 @@ const ModificaAccount: NextPage = () => {
                           <InputGroup size='xs'>
                             <Input
                               w={250}
+                              defaultValue='scorziellogiovanni00@gmail.com'
                               type='text'
                               size='sm'
                               rounded={6}
