@@ -134,8 +134,8 @@ const PostCard = ({ post }: Props) => {
                     }}
                   >
                     <h1 className='flex-1'>{comment.text}</h1>
-                    <div className='flex items-center'>
-                      <h1 className='text-gray-600'>{comment.likes}</h1>
+                    <div className='flex items-center p-2 rounded-[25px] bg-gray-300'>
+                      <h1 className='text-gray-600 mr-1'>{comment.likes}</h1>
                       <span
                         onClick={() => {
                           if (comment.isLiked) {

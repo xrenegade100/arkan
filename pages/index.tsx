@@ -22,10 +22,12 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [modal, setModal] = useState(0);
+  const [url, setUrl] = useState('');
   let src, text, title;
 
   switch (modal) {
@@ -156,6 +158,7 @@ const Home: NextPage = () => {
       break;
     }
   }
+  const router = useRouter();
 
   return (
     <>
@@ -169,17 +172,32 @@ const Home: NextPage = () => {
           }}
         >
           <div className='flex items-center w-[450px] h-[65px] rounded-3xl'>
-            <div className='flex items-center justify-around w-[60px] h-full bg-white rounded-l-3xl border-[1px] border-black'>
+            <div
+              onClick={async () => {
+                const content = await navigator.clipboard.readText();
+                setUrl(content);
+              }}
+              className='cursor-pointer flex items-center justify-around w-[60px] h-full bg-white rounded-l-3xl border-[1px] border-black'
+            >
               <span className='material-icons-outlined '>content_paste</span>
             </div>
             <div className='flex justify-around items-center w-[315px] h-full rounded-r-3xl border-[1px] border-black bg-white z-10'>
               <input
+                onChange={(e) => {
+                  setUrl(e.target.value);
+                }}
+                value={url}
                 type='url'
                 placeholder='Inserisci URL'
                 className='h-full w-full outline-none rounded-r-3xl placeholder:pl-3 placeholder:text-lg text-lg pl-4'
-              ></input>
+              />
             </div>
-            <div className='flex items-center justify-around w-[100px] h-full rounded-r-3xl border-[1px] border-black bg-primary-main -ml-8'>
+            <div
+              onClick={() => {
+                router.push('/analisi');
+              }}
+              className='cursor-pointer flex items-center justify-around w-[100px] h-full rounded-r-3xl border-[1px] border-black bg-primary-main -ml-8'
+            >
               <span className='material-icons-outlined text-white ml-5'>
                 search
               </span>
