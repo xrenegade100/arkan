@@ -36,14 +36,21 @@ const PostCard = ({ post }: Props) => {
         }}
       >
         <div className='w-[600px] flex flex-col bg-primary-main rounded-t-[15px] p-4 border-b-[1px] border-black'>
-          <div className='flex justify-between items-center'>
-            <div className=''>
-              <h1 className='font-bold text-secondary-main text-3xl'>
-                {darkPatternsNames[post.dpName]}
-              </h1>
-              <a href={post.website} className='text-white underline'>
-                {post.website}
-              </a>
+          <div className='flex flex-1 justify-between items-center'>
+            <div className='flex justify-between'>
+              <div className='flex flex-col justify-center'>
+                <div className='flex flex-1 justify-between items-center'>
+                  <h1 className='font-bold text-secondary-main text-3xl'>
+                    {darkPatternsNames[post.dpName]}
+                  </h1>
+                  <span className='text-white text-xl ml-44'>
+                    Pericolositá: 4/5
+                  </span>
+                </div>
+                <a href={post.website} className='text-white underline'>
+                  {post.website}
+                </a>
+              </div>
             </div>
             <div className='flex flex-col items-center'>
               <Tooltip
@@ -127,8 +134,8 @@ const PostCard = ({ post }: Props) => {
                     }}
                   >
                     <h1 className='flex-1'>{comment.text}</h1>
-                    <div className='flex items-center'>
-                      <h1 className='text-gray-600'>{comment.likes}</h1>
+                    <div className='flex items-center p-2 rounded-[25px] bg-gray-300'>
+                      <h1 className='text-gray-600 mr-1'>{comment.likes}</h1>
                       <span
                         onClick={() => {
                           if (comment.isLiked) {

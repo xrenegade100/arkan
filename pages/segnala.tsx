@@ -2,7 +2,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  FormHelperText,
   Select,
   Box,
   Slider,
@@ -13,9 +12,12 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { Button } from '../components';
 
 const Segnala: NextPage = () => {
+  const router = useRouter();
+
   return (
     <div className='flex flex-col items-center w-3/4'>
       <h1 className='text-secondary-main text-4xl font-semibold mt-4'>
@@ -110,7 +112,9 @@ const Segnala: NextPage = () => {
           </div>
         </div>
       </div>
-      <Button>Segnala</Button>
+      <Button onClick={() => router.push('/conferma-segnalazione')}>
+        Segnala
+      </Button>
     </div>
   );
 };

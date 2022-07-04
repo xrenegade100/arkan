@@ -1,8 +1,11 @@
 import type { NextPage } from 'next';
 import { Image, Button } from '@chakra-ui/react';
 import React from 'react';
+import { useRouter } from 'next/router';
 
 const ConfermaSegnalazione: NextPage = () => {
+  const router = useRouter();
+
   return (
     <>
       <div
@@ -72,6 +75,9 @@ const ConfermaSegnalazione: NextPage = () => {
           </div>
           <div className='m-auto'>
             <Button
+              onClick={() => {
+                router.push('/segnala');
+              }}
               style={{
                 height: '40px',
                 width: '335px',

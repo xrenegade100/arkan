@@ -19,7 +19,8 @@ const Drawer: any & { DrawerItem: React.FC<DrawerItemProps> } = forwardRef(
         className={clsx(
           'w-screen md:w-72 bg-primary-main rounded-br-[138px] flex flex-col items-center',
           {
-            hidden: !isOpen,
+            'left-5': !isOpen,
+            '-left-[288px]': isOpen,
           }
         )}
       >

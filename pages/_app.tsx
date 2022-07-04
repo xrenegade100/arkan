@@ -9,6 +9,7 @@ import DrawerItem from '../components/Drawer/DrawerItem';
 import '../styles/globals.css';
 import { extendTheme } from '@chakra-ui/react';
 import clsx from 'clsx';
+import NextNProgress from 'nextjs-progressbar';
 
 const theme = extendTheme({
   fonts: {
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <NextNProgress height={2} color='#F9A825' />
       <div className='fixed w-full h-[56px] z-50 top-0'>
         <Navbar
           hambugerIcon={isOpen ? 'close' : 'menu'}
@@ -35,7 +37,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
         />
       </div>
-      <div className='fixed z-[40]'>
+      <div
+        className={clsx('z-[40] transition-all', {
+          fixed: isOpen,
+          '-ml-[288px] absolute': !isOpen,
+        })}
+      >
         <Drawer isOpen={isOpen}>
           <Link passHref href='/account'>
             <DrawerItem

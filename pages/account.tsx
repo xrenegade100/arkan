@@ -15,12 +15,16 @@ import {
   InputGroup,
   InputRightElement,
   FormErrorMessage,
+  Divider,
+  Stack,
 } from '@chakra-ui/react';
 import { Avatar } from '../components';
 import React, { useEffect, useState } from 'react';
 import { Field, Form, Formik } from 'formik';
 
 const ModificaAccount: NextPage = () => {
+  const [deleteDisabled, setDeleteDisabled] = useState(true);
+
   const [showVecchiaPassword, setShowVecchiaPassword] = React.useState(false);
   const handleClickVecchiaPassword = () =>
     setShowVecchiaPassword(!showVecchiaPassword);
@@ -463,47 +467,57 @@ const ModificaAccount: NextPage = () => {
         </div>
       </div>
       <Modal
+        size={'md'}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => {
+          onClose();
+          setDeleteDisabled(true);
+        }}
         isCentered
         scrollBehavior='inside'
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent className='p-4'>
           <ModalCloseButton />
-          <ModalHeader></ModalHeader>
+          <ModalHeader>Stai per eliminare il tuo account</ModalHeader>
           <ModalBody>
-            <div className='flex justify-around h-24 items-center'>
-              <span className='font-bold text-xl'>
-                Sei sicuro di voler eliminare l<span>&apos;</span>account?
-              </span>
-            </div>
+            Questa azione non può essere annullata e comporta:
+            <br />
+            <ol
+              style={{
+                listStyleType: 'circle',
+              }}
+            >
+              <li>L&apos;eliminazione di tutti i tuoi dati</li>
+              <li>L&apos;eliminazione di tutti i tuoi commenti</li>
+              <li className='font-bold'>
+                Che le segnalazioni che hai effettuato non verranno eliminate
+              </li>
+            </ol>
           </ModalBody>
-          <ModalFooter>
-            <Button
-              w={12}
-              bgColor={'#1976D2'}
-              mr={3}
-              textColor='white'
-              onClick={onClose}
-              _hover={{
-                bgColor: '#63A4FF',
+          <Divider />
+          <ModalFooter className='w-full'>
+            <Stack
+              __css={{
+                width: '100%',
               }}
             >
-              Si
-            </Button>
-            <Button
-              w={12}
-              bgColor={'#1976D2'}
-              mr={3}
-              textColor='white'
-              onClick={onClose}
-              _hover={{
-                bgColor: '#63A4FF',
-              }}
-            >
-              No
-            </Button>
+              <span className='m-1'>
+                Inserisci il tuo username per confermare
+              </span>
+              <Input
+                onChange={(e) => {
+                  if (e.target.value === 'BraindeadHermit') {
+                    setDeleteDisabled(false);
+                  } else setDeleteDisabled(true);
+                }}
+                mb='4'
+                placeholder='Basic usage'
+              />
+              <Button disabled={deleteDisabled} mb='4' colorScheme='red'>
+                Elimina
+              </Button>
+            </Stack>
           </ModalFooter>
         </ModalContent>
       </Modal>

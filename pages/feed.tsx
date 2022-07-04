@@ -1,18 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import moment from 'moment';
 import 'moment/locale/it';
-import clsx from 'clsx';
-import {
-  Button,
-  IconButton,
-  Input,
-  Radio,
-  RadioGroup,
-  Select,
-  Tooltip,
-  useToast,
-} from '@chakra-ui/react';
-import { Avatar } from '../components';
 import { useEffect, useState } from 'react';
 import data from '../data/posts.json';
 import FilterSidebar from '../components/FilterSidebar';
@@ -22,6 +10,7 @@ import type { Post } from '../types';
 const Feed: NextPage<{ posts: Post[] }> = ({ posts }: { posts: Post[] }) => {
   moment.locale('it');
   const [postsList, setPosts] = useState<Post[]>([]);
+
   useEffect(() => {
     setPosts(posts);
   }, [posts]);
