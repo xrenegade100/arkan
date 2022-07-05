@@ -8,11 +8,17 @@ import {
   Link,
 } from '@chakra-ui/react';
 import { LogoIcon } from '../components';
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
+import { useRouter } from 'next/router';
 
 const Login: NextPage = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [email, setEmail] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const handleClickPassword = () => setShowPassword(!showPassword);
+  const auth = useAuth();
+  const router = useRouter();
+
   return (
     <>
       <Image
@@ -56,6 +62,10 @@ const Login: NextPage = () => {
                 <div className='w-full'>
                   <InputGroup size='sm'>
                     <Input
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
                       type={'text'}
                       size='lg'
                       bgColor={'white'}
@@ -103,6 +113,13 @@ const Login: NextPage = () => {
                     mt={8}
                     colorScheme=''
                     type='submit'
+                    onClick={() => {
+                      auth.login({
+                        email,
+                        password: '',
+                      });
+                      router.push('/');
+                    }}
                   >
                     Accedi
                   </Button>

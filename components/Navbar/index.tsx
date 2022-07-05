@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Avatar } from '..';
+import { useAuth } from '../../hooks/useAuth';
 import LogoIcon from '../LogoIcon';
 
 type Props = {
@@ -11,9 +12,10 @@ type Props = {
   isLock?: boolean;
 };
 
-const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
+const Navbar = ({ onMenuClick, hambugerIcon }: Props) => {
   const [path, setPath] = useState('');
   const router = useRouter();
+  const auth = useAuth();
 
   useEffect(() => {
     setPath(router.pathname);
@@ -21,7 +23,7 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
 
   return (
     <nav className='flex h-14 bg-primary-dark items-center justify-between'>
-      {!isLock && (
+      {auth.isLoggedIn && (
         <button
           onClick={onMenuClick}
           className='material-icons pr-32 text-white w-60'
@@ -30,9 +32,9 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
         </button>
       )}
 
-      {isLock && <div className='w-60'></div>}
+      {!auth.isLoggedIn && <div className='w-60'></div>}
 
-      {!isLock && (
+      {auth.isLoggedIn && (
         <div className='w-60 flex flex-1 justify-center'>
           <Link href='/' passHref>
             <LogoIcon size='base' />
@@ -40,14 +42,14 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
         </div>
       )}
 
-      {isLock && (
+      {!auth.isLoggedIn && (
         <div className='w-60 flex flex-1 justify-center'>
           <Link href='/' passHref>
             <LogoIcon size='base' />
           </Link>
         </div>
       )}
-      {!isLock && (
+      {auth.isLoggedIn && (
         <div className='flex items-center text-white w-60'>
           <Link href='/segnala' passHref>
             <button
@@ -73,10 +75,15 @@ const Navbar = ({ onMenuClick, hambugerIcon, isLock }: Props) => {
               Feed
             </button>
           </Link>
-          <Avatar color='#333' name='Giovanni' />
+          {auth.isLoggedIn && (
+            <Avatar
+              color={'#' + auth.user?.iconColor}
+              name={auth.user!.email.toUpperCase()}
+            />
+          )}
         </div>
       )}
-      {isLock && (
+      {!auth.isLoggedIn && (
         <div className='flex items-center text-white w-60'>
           <Link href='/login' passHref>
             <button

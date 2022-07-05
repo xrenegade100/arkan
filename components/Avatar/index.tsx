@@ -9,23 +9,25 @@ export interface Props {
 }
 
 // eslint-disable-next-line object-curly-newline
-const Avatar = ({ name, color, variant }: Props) => (
-  <div
-    className={clsx(
-      'cursor-pointer flex justify-center items-center font-bold rounded-full text-white',
-      {
-        'h-12 w-12 text-2xl': variant === 'sm',
-        'h-16 w-16 text-3xl': variant === 'md',
-        'h-[88px] w-[88px] text-4xl': variant === 'lg',
-      }
-    )}
-    style={{
-      backgroundColor: color,
-    }}
-  >
-    {name.charAt(0)}
-  </div>
-);
+const Avatar = ({ name, color, variant }: Props) => {
+  return (
+    <div
+      className={clsx(
+        'cursor-pointer flex justify-center items-center font-bold rounded-full text-white',
+        {
+          'h-12 w-12 text-2xl': variant === 'sm',
+          'h-16 w-16 text-3xl': variant === 'md',
+          'h-[88px] w-[88px] text-4xl': variant === 'lg',
+        }
+      )}
+      style={{
+        backgroundColor: color,
+      }}
+    >
+      {name.charAt(0)}
+    </div>
+  );
+};
 
 Avatar.defaultProps = {
   variant: 'sm',
