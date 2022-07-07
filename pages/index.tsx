@@ -194,7 +194,13 @@ const Home: NextPage = () => {
             </div>
             <div
               onClick={() => {
-                router.push(`/analisi/${escape(url)}`);
+                if (url.includes('://')) {
+                  const escapedUrl = url
+                    .replace('http://', '')
+                    .replace('https://', '')
+                    .split(/[/?#]/)[0];
+                  router.push(`/analisi/${escapedUrl}`);
+                } else router.push(`/analisi/${url}`);
               }}
               className='cursor-pointer flex items-center justify-around w-[100px] h-full rounded-r-3xl border-[1px] border-black bg-primary-main -ml-8'
             >
