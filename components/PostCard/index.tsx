@@ -1,13 +1,15 @@
-import { Tooltip, Input, toast, useToast } from '@chakra-ui/react';
+import { Tooltip, Input, useToast } from '@chakra-ui/react';
 import clsx from 'clsx';
 import moment from 'moment';
 import React, { useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import type { Post, Comment } from '../../types';
 import Avatar from '../Avatar';
 
 type Props = {
   post: Post;
   onComment?: (comment: string, post: Post) => void;
+  label?: string;
 };
 
 const darkPatternsNames = {
@@ -19,12 +21,13 @@ const POST_TYPE = {
   1: 'REPORT',
 };
 
-const PostCard = ({ post }: Props) => {
+const PostCard = ({ post, label }: Props) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<(Comment & { isLiked?: boolean })[]>(
     post.comments
   );
   const toast = useToast();
+  const auth = useAuth();
 
   return (
     <>
@@ -36,6 +39,8 @@ const PostCard = ({ post }: Props) => {
         }}
       >
         <div className='w-[600px] flex flex-col bg-primary-main rounded-t-[15px] p-4 border-b-[1px] border-black'>
+          {label && <p className='text-white text-sm font-bold'>{label}</p>}
+
           <div className='flex flex-1 justify-between items-center'>
             <div className='flex justify-between'>
               <div className='flex flex-col justify-center'>
@@ -82,11 +87,24 @@ const PostCard = ({ post }: Props) => {
           {/* Comments */}
           <div className='flex flex-col mt-4'>
             <div className='flex items-center mb-2'>
-              <Avatar color='#ab4c2a' name='Antonio' />
+              <Avatar
+                color={
+                  auth.user?.iconColor ? '#' + auth.user.iconColor : '#333'
+                }
+                name={auth.user ? auth.user.email.toUpperCase() : 'UNKNOWN'}
+              />
               <Input
                 onKeyDown={(e) => {
-                  console.log(e.key);
                   if (e.key === 'Enter') {
+                    if (!auth.isLoggedIn) {
+                      toast({
+                        title: "Devi effettuare l'accesso per commentare",
+                        position: 'bottom-left',
+                        isClosable: true,
+                        status: 'error',
+                      });
+                      return;
+                    }
                     comments.unshift({
                       user: {
                         name: 'Antonio',
@@ -138,6 +156,15 @@ const PostCard = ({ post }: Props) => {
                       <h1 className='text-gray-600 mr-1'>{comment.likes}</h1>
                       <span
                         onClick={() => {
+                          if (!auth.isLoggedIn) {
+                            toast({
+                              title: "Devi effettuare l'accesso per votare",
+                              position: 'bottom-left',
+                              isClosable: true,
+                              status: 'error',
+                            });
+                            return;
+                          }
                           if (comment.isLiked) {
                             comment.likes--;
                           } else comment.likes++;
@@ -147,13 +174,15 @@ const PostCard = ({ post }: Props) => {
                         className={clsx(
                           'select-none cursor-pointer material-icons-outlined',
                           {
-                            'hover:text-gray-700 text-gray-600':
-                              !comment.isLiked,
-                            'hover:text-red-500 text-red-500': comment.isLiked,
+                            'hover:text-gray-700': !comment.isLiked,
+                            'hover:text-red-500 text-red-500':
+                              comment.isLiked && auth.isLoggedIn,
                           }
                         )}
                       >
-                        {!comment.isLiked ? 'favorite_border' : 'favorite'}
+                        {!comment.isLiked || !auth.isLoggedIn
+                          ? 'favorite_border'
+                          : 'favorite'}
                       </span>
                     </div>
                   </div>

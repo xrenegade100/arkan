@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React, { forwardRef, ReactNode } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import Avatar from '../Avatar';
 import DrawerItem, { DrawerItemProps } from './DrawerItem';
 
@@ -10,6 +11,8 @@ type Props = {
 
 const Drawer: any & { DrawerItem: React.FC<DrawerItemProps> } = forwardRef(
   ({ isOpen, children }: Props, ref) => {
+    const auth = useAuth();
+
     return (
       <div
         style={{
@@ -24,20 +27,29 @@ const Drawer: any & { DrawerItem: React.FC<DrawerItemProps> } = forwardRef(
           }
         )}
       >
-        <div
-          className='cursor-pointer w-60 h-24 mt-8 rounded-lg flex justify-evenly items-center'
-          style={{
-            background: 'linear-gradient(98.95deg, #F9A825 0%, #FFD95A 100%)',
-          }}
-        >
-          <div>
-            <Avatar color='#333' name='Giovanni' />
+        {auth.isLoggedIn && (
+          <div
+            className='cursor-pointer w-60 h-24 mt-8 rounded-lg flex justify-evenly items-center'
+            style={{
+              background: 'linear-gradient(98.95deg, #F9A825 0%, #FFD95A 100%)',
+            }}
+          >
+            <>
+              <div>
+                <Avatar
+                  color={'#' + auth.user?.iconColor}
+                  name={auth.user!.email.toUpperCase()}
+                />
+              </div>
+              <div className='flex flex-col'>
+                <p className='font-bold text-base'>
+                  @{auth.user?.email.substring(0, 10)}
+                </p>
+                <p className='text-[11px]'>{auth.user?.email}</p>
+              </div>
+            </>
           </div>
-          <div className='flex flex-col'>
-            <p className='font-bold text-base'>@BraindeadHermit</p>
-            <p className='text-[11px]'>scorziello.giovanni00@gmail.com</p>
-          </div>
-        </div>
+        )}
         <div className='mt-20 w-full'>{children}</div>
       </div>
     );

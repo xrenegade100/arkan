@@ -194,7 +194,7 @@ const Home: NextPage = () => {
             </div>
             <div
               onClick={() => {
-                router.push('/analisi');
+                router.push(`/analisi/${escape(url)}`);
               }}
               className='cursor-pointer flex items-center justify-around w-[100px] h-full rounded-r-3xl border-[1px] border-black bg-primary-main -ml-8'
             >

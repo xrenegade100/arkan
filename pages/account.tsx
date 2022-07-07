@@ -19,8 +19,10 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { Avatar } from '../components';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Field, Form, Formik } from 'formik';
+import { useAuth } from '../hooks/useAuth';
+import { useAuthPage } from '../hooks';
 
 const ModificaAccount: NextPage = () => {
   const [deleteDisabled, setDeleteDisabled] = useState(true);
@@ -47,6 +49,10 @@ const ModificaAccount: NextPage = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const auth = useAuth();
+
+  useAuthPage();
+
   return (
     <div
       className='flex flex-col items-center mt-6 pt-6 rounded-3xl bg-gray-200 w-[700px] pb-7'
@@ -54,9 +60,9 @@ const ModificaAccount: NextPage = () => {
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
       }}
     >
-      <div className='pb-4'>
-        <span className='text-secondary-main font-bold text-4xl'>
-          Ciao, BraindeadHermit
+      <div className='pb-4 truncate w-[70%] text-center'>
+        <span className='text-secondary-main text-center font-bold text-4xl truncate w-1/2'>
+          Ciao, {auth.user?.email.substring(0, 10)}
         </span>
       </div>
       <Avatar name='G' color='#CD2222' />
@@ -93,7 +99,7 @@ const ModificaAccount: NextPage = () => {
                           <InputGroup size='xs'>
                             <Input
                               w={250}
-                              defaultValue='BraindeadHermit'
+                              defaultValue={auth.user?.email}
                               type='text'
                               size='sm'
                               rounded={6}
@@ -138,7 +144,7 @@ const ModificaAccount: NextPage = () => {
                     Username
                   </span>
                   <div className='flex justify-between w-full mt-1'>
-                    <h1 className=''>BraindeadHermit</h1>
+                    <h1 className=''>{auth.user?.email.substring(0, 10)}</h1>
                     <div className='w-20'>
                       <Button
                         width='100%'
@@ -183,7 +189,7 @@ const ModificaAccount: NextPage = () => {
                           <InputGroup size='xs'>
                             <Input
                               w={250}
-                              defaultValue='scorziellogiovanni00@gmail.com'
+                              defaultValue={auth.user?.email}
                               type='text'
                               size='sm'
                               rounded={6}
@@ -226,7 +232,7 @@ const ModificaAccount: NextPage = () => {
                 <div className='flex flex-col justify-center pb-4 pt-4 w-full'>
                   <span className='font-bold items-start text-lg'>Email</span>
                   <div className='flex justify-between w-full mt-1'>
-                    <h1 className=''>scorziellogiovanni00@gmail.com</h1>
+                    <h1 className=''>{auth.user?.email}</h1>
                     <div className='w-20'>
                       <Button
                         width='100%'
@@ -503,18 +509,23 @@ const ModificaAccount: NextPage = () => {
               }}
             >
               <span className='m-1'>
-                Inserisci il tuo username per confermare
+                Inserisci la tua email <i>{auth.user?.email}</i> per confermare
               </span>
               <Input
                 onChange={(e) => {
-                  if (e.target.value === 'BraindeadHermit') {
+                  if (e.target.value === auth.user?.email) {
                     setDeleteDisabled(false);
                   } else setDeleteDisabled(true);
                 }}
                 mb='4'
                 placeholder='Basic usage'
               />
-              <Button disabled={deleteDisabled} mb='4' colorScheme='red'>
+              <Button
+                onClick={(e) => {}}
+                disabled={deleteDisabled}
+                mb='4'
+                colorScheme='red'
+              >
                 Elimina
               </Button>
             </Stack>
