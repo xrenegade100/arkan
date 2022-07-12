@@ -11,12 +11,13 @@ import { useRouter } from 'next/router';
 const Analisi: NextPage<{ posts: Post[] }> = ({ posts }: { posts: Post[] }) => {
   const [postList, setPostList] = useState<Post[]>([]);
   moment.locale('it');
-  useEffect(() => {
-    setPostList(posts);
-  }, [posts]);
-
   const router = useRouter();
-  useAuthPage();
+  useEffect(() => {
+    posts.forEach((post) => {
+      post.website = 'https://' + router.query.url;
+    });
+    setPostList(posts);
+  }, [router, posts]);
 
   return (
     <div className='flex flex-col items-center w-full'>

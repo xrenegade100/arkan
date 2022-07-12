@@ -1,10 +1,32 @@
-import { Tooltip, Input, useToast } from '@chakra-ui/react';
+import {
+  Tooltip,
+  Input,
+  useToast,
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Divider,
+  ButtonGroup,
+} from '@chakra-ui/react';
 import clsx from 'clsx';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import type { Post, Comment } from '../../types';
 import Avatar from '../Avatar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFacebook,
+  faInstagram,
+  faTelegram,
+  faTwitter,
+  faWhatsapp,
+} from '@fortawesome/free-brands-svg-icons';
 
 type Props = {
   post: Post;
@@ -23,6 +45,7 @@ const POST_TYPE = {
 
 const PostCard = ({ post, label }: Props) => {
   const [showComments, setShowComments] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   const [comments, setComments] = useState<(Comment & { isLiked?: boolean })[]>(
     post.comments
   );
@@ -31,6 +54,62 @@ const PostCard = ({ post, label }: Props) => {
 
   return (
     <>
+      <Modal
+        isOpen={shareOpen}
+        onClose={() => {
+          setShareOpen(false);
+        }}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Condividi</ModalHeader>
+          <ModalCloseButton />
+          <Divider />
+          <ModalBody>
+            <div className='flex flex-col'>
+              <span>Condividi tramite:</span>
+              <ButtonGroup size='lg' variant='outline' mt={'4'}>
+                <Button colorScheme='facebook'>
+                  <FontAwesomeIcon size='2x' icon={faFacebook} />
+                </Button>
+                <Button colorScheme='twitter'>
+                  <FontAwesomeIcon size='2x' icon={faTwitter} />
+                </Button>
+                <Button colorScheme='whatsapp'>
+                  <FontAwesomeIcon size='2x' icon={faWhatsapp} />
+                </Button>
+                <Button colorScheme='pink'>
+                  <FontAwesomeIcon size='2x' icon={faInstagram} />
+                </Button>
+                <Button colorScheme='telegram'>
+                  <FontAwesomeIcon size='2x' icon={faTelegram} />
+                </Button>
+              </ButtonGroup>
+              <span className='mt-4 mb-2'>Oppure copia il link</span>
+              <div className='flex items-center justify-between'>
+                <span className='material-icons-outlined'>link</span>
+                <Input
+                  width='65%'
+                  readOnly
+                  value={`https://projectarkan.com/analisi/${post.website}`}
+                />
+                <Button
+                  color='white'
+                  style={{
+                    fontWeight: 'bold',
+                  }}
+                  bgColor={'#1976D2'}
+                  _hover={{
+                    bgColor: '#63A4FF',
+                  }}
+                >
+                  Copia
+                </Button>
+              </div>
+            </div>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
       <div
         key={post.id}
         className='flex flex-col mt-8 rounded-b-[15px] rounded-t-[15px]'
@@ -45,10 +124,20 @@ const PostCard = ({ post, label }: Props) => {
             <div className='flex justify-between'>
               <div className='flex flex-col justify-center'>
                 <div className='flex flex-1 justify-between items-center'>
-                  <h1 className='font-bold text-secondary-main text-3xl'>
-                    {darkPatternsNames[post.dpName]}
-                  </h1>
-                  <span className='text-white text-xl ml-44'>
+                  <div className='flex items-center'>
+                    <h1 className='font-bold text-secondary-main text-3xl'>
+                      {darkPatternsNames[post.dpName]}
+                    </h1>
+                    <span
+                      onClick={() => {
+                        setShareOpen(true);
+                      }}
+                      className='material-icons-outlined text-white ml-4 cursor-pointer hover:bg-primary-dark rounded-full p-1'
+                    >
+                      share
+                    </span>
+                  </div>
+                  <span className='text-white text-xl ml-32'>
                     Pericolositá: 4/5
                   </span>
                 </div>
