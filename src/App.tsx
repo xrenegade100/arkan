@@ -1,6 +1,10 @@
 import React from 'react';
-import './App.css';
+import Toast from './components/Toast';
 
-const App: React.FC = () => <div />;
+const App: React.FC = () => (
+  <div>
+    <Toast text="ciao" onClick={() => console.log('ciao')} />
+  </div>
+);
 
 export default App;
