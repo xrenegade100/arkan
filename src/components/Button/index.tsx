@@ -23,7 +23,7 @@ const Button: React.FC<Props> = ({
     onClick={onClick}
     type="button"
     className={clsx(
-      'w-20 px-3 py-1 rounded-lg font-body font-bold text-white transition-colors',
+      'w-fit px-3 py-1 rounded-lg font-body font-bold text-white transition-colors',
       {
         'opacity-70 cursor-not-allowed': disabled || isLoading,
       },
