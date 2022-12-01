@@ -1,21 +1,6 @@
-import React, { useState } from 'react';
-import SearchBar from './components/SearchBar';
+import React from 'react';
+import Button from './components/Button';
 
-const App: React.FC = () => {
-  const [value, setValue] = useState('');
-  return (
-    <div>
-      <SearchBar
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
-        onClick={() => {
-          console.log('searching...');
-        }}
-      />
-    </div>
-  );
-};
+const App: React.FC = () => <Button children="ciao" variant="secondary" />;
 
 export default App;
