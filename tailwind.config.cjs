@@ -18,6 +18,9 @@ module.exports = {
       fontFamily: {
         body: 'quicksand',
       },
+      transitionProperty: {
+        width: 'width',
+      },
     },
   },
   plugins: [],
