@@ -10,6 +10,9 @@ const App: React.FC = () => {
         onChange={(e) => {
           setValue(e.target.value);
         }}
+        onClick={() => {
+          console.log('searching...');
+        }}
       />
     </div>
   );
