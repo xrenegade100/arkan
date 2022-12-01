@@ -8,6 +8,7 @@ interface Props {
   value: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any;
   disabled?: boolean;
+  className?: string;
 }
 
 const Input: React.FC<Props> = ({
@@ -16,6 +17,7 @@ const Input: React.FC<Props> = ({
   value,
   onChange,
   disabled,
+  className,
 }: Props) => {
   const [visibility, setVisibility] = useState({
     isPasswordVisible: false,
@@ -34,7 +36,7 @@ const Input: React.FC<Props> = ({
   return (
     <div
       className={clsx(
-        'w-fit flex justify-around items-center rounded-md border-2 transition-colors',
+        `${className} w-full flex justify-around items-center rounded-md border-2 transition-colors`,
         {
           'border-primary-main': visibility.isInputFocused === true,
           'border-gray-300': visibility.isInputFocused === false,
@@ -56,10 +58,9 @@ const Input: React.FC<Props> = ({
         onChange={onChange}
         placeholder={hint}
         className={clsx(
-          'font-body px-2 py-1 rounded-md outline-none bg-transparent',
+          'w-full font-body px-2 py-1 rounded-md outline-none bg-transparent',
           {
             'cursor-not-allowed': disabled,
-            'w-80': type === 'email',
           },
         )}
       />
