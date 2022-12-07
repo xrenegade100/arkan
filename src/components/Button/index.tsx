@@ -63,7 +63,6 @@ Button.defaultProps = {
   variant: 'primary',
   disabled: false,
   children: '',
-  onClick: () => {},
   isLoading: false,
   className: '',
 };
