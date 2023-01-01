@@ -1,6 +1,6 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Navbar from '../components/Navbar'
+import type { NextPage } from 'next';
+import Main from '../components/Main';
+import Head from 'next/head';
 
 const Home: NextPage = () => {
   return (
@@ -11,9 +11,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/arkan-logo.png" />
       </Head>
 
-      <Navbar/>
+      <Main>
+        <p>ciao</p>
+      </Main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
