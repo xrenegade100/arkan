@@ -1,5 +1,6 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { NextPage } from 'next';
+import Main from '../components/Main';
+import Head from 'next/head';
 
 const Home: NextPage = () => {
   return (
@@ -9,8 +10,12 @@ const Home: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" href="/arkan-logo.png" />
       </Head>
-    </div>
-  )
-}
 
-export default Home
+      <Main>
+        <p>ciao</p>
+      </Main>
+    </div>
+  );
+};
+
+export default Home;
