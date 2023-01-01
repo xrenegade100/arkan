@@ -10,7 +10,7 @@ interface Props {
 
 const SidebarItem: React.FC<Props> = ({text, icon, selected, onClick}: Props) => {
     return (
-        <div className={clsx("w-11/12 flex justify-start items-center rounded-l-2xl py-2",
+        <div className={clsx("w-11/12 flex justify-start items-center rounded-l-2xl py-2 hover:cursor-pointer",
         {
             "bg-primary-accent": selected,
         },

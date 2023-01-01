@@ -1,14 +1,18 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+interface Props {
+  onClick: () => void;
+  isSidebarVisible: boolean;
+}
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<Props> = ({onClick, isSidebarVisible}: Props) => {
   return (
     <div className="fixed w-full h-14 bg-primary-main shadow-md">
       <div className="h-full mx-8 flex justify-between items-center">
         <div className="w-full h-full flex justify-start items-center">
-          <span className="material-symbols-rounded md-36 text-white hover:cursor-pointer">
-            menu
+          <span className="material-symbols-rounded md-36 text-white hover:cursor-pointer" onClick={onClick}>
+            {!isSidebarVisible ? 'menu' : 'close'}
           </span>
         </div>
         <Link href="/" className="h-fit w-fit hover:cursor-pointer">
