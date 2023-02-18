@@ -14,9 +14,25 @@ import {
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Button } from '../components';
+import FileInput from '../components/FileInput';
+import FileHolder from '../components/FileHolder';
+import { useRecoilState } from 'recoil';
+import pdfList from '../data/images';
+import { useDropzone } from 'react-dropzone';
+import clsx from 'clsx';
 
 const Segnala: NextPage = () => {
   const router = useRouter();
+  const [list, setList] = useRecoilState(pdfList);
+
+  const { getRootProps, isDragActive } = useDropzone({
+    accept: 'image/png image/jpeg',
+    onDrop: (acceptedFiles) => {
+      setList([...list, ...acceptedFiles]);
+    },
+    noClick: true,
+    noKeyboard: true,
+  });
 
   return (
     <div className='flex flex-col items-center w-3/4'>
@@ -93,23 +109,26 @@ const Segnala: NextPage = () => {
           <SliderThumb boxSize={6} />
         </Slider>
       </div>
-      <div className='w-full flex flex-col md:flex-row md:justify-evenly mt-8'>
-        <div className='w-full md:w-[35%]'>
+      <div className='w-full mt-8 flex-col justify-center items-center'>
+        <div className='w-full flex flex-wrap justify-center items-center'>
+          {list.map((pdf, position) => (
+            <FileHolder key={position} index={position} name={pdf.name} />
+          ))}
+        </div>
+        <div className='w-full flex justify-center items-center' {...getRootProps()}>
+          <FileInput className={clsx({
+            'border-primary-main': isDragActive,
+          })}
+          
+          isDragActive={isDragActive}/>
+        </div>
+        <div className='w-full'>
           <h1 className='font-bold'>Descrizione</h1>
           <Textarea
-            rows={10}
             placeholder='Here is a sample placeholder'
             size='md'
+            resize="vertical"
           />
-        </div>
-        <div className='w-full md:w-[35%]'>
-          <h1 className='font-bold'>Immagine</h1>
-          <div className='flex flex-col justify-center items-center w-full h-60 border-2 border-secondary-gray-almost-black border-dashed rounded-[25px]'>
-            <h1 className='font-bold text-xl'>
-              Trascina qui o clicca per sfogliare i file
-            </h1>
-            <h1 className='material-icons-outlined text-7xl'>file_upload</h1>
-          </div>
         </div>
       </div>
       <Button onClick={() => router.push('/conferma-segnalazione')}>

@@ -19,3 +19,14 @@ export type Comment = {
 export type User = {
   name: string;
 };
+
+export type Image = {
+  lastModified: number;
+  lastModifiedDate?: Date;
+  name: string;
+  path: string;
+  size: number;
+  type: string;
+  webkitRelativePath: string;
+};
+

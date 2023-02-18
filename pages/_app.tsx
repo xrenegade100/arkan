@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import NextNProgress from 'nextjs-progressbar';
 import ProvideAuth, { useAuth } from '../hooks/useAuth';
 import { __Drawer } from '../components/__';
+import { RecoilRoot } from 'recoil';
 
 const theme = extendTheme({
   fonts: {
@@ -35,42 +36,44 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <ProvideAuth>
-      <>
-        <NextNProgress height={2} color='#F9A825' />
-        <div className='fixed w-full h-[56px] z-50 top-0'>
-          <Navbar
-            hambugerIcon={isOpen ? 'close' : 'menu'}
-            onMenuClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          />
-        </div>
-        <div
-          className={clsx('z-[40] transition-all', {
-            fixed: isOpen,
-            '-ml-[288px] absolute': !isOpen,
-          })}
-          ref={drawerRef}
-        >
-          <__Drawer
-            onLogout={() => {
-              setIsOpen(false);
-            }}
-          />
-        </div>
-        <div
-          className={clsx('flex justify-center w-full mt-[56px]', {
-            'hidden md:flex': isOpen,
-          })}
-        >
-          {' '}
-          <ChakraProvider theme={theme}>
-            <Component {...pageProps} />
-          </ChakraProvider>
-        </div>
-      </>
-    </ProvideAuth>
+    <RecoilRoot>
+      <ProvideAuth>
+        <>
+          <NextNProgress height={2} color='#F9A825' />
+          <div className='fixed w-full h-[56px] z-50 top-0'>
+            <Navbar
+              hambugerIcon={isOpen ? 'close' : 'menu'}
+              onMenuClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            />
+          </div>
+          <div
+            className={clsx('z-[40] transition-all', {
+              fixed: isOpen,
+              '-ml-[288px] absolute': !isOpen,
+            })}
+            ref={drawerRef}
+          >
+            <__Drawer
+              onLogout={() => {
+                setIsOpen(false);
+              }}
+            />
+          </div>
+          <div
+            className={clsx('flex justify-center w-full mt-[56px]', {
+              'hidden md:flex': isOpen,
+            })}
+          >
+            {' '}
+            <ChakraProvider theme={theme}>
+              <Component {...pageProps} />
+            </ChakraProvider>
+          </div>
+        </>
+      </ProvideAuth>
+    </RecoilRoot>
   );
 }
 
