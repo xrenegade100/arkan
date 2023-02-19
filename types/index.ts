@@ -2,6 +2,7 @@ export type Post = {
   id: number;
   dpName: 'HIDDEN_COSTS';
   website: string;
+  siteName: string;
   date: string;
   dangerLevel: 1 | 2 | 3 | 4 | 5;
   type: 0 | 1;

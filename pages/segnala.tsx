@@ -56,6 +56,7 @@ const Segnala: NextPage = () => {
         id: 0,
         dpName: dpType,
         website: link,
+        siteName: siteName,
         date: new Date().toISOString().slice(0, 10),
         dangerLevel: dangerLevel,
         type: 1,
@@ -73,7 +74,10 @@ const Segnala: NextPage = () => {
       });
 
       if(response.status === 200){
-        router.push('/conferma-segnalazione');
+        router.push({pathname: '/conferma-segnalazione', query: {
+            report: JSON.stringify(report)
+          }
+        });
       }
     }else{
       onOpen();
@@ -121,8 +125,12 @@ const Segnala: NextPage = () => {
           }}
           
           onBlur={ () => {
+            try{
               let domain = (new URL(link as string));
               setSiteName(domain.hostname);
+            } catch(e: TypeError) {
+              //TODO find something to do
+            }
             }
           }
           required
