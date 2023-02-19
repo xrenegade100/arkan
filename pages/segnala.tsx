@@ -125,8 +125,12 @@ const Segnala: NextPage = () => {
           }}
           
           onBlur={ () => {
+            try{
               let domain = (new URL(link as string));
               setSiteName(domain.hostname);
+            } catch(e: TypeError) {
+              //TODO find something to do
+            }
             }
           }
           required
