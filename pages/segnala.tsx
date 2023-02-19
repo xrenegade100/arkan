@@ -28,10 +28,7 @@ import pdfList from '../data/images';
 import { useDropzone } from 'react-dropzone';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import useSWR from 'swr';
-
-//Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { Post } from '../types';
 
 const Segnala: NextPage = () => {
   const router = useRouter();
@@ -40,12 +37,9 @@ const Segnala: NextPage = () => {
   const [siteName, setSiteName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [dpType, setDpType] = useState<string>("Scegli dark pattern");
+  const [dangerLevel, setDangerLevel] = useState(3);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-
-  const { data, error } = useSWR('/api/hello', fetcher);
-
-  console.log(data);
 
   const { getRootProps, isDragActive } = useDropzone({
     accept: 'image/png image/jpeg',
@@ -56,9 +50,31 @@ const Segnala: NextPage = () => {
     noKeyboard: true,
   });
 
-  const makeReport = () => {
+  const makeReport = async () => {
     if(list && link && siteName && description && dpType !== 'Scegli dark pattern'){
-      router.push('/conferma-segnalazione');
+      const report = {
+        id: 0,
+        dpName: dpType,
+        website: link,
+        date: new Date().toISOString().slice(0, 10),
+        dangerLevel: dangerLevel,
+        type: 1,
+        description: description,
+        comments: [],
+      } as Post;
+
+      const response = await fetch('/api/addreport', {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }),
+        body: JSON.stringify(report),
+      });
+
+      if(response.status === 200){
+        router.push('/conferma-segnalazione');
+      }
     }else{
       onOpen();
     }
@@ -134,19 +150,19 @@ const Segnala: NextPage = () => {
             setDpType(e.target.value);
           }}
         >
-          <option className='font-bold' value='option1'>
+          <option className='font-bold' value='Nagging'>
             Nagging
           </option>
-          <option className='font-bold' value='option2'>
+          <option className='font-bold' value='Obstruction'>
             Obstruction
           </option>
-          <option className='font-bold' value='option3'>
+          <option className='font-bold' value='Sneaking'>
             Sneaking
           </option>
-          <option className='font-bold' value='option3'>
+          <option className='font-bold' value='Interface Interference'>
             Interface Interference
           </option>
-          <option className='font-bold' value='option3'>
+          <option className='font-bold' value='Forced Action'>
             Forced Action
           </option>
         </Select>
@@ -159,6 +175,8 @@ const Segnala: NextPage = () => {
           max={5}
           step={1}
           w={{ sm: '100%', md: '40%' }}
+          value={dangerLevel}
+          onChange={(e) => { setDangerLevel(e);}}
         >
           <SliderMark value={1} mt='2' fontSize='sm' fontWeight={'bold'}>
             1

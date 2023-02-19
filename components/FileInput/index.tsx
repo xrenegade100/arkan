@@ -30,7 +30,6 @@ const FileInput: React.FC<Props> = ({ className, isDragActive }: Props) => {
         accept="image/png, image/jpeg"
         onChange={(e) => {
           onImageSelected(e);
-          console.log(images)
         }}
         multiple
         hidden

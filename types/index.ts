@@ -3,6 +3,7 @@ export type Post = {
   dpName: 'HIDDEN_COSTS';
   website: string;
   date: string;
+  dangerLevel: 1 | 2 | 3 | 4 | 5;
   type: 0 | 1;
   description: string;
   comments: Comment[];
