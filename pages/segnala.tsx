@@ -10,6 +10,13 @@ import {
   SliderTrack,
   SliderMark,
   Textarea,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
 } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -20,10 +27,25 @@ import { useRecoilState } from 'recoil';
 import pdfList from '../data/images';
 import { useDropzone } from 'react-dropzone';
 import clsx from 'clsx';
+import React, { useState } from 'react';
+import useSWR from 'swr';
+
+//Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Segnala: NextPage = () => {
   const router = useRouter();
   const [list, setList] = useRecoilState(pdfList);
+  const [link, setLink] = useState<string>("");
+  const [siteName, setSiteName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [dpType, setDpType] = useState<string>("Scegli dark pattern");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
+
+  const { data, error } = useSWR('/api/hello', fetcher);
+
+  console.log(data);
 
   const { getRootProps, isDragActive } = useDropzone({
     accept: 'image/png image/jpeg',
@@ -34,8 +56,41 @@ const Segnala: NextPage = () => {
     noKeyboard: true,
   });
 
+  const makeReport = () => {
+    if(list && link && siteName && description && dpType !== 'Scegli dark pattern'){
+      router.push('/conferma-segnalazione');
+    }else{
+      onOpen();
+    }
+  }
+
   return (
     <div className='flex flex-col items-center w-3/4'>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isCentered
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              COMPLETA TUTTI I CAMPI!
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Alcuni dei campi relativi alla segnalazione non sono completati. Per effettuafre la segnalazione è necessario completare tutti i campi nella pagina
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                OK
+              </Button>
+              
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
       <h1 className='text-secondary-main text-4xl font-semibold mt-4'>
         Segnala Dark Pattern
       </h1>
@@ -44,13 +99,27 @@ const Segnala: NextPage = () => {
           <FormLabel htmlFor='link'>
             <span className='font-bold'>Link sito</span>
           </FormLabel>
-          <Input size='md' placeholder='Link' id='link' type='text' />
+          <Input size='md' placeholder='Link' id='link' type='text' value={link} 
+          onChange={(e) => {
+            setLink(e.target.value);
+          }}
+          
+          onBlur={ () => {
+              let domain = (new URL(link as string));
+              setSiteName(domain.hostname);
+            }
+          }
+          required
+        />
         </FormControl>
         <FormControl w={{ sm: '100%', md: '45%' }}>
           <FormLabel htmlFor='nome'>
             <span className='font-bold'>Nome sito</span>
           </FormLabel>
-          <Input size='md' placeholder='Sito' id='nome' type='text' />
+          <Input size='md' placeholder='Sito' id='nome' type='text' value={siteName} onChange={(e) => {
+            setSiteName(e.target.value);
+          }}
+          required/>
         </FormControl>
       </div>
       <div className='mt-8 w-full flex justify-center'>
@@ -59,6 +128,10 @@ const Segnala: NextPage = () => {
           w={{ sm: '100%', md: '40%' }}
           style={{
             fontWeight: 'bold',
+          }}
+          value={dpType}
+          onChange={(e) => {
+            setDpType(e.target.value);
           }}
         >
           <option className='font-bold' value='option1'>
@@ -128,10 +201,13 @@ const Segnala: NextPage = () => {
             placeholder='Here is a sample placeholder'
             size='md'
             resize="vertical"
+            value={description}
+            onChange={(e) => {setDescription(e.target.value);}}
+            required
           />
         </div>
       </div>
-      <Button onClick={() => router.push('/conferma-segnalazione')}>
+      <Button onClick={makeReport}>
         Segnala
       </Button>
     </div>
