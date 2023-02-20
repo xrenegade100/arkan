@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
 import { Image } from '../types/index';
 
-const pdfList = atom({
+const imageList = atom({
   key: 'pdfList',
   default: [] as File[],
 });
 
-export default pdfList;
+export default imageList;
