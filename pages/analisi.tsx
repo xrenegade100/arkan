@@ -24,7 +24,9 @@ const Analisi: NextPage<{ posts: Post[] }> = ({ posts }: { posts: Post[] }) => {
       </span>
 
       <div className='flex flex-col flex-1 items-center justify-between w-3/4 overflow-auto'>
-        <UserReportCard report={posts[0]}/>
+        {posts.map((post) => (
+          <UserReportCard key={post.id} report={post}/>
+        ))}
       </div>
     </div>
   );
