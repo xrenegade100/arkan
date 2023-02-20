@@ -104,7 +104,7 @@ const UserReportCard: React.FC<Props> = ({ report }: Props) => {
           </ModalBody>
         </ModalContent>
       </Modal>
-        <div className="w-1/2 bg-slate-200 rounded-lg shadow-md">
+        <div className="w-1/2 bg-slate-200 rounded-lg shadow-md my-3">
             <div className="w-full flex justify-between items-center rounded-t-lg bg-primary-main p-4">
                 <span className="text-xl font-bold text-white">USER</span>
                 <Toast disabled>
@@ -148,7 +148,7 @@ const UserReportCard: React.FC<Props> = ({ report }: Props) => {
                         </ModalContent>
                     </Modal>
                     <img className="w-full object-contain" src={image.path}/>
-                    <div className="absolute">
+                    <div className="absolute bottom-0 left-0 w-full flex justify-end items-center p-2">
                         <Toast disabled>{report.dpName}</Toast>
                         <button
                             type="button"
