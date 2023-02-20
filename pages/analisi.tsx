@@ -6,6 +6,7 @@ import PostCard from '../components/PostCard';
 import { Post } from '../types';
 import data from '../data/posts.json';
 import { useAuthPage } from '../hooks';
+import UserReportCard from '../components/UserReportCard';
 
 const Analisi: NextPage<{ posts: Post[] }> = ({ posts }: { posts: Post[] }) => {
   const [postList, setPostList] = useState<Post[]>([]);
@@ -23,9 +24,7 @@ const Analisi: NextPage<{ posts: Post[] }> = ({ posts }: { posts: Post[] }) => {
       </span>
 
       <div className='flex flex-col flex-1 items-center justify-between w-3/4 overflow-auto'>
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
-        ))}
+        <UserReportCard report={posts[0]}/>
       </div>
     </div>
   );

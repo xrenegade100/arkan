@@ -6,7 +6,7 @@ import imageList from '../../data/images';
 
 interface Props {
   className: string;
-  isDragActive: boolean
+  isDragActive: boolean;
 }
 
 const FileInput: React.FC<Props> = ({ className, isDragActive }: Props) => {
