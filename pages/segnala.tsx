@@ -80,7 +80,6 @@ const Segnala: NextPage = () => {
             report: JSON.stringify(report)
           }
         });
-        setList([]);
       }
     }else{
       onOpen();
@@ -253,7 +252,10 @@ const convertFile = (fileList: File[]): Image[] => {
       size: file.size,
       type: file.type,
       webkitRelativePath: file.webkitRelativePath,
+      path: URL.createObjectURL(file),
     };
+
+    console.log(toInsert.path);
 
     images.push(toInsert);
   });

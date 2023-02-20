@@ -30,5 +30,6 @@ export type Image = {
   size: number;
   type: string;
   webkitRelativePath: string;
+  path: string,
 };
 
