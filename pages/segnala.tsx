@@ -24,15 +24,15 @@ import { Button } from '../components';
 import FileInput from '../components/FileInput';
 import FileHolder from '../components/FileHolder';
 import { useRecoilState } from 'recoil';
-import pdfList from '../data/images';
+import imageList from '../data/images';
 import { useDropzone } from 'react-dropzone';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { Post } from '../types';
+import { Post, Image } from '../types';
 
 const Segnala: NextPage = () => {
   const router = useRouter();
-  const [list, setList] = useRecoilState(pdfList);
+  const [list, setList] = useRecoilState(imageList);
   const [link, setLink] = useState<string>("");
   const [siteName, setSiteName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -51,11 +51,13 @@ const Segnala: NextPage = () => {
   });
 
   const makeReport = async () => {
+
     if(list && link && siteName && description && dpType !== 'Scegli dark pattern'){
       const report = {
         id: 0,
         dpName: dpType,
         website: link,
+        images: convertFile(list),
         siteName: siteName,
         date: new Date().toISOString().slice(0, 10),
         dangerLevel: dangerLevel,
@@ -78,6 +80,7 @@ const Segnala: NextPage = () => {
             report: JSON.stringify(report)
           }
         });
+        setList([]);
       }
     }else{
       onOpen();
@@ -239,5 +242,23 @@ const Segnala: NextPage = () => {
     </div>
   );
 };
+
+const convertFile = (fileList: File[]): Image[] => {
+  let images: Image[] = [];
+
+  fileList.forEach(file => {
+    const toInsert: Image = {
+      lastModified: file.lastModified,
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      webkitRelativePath: file.webkitRelativePath,
+    };
+
+    images.push(toInsert);
+  });
+
+  return images;
+}
 
 export default Segnala;

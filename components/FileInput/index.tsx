@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import pdfList from '../../data/images';
+import imageList from '../../data/images';
 
 interface Props {
   className: string;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const FileInput: React.FC<Props> = ({ className, isDragActive }: Props) => {
-  const [images, setImages] = useRecoilState(pdfList);
+  const [images, setImages] = useRecoilState(imageList);
 
   const onImageSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || event.target.files.length === 0) {

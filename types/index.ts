@@ -1,6 +1,7 @@
 export type Post = {
   id: number;
   dpName: 'HIDDEN_COSTS';
+  images: Image[];
   website: string;
   siteName: string;
   date: string;
@@ -26,7 +27,6 @@ export type Image = {
   lastModified: number;
   lastModifiedDate?: Date;
   name: string;
-  path: string;
   size: number;
   type: string;
   webkitRelativePath: string;
