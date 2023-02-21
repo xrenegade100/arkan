@@ -119,7 +119,7 @@ const Segnala: NextPage = () => {
       <div className='flex flex-col items-center w-full md:flex-row md:justify-between md:w-2/4 mt-4'>
         <FormControl w={{ sm: '100%', md: '45%' }}>
           <FormLabel htmlFor='link'>
-            <span className='font-bold'>Link sito</span>
+            <span className='font-bold'>Link sito *</span>
           </FormLabel>
           <Input size='md' placeholder='Link' id='link' type='text' value={link} 
           onChange={(e) => {
@@ -140,7 +140,7 @@ const Segnala: NextPage = () => {
         </FormControl>
         <FormControl w={{ sm: '100%', md: '45%' }}>
           <FormLabel htmlFor='nome'>
-            <span className='font-bold'>Nome sito</span>
+            <span className='font-bold'>Nome sito *</span>
           </FormLabel>
           <Input size='md' placeholder='Sito' id='nome' type='text' value={siteName} onChange={(e) => {
             setSiteName(e.target.value);
@@ -150,7 +150,7 @@ const Segnala: NextPage = () => {
       </div>
       <div className='mt-8 w-full flex justify-center'>
         <Select
-          placeholder='Scegli dark pattern'
+          placeholder='Scegli dark pattern *'
           w={{ sm: '100%', md: '40%' }}
           style={{
             fontWeight: 'bold',
@@ -178,7 +178,7 @@ const Segnala: NextPage = () => {
         </Select>
       </div>
       <div className='mt-4 w-full flex flex-col items-center'>
-        <h1 className='font-bold'>Livello di rischio</h1>
+        <h1 className='font-bold'>Livello di rischio *</h1>
         <Slider
           defaultValue={3}
           min={1}
@@ -224,7 +224,7 @@ const Segnala: NextPage = () => {
           isDragActive={isDragActive}/>
         </div>
         <div className='w-full'>
-          <h1 className='font-bold'>Descrizione</h1>
+          <h1 className='font-bold'>Descrizione *</h1>
           <Textarea
             placeholder='Here is a sample placeholder'
             size='md'

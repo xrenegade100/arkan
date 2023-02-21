@@ -40,7 +40,7 @@ const FileInput: React.FC<Props> = ({ className, isDragActive }: Props) => {
       >
         <h2 className="material-icons md-48 text-gray-300">{!isDragActive ? "add_photo_alternate" : "file_upload"}</h2>
         <span className='font-bold text-lg text-gray-300'>
-          {!isDragActive ? "Trascina qui o clicca per aggiungere i file" : "Rilascia il file"}
+          {!isDragActive ? "Trascina qui o clicca per aggiungere i file *" : "Rilascia il file"}
         </span>
       </label>
     </div>
