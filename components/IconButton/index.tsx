@@ -7,6 +7,7 @@ interface Props {
     variant?: 'primary' | 'secondary';
     size?: 'sm' | 'base' | 'lg';
     showTextOnHover?: boolean;
+    className?: string,
 }
 
 const IconButton: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const IconButton: React.FC<Props> = ({
   variant,
   size,
   showTextOnHover,
+  className,
 }: Props) => {
   const span = useRef<HTMLSpanElement>(null);
 
@@ -22,7 +24,7 @@ const IconButton: React.FC<Props> = ({
     showTextOnHover = false;
 
   return (
-    <button className={clsx("rounded-full p-2 shadow-md transition-all ease-in",
+    <button className={clsx(`${className} rounded-full p-2 shadow-md transition-all ease-in flex justify-start items-center`,
     {
       "bg-secondary-main hover:bg-secondary-accent": variant === 'secondary',
       "bg-primary-main hover:bg-primary-accent": variant === 'primary',
@@ -41,14 +43,14 @@ const IconButton: React.FC<Props> = ({
       }
     }}>
       <div className="flex justify-center items-center">
-        <span className={clsx("material-symbols-rounded font-bold text-white",
+        <span className={clsx("material-symbols-rounded text-white",
           {
             "md-24": size === 'base',
             "md-18": size === 'sm',
             "md-32": size === 'lg',
           }
         )}>{icon}</span>
-        { text && <span ref={span} className={clsx("font-bold font-body text-white uppercase transition-width",
+        { text && <span ref={span} className={clsx("font-body text-white uppercase transition-width",
           {
             'w-0 mx-0 hidden': showTextOnHover,
             "mx-1": !showTextOnHover,
