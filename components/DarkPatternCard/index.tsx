@@ -38,10 +38,16 @@ const UserDetectedCard: React.FC<Props> = ({
         </div>
         <Toast text={detectionMode.toUpperCase()} className="uppercase" onClick={() => {}} />
       </div>
-      <div className="relative w-full">
+      {detectionMode === 'rilevato tramite analisi' ?
+        <div className="relative w-full">
         <img src={imageLink} className="w-full object-cover" height={100} alt={darkPatternType}/>
         <Toast text={darkPatternType.toUpperCase()} className="absolute bottom-0 right-0 m-4 uppercase" onClick={() => {}}/>
       </div>
+      :
+      <div className="mx-4 mt-4">
+        <Toast text={darkPatternType.toUpperCase()} onClick={() => {}}/>
+      </div>
+      }
       <div className="mx-4 my-1 md:my-2 flex justify-start items-center">
         <span className={clsx("w-6 h-6 rounded-full",
         {
@@ -54,9 +60,9 @@ const UserDetectedCard: React.FC<Props> = ({
         <a href={siteLink} className="ml-1 md:ml-2 font-body text-xl md:text-2xl font-bold">{siteName}</a>
       </div>
       <div className="mx-4">
-        <span className="font-body">
+        {detectionMode === 'rilevato tramite analisi' &&  <span className="font-body">
           {description}
-        </span>
+        </span>}
       </div>
       <div className="py-1 md:py-2 w-full flex justify-between items-end">
         <div className="flex justify-start items-center ml-4">
