@@ -38,7 +38,7 @@ const UserDetectedCard: React.FC<Props> = ({
         </div>
         <Toast text={detectionMode.toUpperCase()} className="uppercase" onClick={() => {}} />
       </div>
-      {detectionMode === 'rilevato tramite analisi' ?
+      {detectionMode === 'rilevato tramite segnalazione' ?
         <div className="relative w-full">
         <img src={imageLink} className="w-full object-cover" height={100} alt={darkPatternType}/>
         <Toast text={darkPatternType.toUpperCase()} className="absolute bottom-0 right-0 m-4 uppercase" onClick={() => {}}/>
@@ -60,7 +60,7 @@ const UserDetectedCard: React.FC<Props> = ({
         <a href={siteLink} className="ml-1 md:ml-2 font-body text-xl md:text-2xl font-bold">{siteName}</a>
       </div>
       <div className="mx-4">
-        {detectionMode === 'rilevato tramite analisi' &&  <span className="font-body">
+        {detectionMode === 'rilevato tramite segnalazione' &&  <span className="font-body">
           {description}
         </span>}
       </div>
