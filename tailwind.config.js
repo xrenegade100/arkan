@@ -20,6 +20,7 @@ module.exports = {
       },
       fontFamily: {
         body: 'quicksand',
+        logo: 'Rajdhani',
       },
       transitionProperty: {
         width: 'width',
