@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { useRef, useState, Ref } from 'react';
+import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
 
 const Home: NextPage = () => {
@@ -23,7 +24,10 @@ const Home: NextPage = () => {
           </button>
         </div>
       </header>
-      <div ref={scrollPoint} className="p-14">
+      <div ref={scrollPoint} className="pt-14 flex justify-start items-start">
+        <PostItem title='Nagging' sidePosition='left'>
+          <p>ciao</p>
+        </PostItem>
       </div>
     </div>
   );
