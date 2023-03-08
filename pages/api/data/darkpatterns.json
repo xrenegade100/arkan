@@ -1,0 +1,144 @@
+{
+    "description": "l termine Dark Pattern, creato da Harry Brignull nel 2010, designer londinese di UX, è stato definito in questo modo: \n“I dark pattern sono modelli di design utilizzati nei siti web e nelle app per indurre gli utenti ad agire contro il proprio reale interesse, ad esempio spingendoli a comprare servizi o beni non desiderati o sottoscrivere abbonamenti non voluti” \nEgli ha raccolto sul suo sito darkpatterns.org una serie di esempi di dark pattern, classificandoli in diverse categorie.\nAll'interno del sito troviamo la sezione Hall Of Shame, nella quale ci sono diverse segnalazioni, effettuate dagli utenti tramite Twitter, di siti web che utilizzano uno o più tipi di dark pattern.\nÉ presente anche la sezione Types of Dark Pattern in cui è mostrata la tassonomia ideata da Brignull, caratterizzata da una classificazione dei dark pattern in 12 categorie. Con l'avanzare degli anni, un numero sempre maggiore di studi ha ampliato la tassonomia creata da Brignull in maniera più sistematica, migliorando la comprensione dei dark pattern. Esistono quindi varie tassonomie di Dark Pattern, qui descriviamo la più recente, ovvero quella definita da Gray nel 2018  alla Conference on Human Factors in Computing Systems. Egli ha  ridefinito la categorizzazione delineata da Brignull partendo da un insieme di artefatti raccolti da blog, siti web e social media, rendendola più nitida e più generale. Gray ha proposto 5 categorie di dark pattern: Nagging, Obstruction, Sneaking, Interface Intereferences, Aesthetic Manipulation. La tassonomia realizzata da Gray si basa su quella originariamente creata da Brignull nel 2010, estendendola, ed adattando il significato di alcuni pattern, tenendo conto anche del target di utenti a cui è rivolto",
+    "image" : "",
+    "taxonomy": [
+        {
+            "name": "Nagging",
+            "description": "Si tratta di una categoria di dark pattern che si manifesta come una ripetuta intrusione durante la normale interazione dell'utente con la piattaforma.\nL'utente viene interrotto una o più volte, durante l'esecuzione di un task, da altre operazioni non direttamente collegati a quello che esso sta svolgendo.\nIl Nagging si può manifestare con pop-up che oscurano l'interfaccia, pubblicità improvvise a schermo intero oppure qualunque azione che ostruisce o sposta il focus dell'utente.\nNell'esempio mostrato in figura, un pop-up per provare il nuovo safari interrompe il task",
+            "categories": []
+        },
+        {
+            "name": "Obstruction",
+            "description": "Con questo dark pattern definiamo tutte quelle situazioni in cui l'utente si trova di fronte a degli “ostacoli”, inseriti durante l'esecuzione di un task che esso sta svolgendo e che ne intralciano il normale flusso con l'intento di dissuaderlo dal compiere un'azione.\nLa categoria Obstruction include i dark pattern Roach Motel, Price Comparison Prevention, e Intermediate Currency come definiti da Brignull",
+            "example_image": "",
+            "categories": [
+                {
+                    "name": "Roach Motel",
+                    "description": "Identifichiamo in questa sottocategoria tutte quelle azioni che sono facili da compiere ma difficili da annullare. Molto spesso questo si verifica quando un utente si può iscrivere facilmente a un servizio, ma chiudere l'account o cancellare l'iscrizione dal servizio risulta essere difficile o impossibile.",
+                    "example_image": "",
+                    "example_description": "Un esempio di Roach Motel è mostrasto in figura, ed stato individuato nel sito \"G2A Shield\", esso infatti, nel momento in cui si vuole iniziare la procedura di cancellazione dell'account, cerca in ogni modo di dissuadere l'utente dal completare l'azione, offrendo sconti sui servizi o latri tipi di manipolazioni. Il tutto rende questa procedura molto lunga e ardua"
+                },
+                {
+                    "name": "Price Comparison Prevention",
+                    "description": "All'interno del sito vengono appositamente omesse informazioni importanti riguardo ad un prodotto o servizio, come per esempio il nome o l'azienda produttrice, rendendo difficile il confronto del prezzo di essi con quello di altre piattaforme. L'utente non potrà quindi informarsi per prendere una decisione. Un altro esempio potrebbe essere una situazione in cui invece il testo sul sito viene reso \"non copiabile\" per impedirne la ricerca.",
+                    "example_image": "",
+                    "example_description": "Un'istanza di questo pattern è stata rilevata nel sito “theladders.com”, dove il nome di un inserzione è reso impossibile da copiare in modo da non poterlo cercare su altri siti di annunci di lavoro, poiché per candidarsi bisogna sottoscrivere un abbonamento a pagamento, come mostrato in figura"
+                },
+                {
+                    "name": "Intermediate Currency",
+                    "description": "Questo dark pattern è caratterizzato dall'utilizzo di una valuta “finta” per eseguire acquisti online: l'utente non acquista direttamente il bene o servizio richiesto, ma una valuta intermedia, tramite la quale sarà poi in grado di acuistare ciò che gli serve. Questo pattern punta a confondere l'utente, in modo che egli non riesca a percepire quanto effettivamente stia veramente spendendo. In questo modo si va a creare un tipo di interazione diversa tra l'utente e la valuta virtuale rispetto a quella che avrebbe con la valuta reale. Questo modello è utilizzato principalmente per gli acquisti in-app, soprattutto nei videogiochi, dove vengono utilizzate difficili formulazioni (tramite ad esempio percentuali) sui beni o servizi che si vanno ad acquistare insieme alla valuta virtuale.",
+                    "example_image": "",
+                    "example_description": "Nell'esempio in figura, il pattern è rilevato nell'app \"Heroes and Generals\": tramite le gemme è possibile ottenere dei potenziamenti delle statistiche del proprio personaggio virtuale ma, al momento dell'acquisto dei potenziamenti, vengono utilizzate delle percentuali per confondere l'utente sui benefici che otterrà."
+                }
+            ]
+        },
+        {
+            "name": "Sneaking",
+            "description": "In questa categoria sono inclusi tutti i metodi per nascondere, mascherare o ritardare la comunicazione di informazioni che risultano essere rilevanti per l'utente. Tramite queste tecniche si cerca di far eseguire all'utente delle azioni che non avrebbe compiuto se avesse avuto conoscenza delle informazioni che gli sono state nascoste. Questa categoria include le sottocategorie Forced Continuity, Hidden Costs, Sneak into Basket e Bait and Switch definite da Brignull.",
+            "categories": [
+                {
+                    "name": "Forced Continuity",
+                    "description": "Questo tipo di dark pattern si verifica quando abbiamo una situazione in cui il costo di un servizio continua ad essere addebitato all'utente anche dopo la sua scadenza. Si verifica, quindi, nel momento in cui termina la prova gratuita di un servizio, o quando viene raggiunta la scadenza di esso.",
+                    "example_image": "",
+                    "example_description": "L'esempio in figura è preso dal sito \"thetrainline.com\", all'interno del quale, quando andiamo ad acquistare un biglietto, nel momento in cui arriviamo alla fase di conferma dell'acquisto veniamo reindirizzati ad una pagina, all'interno della quale il sito tenterà, attraverso un altro dark pattern (Disguised Ad), di farci sottoscrivere un abbonamento ad un altro sito, one-time-offer.com, che comporterà l'addebito mensile al cliente di 15 sterline al mese, e questo per sempre."
+                },
+                {
+                    "name": "Hidden Costs",
+                    "description": "In questa categoria vediamo che prodotti o servizi vengono “pubblicizzati” con un prezzo, al quale vengono aggiunti altri costi successivamente, dovuti per esempio a commissioni, tasse o costi di spedizione non precedentemente comunicati.",
+                    "example_image": "",
+                    "example_description": "L'esempio in figura mostra il sito \"bostonglobe.com\", all'interno del quale, quando andiamo ad effettuare l'iscrizione, vediamo un prezzo alla voce Price Today, che però non è quello che verrà poi pagato in futuro."
+                },
+                {
+                    "name": "Sneak into Basket",
+                    "description": "Questo dark pattern aggiunge prodotti non scelti dall'utente al suo carrello online. Molto spesso questo inserimento verrà giustificato come un suggerimento, che si basa su altri articoli acquistati. Se l'utente non si accorge dell'articolo indesiderato potrebbe acquistarlo involontariamente.",
+                    "example_image": "",
+                    "example_description": "Un esempio, mostrato in figura, è quello del sito \"godaddy.com\", dove nel momento in cui andiamo ad acquistare un dominio ci viene automaticamente aggiunta la privacy protection, al costo di 8 dollari."
+                },
+                {
+                    "name": "Bait and Switch",
+                    "description": "Con questo tipo di dark pattern definiamo un'interfaccia che apparentemente allo svolgere di un'azione restituisce un determinato risultato, ma che in realtà ha un effetto diverso.",
+                    "example_image": "",
+                    "example_description": "Questo dark pattern è stato impiegato da Microsoft durante la campagna di aggiornamento di Windows 10: la finestra in figura permette di effettuare l'aggiornamento, ma la classica X in alto a destra invece che chiudere la finestra e non effettuare l'aggiornamento, dà inizio al processo."
+                }
+            ]
+        },
+        {
+            "name": "Interface Interferences",
+            "description": "Si tratta di una categoria che comprende tecniche di manipolazione dell'interfaccia che limitano l'utente nella possibilità di svolgere determinate azioni.\nSi cerca quindi di confondere l'utente facendogli effettuare delle azioni invece che altre, nascondendo o mascherandone alcune.",
+            "categories": [
+                {
+                    "name": "Hidden Information",
+                    "description": "All'utente vengono nascoste delle informazioni, attraverso l'utilizzo di sezioni poco visibili formate da testo scolorito o di piccole dimensioni.\nL'obiettivo di questo dark pattern è quello di far passare informazioni rilevanti come irrilevanti.",
+                    "example_image": "",
+                    "example_description": "Questa tecnica viene utilizzata nel pannello di controllo di Java, mostrato in figura, dove l'opzione per nascondere le pubblicità degli sponsor è nascosta in profondità nel menù."
+                },
+                {
+                    "name": "Hidden Information",
+                    "description": "All'utente vengono nascoste delle informazioni, attraverso l'utilizzo di sezioni poco visibili formate da testo scolorito o di piccole dimensioni.\nL'obiettivo di questo dark pattern è quello di far passare informazioni rilevanti come irrilevanti.",
+                    "example_image": "",
+                    "example_description": "Questa tecnica viene utilizzata nel pannello di controllo di Java, mostrato in figura, dove l'opzione per nascondere le pubblicità degli sponsor è nascosta in profondità nel menù."
+                },
+                {
+                    "name": "Preselection",
+                    "description": "Un'opzione è già selezionata di default nella pagina. Si tratta Di solito di una scelta che il proprietario del sito vuole che l'utente compia.\nÉ però molto spesso usata per scopi che vanno contro l'utente ed i suoi interessi, o che causano effetti indesiderati",
+                    "example_image": "",
+                    "example_description": "Un utilizzo è stato rilevato nel sito \"virgin.com\", che, al momento della registrazione, ha come preselezionata una checkbox tramite la quale l'utente acconsente a ricevere aggiurnamenti futuri su prodotti e servizi tramite email."
+                }
+            ]
+        },
+        {
+            "name": "Aesthetic Manipulation",
+            "description": "Vengono effettuate scelte di design che hanno lo scopo di attirare l'attenzione dell'utente, manipolando l'interfaccia per farlo concentrare su determinati aspetti o sezioni piuttosto che altre, per distrarlo o convincerlo diversamente.\nQuesta sottocategoria contiene 4 ulteriori sottocategorie (Toying with Emotions, False Hierarchy, Disguised Ad, Trick Questions) che riguardano più \"l'aspetto\", e quindi il designi effettivo della piattaforma, che le funzionalità.\nQuesto tipo di dark pattern è simile a Misdirection individuato da Brignull.",
+            "categories": [
+                {
+                    "name": "Toying with Emotions",
+                    "description": "Tramite uno o più aspetti dell'interfaccia, come testo, colori, immagini, ecc., si cerca di scatenare nell'utente determinate emozioni.",
+                    "example_image": "",
+                    "example_description": "L'esempio riporta l'iscrizione alla newletter del sito \"delish.com\", nel momento in cui l'utente non volesse iscriversi si cerca di dissuaderlo con una frase che tenta di raggiungere le sue emozioni."
+                },
+                {
+                    "name": "False Hierarchy",
+                    "description": "Con questo dark pattern tramite l'uso di decorazioni e altre scelte di design si cerca di rendere una azione da compiere più appetibile all'utente rispetto ad un'altra.\nIn particolare si cerca di dare l'impressione che  l'opzione evidenziata sia l'unica o la migliore.",
+                    "example_image": "",
+                    "example_description": "L'esempio in figura mostra come questo dark pattern sia applicato nel sito \"delta.com\", dove il bottone per pagare ora è evidenziato in rosso, mentre quello per continuare è grigio"
+                },
+                {
+                    "name": "Disguised Ad",
+                    "description": "Con questo dark pattern indichiamo tutti quei metodi che vengono utilizzati per nascondere una pubblicità, tramite l'uso di giochi, pulsanti o altri elementi interattivi che l'utente trova in una pagina.\nIn casi estremi l'intera pagina web è trasformata in un annuncio, in modo tale che ovunque si clicchi all'interno di essa l'utente viene reindirizzato verso un'altra pagina",
+                    "example_image": "",
+                    "example_description": "L'esempio in figura è tratto dall'app \"Accuweather\", dove, premendo la X per per chiudere la pubblicità, l'utente va in realtà a cliccare il pulsante di download dal Google Play Store, azione che non voleva compiere."
+                },
+                {
+                    "name": "Trick Questions",
+                    "description": "Con questo tipo di dark pattern si cerca di confondere l'utente e manipolare le sue intenzioni utilizzando volontariamente un linguaggio complicato, usando per esempio frasi con doppie negazioni, o che sembrano indicare una cosa, ma in realtà significano tutt'altro.",
+                    "example_image": "",
+                    "example_description": "Ne vediamo un esempio nella figura, dove, nel sito \"currys.co.uk\", durante l'iscrizione, selezionando la prima checkbox l'utente dichiara di non volere informazioni sui prodotti del sito, mentre selezionando la seconda invece dichiara di volerle"
+                }
+            ]
+        },
+        {
+            "name": "Forced Action",
+            "description": "Con questo tipo di dark pattern si descrive una situazione dove l'utente, per poter utilizzare una funzionalità è costretto a compiere una determinata azione.\nQuesta azione è spesso mascherata come un'opzione da cui l'utente ottiene un forte beneficio o si presenta come uno step obbligatorio da compiere per completare un task.",
+            "categories": [
+                {
+                    "name": "Social Pyramid",
+                    "description": "Con questo pattern l'utente è costretto ad invitare altri utenti per utilizzare il servizio offerto.\nÉ un modello molto utilizzato soprattutto in piattaforme di social media e giochi online, in cui l'utente viene premiato con potenziamenti (o benefici) se invita altre persone ad iscriversi alla piattaforma.",
+                    "example_image": "",
+                    "example_description": "L'esempio mostrato in figura ce ne mostra un caso nell'app \"FarmVille\", dove tramite questo pattern il gioco suggerisce di invitare amici, per poter usare funzionalità che non sono accessibili se si gioca da soli."
+                },
+                {
+                    "name": "Privacy Zuckering",
+                    "description": "Questo pattern cerca di ingannare l'utente in modo da fargli condividere più informazioni personali di quante voglia fornirne veramente.\nÉ utilizzato molto spesso per vendere le informazioni degli utenti ad aziende di terze parti, inserendo una clausola nei termini e condizioni o privacy policy dei siti web.",
+                    "example_image": "",
+                    "example_description": "Ne è un esempio la sequenza di pagine mostrata per accettare i termini di utilizzo e le Privacy Policy di WhatsApp, mostrata in figura. All'interno della prima pagina vediamo che non ci sono riferimenti a Facebook, la compagnia che possiede WhatsApp, ed abbiamo il pulsante per accettare i termini, ben evidente ed in grassetto, facendo trasparire la presenza anche del dark pattern False Hierarchy, e quello per leggere di più sui termini e condizioni del contratto.\nSe premiamo su quest'ultimo vediamo come, accettando i termini, l'utente permette a Facebook di usare i dati dell'account WhatsApp per mostrare ad esso pubblicità correlate con i suoi interessi."
+                },
+                {
+                    "name": "Gamification",
+                    "description": "Con questo dark pattern vengono indicate tutte quelle situazioni dove, all'interno di un servizio, alcuni aspetti possono essere \"guadagnati\" soltanto tramite il ripetuto svolgimento di specifiche azioni. ",
+                    "example_image": "",
+                    "example_description": "Vediamo un esempio del gioco Candy Crush, mostrato in figura, che occasionalmente fa giocare agli utenti dei livelli impossibili da completare, per costringerli a comprare vite extra o potenziamenti.\nSe l'utente non compra nessun potenziamento, il livello di difficoltà verrà abbassato lentamente."
+                }
+            ]
+        }
+    ]
+}
