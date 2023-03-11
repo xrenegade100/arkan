@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { NextPage } from 'next';
-import { useRef, useState, useEffect, Ref } from 'react';
+import { useRef, useState, Ref } from 'react';
 import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
 import { DarkPatternsInfo } from '../types';
