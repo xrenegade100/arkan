@@ -29,8 +29,26 @@ module.exports = {
         quarter: '150px',
       },
       backgroundImage: {
-        'header': "url('/header_background.svg')",
-      }
+        header: "url('/header_background.svg')",
+        'login-left-side': "url('/login_left_side_bg.svg')",
+      },
+      keyframes: {
+        fadein: {
+          '0%': { opacity: '0%' },
+          '90%': { opacity: '0%' },
+          '100%': { opacity: '100%' },
+        },
+        cover: {
+          '0%': { 'background-color': 'black' },
+          '90%': { 'background-color': 'black' },
+          '100%': { 'background-color': 'transparent' },
+        },
+      },
+
+      animation: {
+        'fade-in': 'fadein 8s linear',
+        cover: 'cover 8s linear',
+      },
     },
   },
   plugins: [],
