@@ -10,7 +10,10 @@ interface Props {
   onClick?: () => void;
 }
 
-const Avatar: React.FC<Props> = ({ imageUrl, dimen, user, onClick }: Props) => (
+const Avatar: React.FC<Props> = ({
+  imageUrl, dimen, user, onClick,
+}: Props) => (
+  // rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
   <img
     src={imageUrl}
     alt={user}

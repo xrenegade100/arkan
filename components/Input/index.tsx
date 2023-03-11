@@ -6,7 +6,7 @@ interface Props {
   type?: 'text' | 'email' | 'password';
   hint: string;
   value: string | number;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   className?: string;
 }

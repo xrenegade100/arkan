@@ -1,11 +1,11 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import Main from '../components/Main'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import Main from '../components/Main';
 import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return  (
+  return (
     <>
       <Head>
         <title>Arkan</title>
@@ -14,10 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Main>
         <Component {...pageProps} />
-        <Footer/>
+        <Footer />
       </Main>
     </>
   );
 }
 
-export default MyApp
+export default MyApp;

@@ -29,7 +29,7 @@ const Button: React.FC<Props> = ({
       },
       {
         'hover:bg-primary-accent':
-          !disabled && !isLoading && variant === 'primary',
+          !(disabled || isLoading) && variant === 'primary',
       },
       {
         'bg-primary-main': variant === 'primary',
@@ -39,7 +39,7 @@ const Button: React.FC<Props> = ({
       },
       {
         'hover:bg-secondary-accent':
-          !disabled && !isLoading && variant === 'secondary',
+          !(disabled || isLoading) && variant === 'secondary',
       },
       className,
     )}

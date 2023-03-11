@@ -9,24 +9,37 @@ interface Props {
 }
 
 const Main: React.FC<Props> = ({ children }: Props) => {
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false)
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const sidebar = useRef<HTMLDivElement>(null);
   const outsideClick = useOutsideClick(sidebar, isSidebarVisible);
 
   useEffect(() => {
-    if(outsideClick) setIsSidebarVisible(false);
+    if (outsideClick) setIsSidebarVisible(false);
   }, [outsideClick]);
-  
 
   return (
     <div className="w-full h-screen m-0 p-0">
       <div ref={sidebar}>
-        <Navbar onClick={() => {setIsSidebarVisible(!isSidebarVisible)}} isSidebarVisible={isSidebarVisible}/>
-        <Sidebar username='BraindeadHermit' email='scorziello.giovanni00@gmail.com' isVisible={isSidebarVisible}>
-          <SidebarItem icon='account_circle' text='account' selected onClick={() => {}}/>
-          <SidebarItem icon='analytics' text='analisi' onClick={() => {}}/>
-          <SidebarItem icon='public' text='interazioni' onClick={() => {}}/>
-          <SidebarItem icon='logout' text='logout' onClick={() => {}}/>
+        <Navbar
+          onClick={() => {
+            setIsSidebarVisible(!isSidebarVisible);
+          }}
+          isSidebarVisible={isSidebarVisible}
+        />
+        <Sidebar
+          username="BraindeadHermit"
+          email="scorziello.giovanni00@gmail.com"
+          isVisible={isSidebarVisible}
+        >
+          <SidebarItem
+            icon="account_circle"
+            text="account"
+            selected
+            onClick={() => {}}
+          />
+          <SidebarItem icon="analytics" text="analisi" onClick={() => {}} />
+          <SidebarItem icon="public" text="interazioni" onClick={() => {}} />
+          <SidebarItem icon="logout" text="logout" onClick={() => {}} />
         </Sidebar>
       </div>
       <div className="w-full h-full m-0 p-0">{children}</div>

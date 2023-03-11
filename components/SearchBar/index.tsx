@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 interface Props {
   value: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any;
-  onClick: () => any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
 }
 
 const SearchBar: React.FC<Props> = ({ value, onChange, onClick }: Props) => {
