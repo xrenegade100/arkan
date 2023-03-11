@@ -23,13 +23,16 @@ const PostItem: React.FC<Props> = ({title, children, sidePosition}: Props) => {
         'justify-start': sidePosition === 'left',
         'flex-row-reverse': sidePosition === 'right',
       })}>
-        <span className={clsx("font-body text-xl lg:text-2xl xl:text-4xl font-bold",
+        <span className={clsx("font-body text-xl lg:text-2xl xl:text-4xl font-bold hover:cursor-pointer",
         {
           "pl-4 lg:pl-6 xl:pl-8": sidePosition === 'left',
           "pr-4 lg:pr-6 xl:pr-8": sidePosition === 'right',
-        })}>{title}</span>
+        })}
+        onClick={() => {
+          setVisibility(!visibility);
+        }}>{title}</span>
         <span 
-          className={clsx("material-symbols-rounded md-36 lg:md-64 xl:md-64",
+          className={clsx("material-symbols-rounded md-36 lg:md-64 xl:md-64 hover:cursor-pointer",
           {
             'pr-4 lg:pr-6 xl:pr-8': sidePosition === 'left',
             'pl-4 lg:pl-6 xl:pl-8': sidePosition === 'right',
