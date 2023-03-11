@@ -8,7 +8,7 @@ interface Props {
 
 const Navbar: React.FC<Props> = ({onClick, isSidebarVisible}: Props) => {
   return (
-    <div className="fixed w-full h-14 bg-primary-main shadow-md">
+    <div className="fixed z-10 w-full h-14 bg-primary-main shadow-md">
       <div className="h-full mx-8 flex justify-between items-center">
         <div className="w-full h-full flex justify-start items-center">
           <span className="material-symbols-rounded md-36 text-white hover:cursor-pointer" onClick={onClick}>

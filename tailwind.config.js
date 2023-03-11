@@ -19,7 +19,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        body: 'quicksand',
+        body: 'Open Sans',
         logo: 'Rajdhani',
       },
       transitionProperty: {
@@ -28,6 +28,9 @@ module.exports = {
       borderRadius: {
         quarter: '150px',
       },
+      backgroundImage: {
+        'header': "url('/header_background.svg')",
+      }
     },
   },
   plugins: [],
