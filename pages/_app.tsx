@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" href="/arkan-logo.png" />
       </Head>
-      {route.pathname === '/login' || route.pathname === '/singin' ? (
+      {route.pathname === '/login' || route.pathname === '/signup' ? (
         <Component {...pageProps} />
       ) : (
         <Main>

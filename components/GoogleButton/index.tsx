@@ -1,13 +1,13 @@
 import React from 'react';
 
 interface Props {
-  action: 'signin' | 'login';
+  action: 'signup' | 'login';
   className?: string;
 }
 
 const GoogleButton: React.FC<Props> = ({ action, className }: Props) => {
   const logIn = () => {};
-  const singIn = () => {};
+  const singUp = () => {};
 
   return (
     <button
@@ -16,7 +16,7 @@ const GoogleButton: React.FC<Props> = ({ action, className }: Props) => {
     >
       <img src="/google-icon.svg" alt="google" className="w-5 h-5" />
       <span className="text-gray-500 text-lg font-body px-4">
-        {action === 'signin' ? 'Sign in with Google' : 'Login with Google'}
+        {action === 'signup' ? 'Sign up with Google' : 'Login with Google'}
       </span>
     </button>
   );

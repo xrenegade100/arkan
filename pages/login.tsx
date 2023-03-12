@@ -83,7 +83,7 @@ const login: NextPage = () => {
           </div>
           <span className="font-body text-sm my-2 justify-self-end">
             Non hai un account?{' '}
-            <Link className="text-primary-main" href="">
+            <Link className="text-primary-main" href="/signup">
               REGISTRATI
             </Link>
           </span>

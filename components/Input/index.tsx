@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
 import React, { useRef, useState } from 'react';
 import Eye from './eye';
