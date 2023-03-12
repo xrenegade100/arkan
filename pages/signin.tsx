@@ -8,7 +8,7 @@ import Button from '../components/Button';
 import GoogleButton from '../components/GoogleButton';
 import Input from '../components/Input';
 
-const singin: NextPage = () => {
+const signin: NextPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -92,7 +92,7 @@ const singin: NextPage = () => {
               <Button className="w-full py-3 my-2">
                 <span>REGISTRATI</span>
               </Button>
-              <GoogleButton action="singin" className="w-full my-2" />
+              <GoogleButton action="signin" className="w-full my-2" />
             </div>
           </div>
           <span className="font-body text-sm my-2 justify-self-end">
@@ -107,4 +107,4 @@ const singin: NextPage = () => {
   );
 };
 
-export default singin;
+export default signin;
