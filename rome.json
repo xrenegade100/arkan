@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/rome/configuration_schema.json",
+  "formatter": {
+      "enabled": true,
+      "indentStyle": "tab",
+      "lineWidth": 120,
+      "indentSize": 2
+  },
+  "javascript":{
+    "formatter": {
+      "semicolons": "always",
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  }
+}
