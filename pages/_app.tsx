@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -14,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" href="/arkan-logo.png" />
       </Head>
-      {route.pathname === '/login' ? (
+      {route.pathname === '/login' || route.pathname === '/singin' ? (
         <Component {...pageProps} />
       ) : (
         <Main>

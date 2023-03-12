@@ -8,7 +8,7 @@ import Button from '../components/Button';
 import GoogleButton from '../components/GoogleButton';
 import Input from '../components/Input';
 
-const login: NextPage = () => {
+const singin: NextPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -46,7 +46,7 @@ const login: NextPage = () => {
         <div className="w-full lg:w-1/2 bg-white h-full flex flex-col justify-between items-center">
           <div />
           <span className="font-logo text-5xl text-secondary-main mt-2 lg:mt-4">
-            Benvenuto!
+            Registrati
           </span>
           <div className="w-full flex flex-col justify-center items-center">
             <div className="w-full flex flex-col justify-center items-center lg:my-4">
@@ -61,7 +61,7 @@ const login: NextPage = () => {
                   value={username}
                 />
               </div>
-              <div className="w-3/4 lg:w-2/4 py-2 lg:py-4">
+              <div className="w-3/4 lg:w-2/4 pt-2 lg:py-4">
                 <span className="font-body text-sm font-bold">Password:</span>
                 <Input
                   hint="password"
@@ -73,18 +73,32 @@ const login: NextPage = () => {
                   type="password"
                 />
               </div>
+              <div className="w-3/4 lg:w-2/4 py-2 lg:py-4">
+                <span className="font-body text-sm font-bold">
+                  Conferma Password:
+                </span>
+                <Input
+                  hint="conferma password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                  value={password}
+                  className="py-2"
+                  type="password"
+                />
+              </div>
             </div>
             <div className="w-3/4 lg:w-2/4 flex flex-col justify-around items-center my-2 lg:my-4">
               <Button className="w-full py-3 my-2">
-                <span>ACCEDI</span>
+                <span>REGISTRATI</span>
               </Button>
-              <GoogleButton action="login" className="w-full my-2" />
+              <GoogleButton action="singin" className="w-full my-2" />
             </div>
           </div>
           <span className="font-body text-sm my-2 justify-self-end">
-            Non hai un account?{' '}
+            Hai già un account?{' '}
             <Link className="text-primary-main" href="">
-              REGISTRATI
+              ACCEDI
             </Link>
           </span>
         </div>
@@ -93,4 +107,4 @@ const login: NextPage = () => {
   );
 };
 
-export default login;
+export default singin;

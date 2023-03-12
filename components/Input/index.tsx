@@ -8,6 +8,7 @@ interface Props {
   value: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  isInvalid?: boolean;
   className?: string;
 }
 
@@ -17,6 +18,7 @@ const Input: React.FC<Props> = ({
   value,
   onChange,
   disabled,
+  isInvalid,
   className,
 }: Props) => {
   const [visibility, setVisibility] = useState({
@@ -41,6 +43,7 @@ const Input: React.FC<Props> = ({
           'border-primary-main': visibility.isInputFocused === true,
           'border-gray-300': visibility.isInputFocused === false,
           'cursor-not-allowed': disabled,
+          'border-red-500': isInvalid,
         },
       )}
     >
@@ -95,6 +98,7 @@ Input.defaultProps = {
   type: 'text',
   onChange: () => {},
   disabled: false,
+  isInvalid: false,
 };
 
 export default Input;
