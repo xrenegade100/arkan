@@ -7,13 +7,58 @@ import Typewriter, { TypewriterClass } from 'typewriter-effect';
 import Button from '../components/Button';
 import GoogleButton from '../components/GoogleButton';
 import Input from '../components/Input';
+import {
+  validateEmail,
+  validatePassword,
+  validateUsername,
+  validateIsPasswordEqualToConfirmPassword,
+  validation,
+} from './Helpers/CredentialsValidation';
 import { useAuth } from '../hook/useAuth';
 
 const signup: NextPage = () => {
+  // value variables
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const { singinWithEmail, authenticateWithGoogle } = useAuth();
+
+  // validation variables
+  const [isEmailValid, setIsEmailValid] = useState(validation.VALID);
+  const [isPasswordValid, setIsPasswordValid] = useState(validation.VALID);
+  const [
+    isConfirmPasswordEqualToPassword,
+    setIsConfirmPasswordEqualToPassword,
+  ] = useState(validation.VALID);
+  const [isUsernameValid, setIsUsernameValid] = useState(validation.VALID);
+
+  // show/hide button loading spinner
+  const [isLoading, setIsLoading] = useState(false);
+
+  const singIn = () => {
+    setIsEmailValid(validateEmail(email));
+    if (validateEmail(email) !== validation.VALID) return;
+
+    setIsUsernameValid(validateUsername(username));
+    if (validateUsername(username) !== validation.VALID) return;
+
+    setIsPasswordValid(validatePassword(password));
+    if (validatePassword(password) !== validation.VALID) return;
+
+    setIsConfirmPasswordEqualToPassword(
+      validateIsPasswordEqualToConfirmPassword(password, confirmPassword),
+    );
+    if (
+      validateIsPasswordEqualToConfirmPassword(password, confirmPassword) !==
+      validation.VALID
+    ) {
+      return;
+    }
+
+    setIsLoading(true);
+    singinWithEmail(email, username, password);
+  };
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-white to-secondary-accent">
@@ -62,6 +107,8 @@ const signup: NextPage = () => {
                   }}
                   className="xl:py-1 2xl:py-2"
                   value={email}
+                  errorText="l'email inserita non è valida"
+                  isInvalid={isEmailValid}
                 />
               </div>
               <div className="w-full xl:py-2">
@@ -73,6 +120,7 @@ const signup: NextPage = () => {
                   }}
                   className="xl:py-1 2xl:py-2"
                   value={username}
+                  isInvalid={isUsernameValid}
                 />
               </div>
               <div className="w-full xl:py-2">
@@ -85,6 +133,8 @@ const signup: NextPage = () => {
                   value={password}
                   className="xl:py-1 2xl:py-2"
                   type="password"
+                  errorText="Attenzione! la password deve avere almeno 8 caratteri, almeno una lettera maiuscola, un numero ed un carattere speciale"
+                  isInvalid={isPasswordValid}
                 />
               </div>
               <div className="w-full py-1 xl:py-2">
@@ -94,11 +144,13 @@ const signup: NextPage = () => {
                 <Input
                   hint="conferma password"
                   onChange={(e) => {
-                    setPassword(e.target.value);
+                    setConfirmPassword(e.target.value);
                   }}
-                  value={password}
+                  value={confirmPassword}
                   className="xl:py-1 2xl:py-2"
                   type="password"
+                  errorText="Attenzione! i campi password e conferma password devono essere uguali"
+                  isInvalid={isConfirmPasswordEqualToPassword}
                 />
               </div>
             </div>
@@ -106,7 +158,8 @@ const signup: NextPage = () => {
           <div className="w-10/12 lg:w-9/12 2xl:w-7/12 flex flex-col justify-around items-center my-2 xl:my-4">
             <Button
               className="w-full py-2 xl:py-3 my-2"
-              onClick={() => singinWithEmail(email, username, password)}
+              onClick={singIn}
+              isLoading={isLoading}
             >
               <span>REGISTRATI</span>
             </Button>
