@@ -15,6 +15,7 @@ import {
   validation,
 } from './Helpers/CredentialsValidation';
 import { useAuth } from '../hook/useAuth';
+import Popup from '../components/Popup';
 
 const signup: NextPage = () => {
   // value variables
@@ -36,10 +37,14 @@ const signup: NextPage = () => {
   // show/hide button loading spinner
   const [isLoading, setIsLoading] = useState(false);
 
+  // popup visiblity
+  const [userAlreadyExist, setUserAlreadyExist] = useState(false);
+
   useEffect(() => {
     if (firebaseError) {
       if (firebaseError.code === 'auth/email-already-in-use') {
         setIsLoading(false);
+        setUserAlreadyExist(true);
       }
     }
   }, [firebaseError]);
@@ -117,6 +122,7 @@ const signup: NextPage = () => {
                   value={email}
                   errorText="l'email inserita non è valida"
                   isInvalid={isEmailValid}
+                  disabled={userAlreadyExist}
                 />
               </div>
               <div className="w-full xl:py-2">
@@ -129,6 +135,7 @@ const signup: NextPage = () => {
                   className="xl:py-1 2xl:py-2"
                   value={username}
                   isInvalid={isUsernameValid}
+                  disabled={userAlreadyExist}
                 />
               </div>
               <div className="w-full xl:py-2">
@@ -143,6 +150,7 @@ const signup: NextPage = () => {
                   type="password"
                   errorText="Attenzione! la password deve avere almeno 8 caratteri, almeno una lettera maiuscola, un numero ed un carattere speciale"
                   isInvalid={isPasswordValid}
+                  disabled={userAlreadyExist}
                 />
               </div>
               <div className="w-full py-1 xl:py-2">
@@ -159,6 +167,7 @@ const signup: NextPage = () => {
                   type="password"
                   errorText="Attenzione! i campi password e conferma password devono essere uguali"
                   isInvalid={isConfirmPasswordEqualToPassword}
+                  disabled={userAlreadyExist}
                 />
               </div>
             </div>
@@ -168,6 +177,7 @@ const signup: NextPage = () => {
               className="w-full py-2 xl:py-3 my-2"
               onClick={singIn}
               isLoading={isLoading}
+              disabled={userAlreadyExist}
             >
               <span>REGISTRATI</span>
             </Button>
@@ -175,6 +185,7 @@ const signup: NextPage = () => {
               action="signup"
               className="w-full my-2"
               onClick={authenticateWithGoogle}
+              disabled={userAlreadyExist}
             />
           </div>
           <span className="font-body text-sm my-2 justify-self-end">
@@ -185,6 +196,12 @@ const signup: NextPage = () => {
           </span>
         </div>
       </div>
+      <Popup
+        message="Esiste già un account con questa email, prova ad effettuare l'accesso con la pagina di login"
+        title="Attenzione!"
+        isVisible={userAlreadyExist}
+        onClick={() => setUserAlreadyExist(false)}
+      />
     </div>
   );
 };
