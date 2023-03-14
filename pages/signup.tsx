@@ -17,7 +17,7 @@ const signup: NextPage = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-white to-secondary-accent">
-      <div className="w-10/12 h-3/4 lg:w-3/4 lg:h-4/5  flex justify-center items-center rounded-xl shadow-xl overflow-hidden">
+      <div className="w-10/12 h-5/6 lg:w-3/4 lg:h-5/6  flex justify-center items-center rounded-xl shadow-xl overflow-hidden">
         <div className="hidden lg:block relative w-1/2 h-full bg-login-left-side bg-cover">
           <div className="w-full h-full p-0 m-0 absolute">
             <div className="-z-10 w-full h-full flex justify-center items-center animate-cover">
@@ -51,31 +51,31 @@ const signup: NextPage = () => {
           <span className="font-logo text-5xl text-secondary-main mt-2 lg:mt-4">
             Registrati
           </span>
-          <div className="w-full flex flex-col justify-center items-center">
-            <div className="w-full flex flex-col justify-center items-center lg:my-4">
-              <div className="w-3/4 lg:w-2/4 lg:py-4">
+          <div className="w-10/12 lg:w-9/12 2xl:w-7/12 flex flex-col justify-center items-center">
+            <div className="w-full flex flex-col justify-center items-center xl:my-4">
+              <div className="w-full xl:py-2">
                 <span className="font-body text-sm font-bold">Email:</span>
                 <Input
                   hint="email"
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
-                  className="py-2"
+                  className="xl:py-1 2xl:py-2"
                   value={email}
                 />
               </div>
-              <div className="w-3/4 lg:w-2/4 lg:py-4">
+              <div className="w-full xl:py-2">
                 <span className="font-body text-sm font-bold">Username:</span>
                 <Input
                   hint="username"
                   onChange={(e) => {
                     setUsername(e.target.value);
                   }}
-                  className="py-2"
+                  className="xl:py-1 2xl:py-2"
                   value={username}
                 />
               </div>
-              <div className="w-3/4 lg:w-2/4 pt-2 lg:py-4">
+              <div className="w-full xl:py-2">
                 <span className="font-body text-sm font-bold">Password:</span>
                 <Input
                   hint="password"
@@ -83,11 +83,11 @@ const signup: NextPage = () => {
                     setPassword(e.target.value);
                   }}
                   value={password}
-                  className="py-2"
+                  className="xl:py-1 2xl:py-2"
                   type="password"
                 />
               </div>
-              <div className="w-3/4 lg:w-2/4 py-2 lg:py-4">
+              <div className="w-full py-1 xl:py-2">
                 <span className="font-body text-sm font-bold">
                   Conferma Password:
                 </span>
@@ -97,24 +97,24 @@ const signup: NextPage = () => {
                     setPassword(e.target.value);
                   }}
                   value={password}
-                  className="py-2"
+                  className="xl:py-1 2xl:py-2"
                   type="password"
                 />
               </div>
             </div>
-            <div className="w-3/4 lg:w-2/4 flex flex-col justify-around items-center my-2 lg:my-4">
-              <Button
-                className="w-full py-3 my-2"
-                onClick={() => singinWithEmail(email, username, password)}
-              >
-                <span>REGISTRATI</span>
-              </Button>
-              <GoogleButton
-                action="signup"
-                className="w-full my-2"
-                onClick={authenticateWithGoogle}
-              />
-            </div>
+          </div>
+          <div className="w-10/12 lg:w-9/12 2xl:w-7/12 flex flex-col justify-around items-center my-2 xl:my-4">
+            <Button
+              className="w-full py-2 xl:py-3 my-2"
+              onClick={() => singinWithEmail(email, username, password)}
+            >
+              <span>REGISTRATI</span>
+            </Button>
+            <GoogleButton
+              action="signup"
+              className="w-full my-2"
+              onClick={authenticateWithGoogle}
+            />
           </div>
           <span className="font-body text-sm my-2 justify-self-end">
             Hai già un account?{' '}

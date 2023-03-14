@@ -1,8 +1,9 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import React, { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../../hook/useAuth';
 import useOutsideClick from '../../hook/useOutsideClick';
 import Navbar from '../Navbar';
-import Overlay from '../Overlay';
 import Sidebar from '../Sidebar';
 import SidebarItem from '../Sidebar/Item';
 
@@ -30,22 +31,38 @@ const Main: React.FC<Props> = ({ children }: Props) => {
           isSidebarVisible={isSidebarVisible}
         />
         <Sidebar
-          profilePicture={user?.photoURL as string}
+          profilePicture={
+            user?.photoURL
+              ? (user?.photoURL as string)
+              : 'https://st3.depositphotos.com/9998432/13335/v/600/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg'
+          }
           username={user ? (user.displayName as string) : 'Guest'}
           email={user ? (user.email as string) : 'Arkan guest'}
           isVisible={isSidebarVisible}
         >
-          <div className="w-full flex flex-col justify-center items-end md:hidden ">
-            <SidebarItem
-              icon="account_circle"
-              text="account"
-              onClick={() => {}}
-            />
-            <SidebarItem icon="analytics" text="analisi" onClick={() => {}} />
-            <SidebarItem icon="public" text="interazioni" onClick={() => {}} />
-            <SidebarItem icon="logout" text="logout" onClick={() => {}} />
-            <hr className="w-full my-4" />
-          </div>
+          {user ? (
+            <div className="w-full flex flex-col justify-center items-end md:hidden ">
+              <SidebarItem
+                icon="account_circle"
+                text="account"
+                onClick={() => {}}
+              />
+              <SidebarItem icon="analytics" text="analisi" onClick={() => {}} />
+              <SidebarItem
+                icon="public"
+                text="interazioni"
+                onClick={() => {}}
+              />
+              <SidebarItem icon="logout" text="logout" onClick={logout} />
+              <hr className="w-full my-4" />
+            </div>
+          ) : (
+            <div className="w-full flex flex-col justify-center items-end md:hidden ">
+              <SidebarItem icon="login" text="login" onClick={() => {}} />
+              <SidebarItem icon="person_add" text="sign up" onClick={logout} />
+              <hr className="w-full my-4" />
+            </div>
+          )}
           <SidebarItem icon="report" text="segnala" onClick={() => {}} />
           <SidebarItem
             icon="list_alt"
