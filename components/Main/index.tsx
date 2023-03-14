@@ -34,20 +34,11 @@ const Main: React.FC<Props> = ({ children }: Props) => {
           email={user ? (user.email as string) : 'Arkan guest'}
           isVisible={isSidebarVisible}
         >
+          <SidebarItem icon="report" text="segnala" onClick={() => {}} />
           <SidebarItem
-            icon="account_circle"
-            text="account"
-            selected
+            icon="list_alt"
+            text="Hall of Shame"
             onClick={() => {}}
-          />
-          <SidebarItem icon="analytics" text="analisi" onClick={() => {}} />
-          <SidebarItem icon="public" text="interazioni" onClick={() => {}} />
-          <SidebarItem
-            icon="logout"
-            text="logout"
-            onClick={() => {
-              logout();
-            }}
           />
         </Sidebar>
       </div>
