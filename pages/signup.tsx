@@ -7,10 +7,12 @@ import Typewriter, { TypewriterClass } from 'typewriter-effect';
 import Button from '../components/Button';
 import GoogleButton from '../components/GoogleButton';
 import Input from '../components/Input';
+import { useAuth } from '../hook/useAuth';
 
 const signup: NextPage = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { singinWithEmail, authenticateWithGoogle } = useAuth();
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-white to-secondary-accent">
@@ -55,10 +57,10 @@ const signup: NextPage = () => {
                 <Input
                   hint="username"
                   onChange={(e) => {
-                    setUsername(e.target.value);
+                    setEmail(e.target.value);
                   }}
                   className="py-2"
-                  value={username}
+                  value={email}
                 />
               </div>
               <div className="w-3/4 lg:w-2/4 pt-2 lg:py-4">
@@ -89,10 +91,17 @@ const signup: NextPage = () => {
               </div>
             </div>
             <div className="w-3/4 lg:w-2/4 flex flex-col justify-around items-center my-2 lg:my-4">
-              <Button className="w-full py-3 my-2">
+              <Button
+                className="w-full py-3 my-2"
+                onClick={() => singinWithEmail(email, password)}
+              >
                 <span>REGISTRATI</span>
               </Button>
-              <GoogleButton action="signup" className="w-full my-2" />
+              <GoogleButton
+                action="signup"
+                className="w-full my-2"
+                onClick={authenticateWithGoogle}
+              />
             </div>
           </div>
           <span className="font-body text-sm my-2 justify-self-end">
