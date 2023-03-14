@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app';
 import { User } from 'firebase/auth';
 import { createContext } from 'react';
 
@@ -7,6 +8,7 @@ interface IAuthContext {
   loginWithEmail: (email: string, password: string) => void;
   singinWithEmail: (email: string, username: string, password: string) => void;
   authenticateWithGoogle: () => {};
+  firebaseError: FirebaseError;
   logout: () => {};
 }
 

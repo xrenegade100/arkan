@@ -2,7 +2,7 @@
 /* eslint-disable import/no-unresolved */
 import { NextPage } from 'next';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Typewriter, { TypewriterClass } from 'typewriter-effect';
 import Button from '../components/Button';
 import GoogleButton from '../components/GoogleButton';
@@ -22,7 +22,7 @@ const signup: NextPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const { singinWithEmail, authenticateWithGoogle } = useAuth();
+  const { singinWithEmail, authenticateWithGoogle, firebaseError } = useAuth();
 
   // validation variables
   const [isEmailValid, setIsEmailValid] = useState(validation.VALID);
@@ -36,7 +36,15 @@ const signup: NextPage = () => {
   // show/hide button loading spinner
   const [isLoading, setIsLoading] = useState(false);
 
-  const singIn = () => {
+  useEffect(() => {
+    if (firebaseError) {
+      if (firebaseError.code === 'auth/email-already-in-use') {
+        setIsLoading(false);
+      }
+    }
+  }, [firebaseError]);
+
+  const singIn = async () => {
     setIsEmailValid(validateEmail(email));
     if (validateEmail(email) !== validation.VALID) return;
 

@@ -10,6 +10,7 @@ import {
   browserLocalPersistence,
 } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import { FirebaseError } from 'firebase/app';
 import { AuthContext } from '../context';
 import { auth, googleProvider } from '../firebase.config';
 
@@ -17,6 +18,7 @@ const useProvideAuth = () => {
   const router = useRouter();
 
   const [user, setUser] = useState<User>();
+  const [firebaseError, setFirebaseError] = useState<FirebaseError>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const useProvideAuth = () => {
         setIsLoggedIn(true);
       }
     } catch (error) {
-      console.log(error);
+      setFirebaseError(error as FirebaseError);
     }
   };
 
@@ -64,7 +66,7 @@ const useProvideAuth = () => {
         setIsLoggedIn(true);
       }
     } catch (error) {
-      console.log(error);
+      alert('ERROR DURING GOOGLE AUTHENICATION');
     }
   };
 
@@ -76,7 +78,7 @@ const useProvideAuth = () => {
         setIsLoggedIn(true);
       }
     } catch (error) {
-      console.log(error);
+      setFirebaseError(error as FirebaseError);
     }
   };
 
@@ -94,6 +96,7 @@ const useProvideAuth = () => {
     loginWithEmail,
     singinWithEmail,
     authenticateWithGoogle,
+    firebaseError,
     logout,
   };
 };
