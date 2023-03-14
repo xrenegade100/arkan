@@ -1,21 +1,25 @@
-import {
-  useState, useEffect, Ref, MutableRefObject,
-} from 'react';
+import { useState, useEffect, Ref, MutableRefObject } from 'react';
 
-const useOutsideClick = (ref: Ref<HTMLDivElement>, isSidebarVisibile: boolean) => {
+const useOutsideClick = (
+  ref: Ref<HTMLDivElement>,
+  isComponentVisibile: boolean,
+) => {
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
-        (ref as MutableRefObject<HTMLDivElement>)?.current
-        && !(ref as MutableRefObject<HTMLDivElement>)?.current.contains(event.target as Node)
-        && isSidebarVisibile) {
+        (ref as MutableRefObject<HTMLDivElement>)?.current &&
+        !(ref as MutableRefObject<HTMLDivElement>)?.current.contains(
+          event.target as Node,
+        ) &&
+        isComponentVisibile
+      ) {
         setIsClicked(true);
       }
     }
 
-    if (!isSidebarVisibile) {
+    if (!isComponentVisibile) {
       setIsClicked(false);
     }
 
@@ -23,7 +27,7 @@ const useOutsideClick = (ref: Ref<HTMLDivElement>, isSidebarVisibile: boolean) =
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref, isSidebarVisibile]);
+  }, [ref, isComponentVisibile]);
 
   return isClicked;
 };
