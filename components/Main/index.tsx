@@ -35,6 +35,17 @@ const Main: React.FC<Props> = ({ children }: Props) => {
           email={user ? (user.email as string) : 'Arkan guest'}
           isVisible={isSidebarVisible}
         >
+          <div className="w-full flex flex-col justify-center items-end md:hidden ">
+            <SidebarItem
+              icon="account_circle"
+              text="account"
+              onClick={() => {}}
+            />
+            <SidebarItem icon="analytics" text="analisi" onClick={() => {}} />
+            <SidebarItem icon="public" text="interazioni" onClick={() => {}} />
+            <SidebarItem icon="logout" text="logout" onClick={() => {}} />
+            <hr className="w-full my-4" />
+          </div>
           <SidebarItem icon="report" text="segnala" onClick={() => {}} />
           <SidebarItem
             icon="list_alt"

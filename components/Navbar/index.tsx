@@ -40,7 +40,7 @@ const Navbar: React.FC<Props> = ({ onClick, isSidebarVisible }: Props) => {
           <Image src="/logo.png" alt="Arkan" width={160} height={50} priority />
         </Link>
         {user ? (
-          <div className="w-full h-full flex justify-end items-center">
+          <div className="invisible w-full h-full flex justify-end items-center md:visible">
             <div className="flex flex-col justify-end items-end" ref={overlay}>
               <Avatar
                 imageUrl={
@@ -70,7 +70,7 @@ const Navbar: React.FC<Props> = ({ onClick, isSidebarVisible }: Props) => {
             </div>
           </div>
         ) : (
-          <div className="w-full h-full flex justify-end items-center">
+          <div className="invisible w-full h-full flex justify-end items-center md:visible">
             <Link href="/login" className="h-full">
               <span className="w-0 md:w-fit h-full flex items-center justify-center bg-transparent px-2 font-body text-xl font-bold text-white hover:bg-secondary-main hover:cursor-pointer transition-colors">
                 SIGN IN
