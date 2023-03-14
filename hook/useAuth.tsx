@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   User,
+  updateProfile,
   browserLocalPersistence,
 } from 'firebase/auth';
 import { useRouter } from 'next/router';
@@ -36,10 +37,17 @@ const useProvideAuth = () => {
     }
   }, [isLoggedIn]);
 
-  const singinWithEmail = async (email: string, password: string) => {
+  const singinWithEmail = async (
+    email: string,
+    username: string,
+    password: string,
+  ) => {
     try {
       const data = await createUserWithEmailAndPassword(auth, email, password);
       if (data) {
+        await updateProfile(auth.currentUser as User, {
+          displayName: username,
+        });
         setUser(data.user);
         setIsLoggedIn(true);
       }

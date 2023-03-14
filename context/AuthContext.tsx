@@ -5,7 +5,7 @@ interface IAuthContext {
   user: User | undefined;
   isLoggedIn: boolean;
   loginWithEmail: (email: string, password: string) => void;
-  singinWithEmail: (email: string, password: string) => void;
+  singinWithEmail: (email: string, username: string, password: string) => void;
   authenticateWithGoogle: () => {};
   logout: () => {};
 }

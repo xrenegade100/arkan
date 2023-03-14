@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useAuth } from '../../hook/useAuth';
 import useOutsideClick from '../../hook/useOutsideClick';
 import Navbar from '../Navbar';
 import Sidebar from '../Sidebar';
@@ -12,6 +13,7 @@ const Main: React.FC<Props> = ({ children }: Props) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const sidebar = useRef<HTMLDivElement>(null);
   const outsideClick = useOutsideClick(sidebar, isSidebarVisible);
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     if (outsideClick) setIsSidebarVisible(false);
@@ -27,8 +29,9 @@ const Main: React.FC<Props> = ({ children }: Props) => {
           isSidebarVisible={isSidebarVisible}
         />
         <Sidebar
-          username="BraindeadHermit"
-          email="scorziello.giovanni00@gmail.com"
+          profilePicture={user?.photoURL as string}
+          username={user ? (user.displayName as string) : 'Guest'}
+          email={user ? (user.email as string) : 'Arkan guest'}
           isVisible={isSidebarVisible}
         >
           <SidebarItem
@@ -39,7 +42,13 @@ const Main: React.FC<Props> = ({ children }: Props) => {
           />
           <SidebarItem icon="analytics" text="analisi" onClick={() => {}} />
           <SidebarItem icon="public" text="interazioni" onClick={() => {}} />
-          <SidebarItem icon="logout" text="logout" onClick={() => {}} />
+          <SidebarItem
+            icon="logout"
+            text="logout"
+            onClick={() => {
+              logout();
+            }}
+          />
         </Sidebar>
       </div>
       <div className="w-full h-full m-0 p-0">{children}</div>

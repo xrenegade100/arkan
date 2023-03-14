@@ -11,6 +11,7 @@ import { useAuth } from '../hook/useAuth';
 
 const signup: NextPage = () => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { singinWithEmail, authenticateWithGoogle } = useAuth();
 
@@ -53,14 +54,25 @@ const signup: NextPage = () => {
           <div className="w-full flex flex-col justify-center items-center">
             <div className="w-full flex flex-col justify-center items-center lg:my-4">
               <div className="w-3/4 lg:w-2/4 lg:py-4">
-                <span className="font-body text-sm font-bold">Username:</span>
+                <span className="font-body text-sm font-bold">Email:</span>
                 <Input
-                  hint="username"
+                  hint="email"
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                   className="py-2"
                   value={email}
+                />
+              </div>
+              <div className="w-3/4 lg:w-2/4 lg:py-4">
+                <span className="font-body text-sm font-bold">Username:</span>
+                <Input
+                  hint="username"
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                  className="py-2"
+                  value={username}
                 />
               </div>
               <div className="w-3/4 lg:w-2/4 pt-2 lg:py-4">
@@ -93,7 +105,7 @@ const signup: NextPage = () => {
             <div className="w-3/4 lg:w-2/4 flex flex-col justify-around items-center my-2 lg:my-4">
               <Button
                 className="w-full py-3 my-2"
-                onClick={() => singinWithEmail(email, password)}
+                onClick={() => singinWithEmail(email, username, password)}
               >
                 <span>REGISTRATI</span>
               </Button>
