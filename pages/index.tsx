@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
 import type { NextPage } from 'next';
 import { useRef, useState, Ref } from 'react';
@@ -47,7 +49,9 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
         className="py-14 flex flex-col justify-start items-start"
       >
         <section className="flex flex-col justify-start items-start text-justify px-4">
-          <span className="text-8xl font-body font-bold">Dark Patterns</span>
+          <span className="text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-body font-bold">
+            Dark Patterns
+          </span>
           <span className="px-8 py-4 font-body">
             {darkPatternsInfo.description}
           </span>
