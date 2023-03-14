@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../../hook/useAuth';
 import useOutsideClick from '../../hook/useOutsideClick';
 import Navbar from '../Navbar';
+import Overlay from '../Overlay';
 import Sidebar from '../Sidebar';
 import SidebarItem from '../Sidebar/Item';
 
