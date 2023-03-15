@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 interface Props {
   value: string;
+  // eslint-disable-next-line no-unused-vars
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
 }

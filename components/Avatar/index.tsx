@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import clsx from 'clsx';
 import React from 'react';
 
@@ -10,6 +8,7 @@ interface Props {
   onClick?: () => void;
 }
 
+// eslint-disable-next-line object-curly-newline
 const Avatar: React.FC<Props> = ({ imageUrl, dimen, user, onClick }: Props) => (
   // rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
   <img

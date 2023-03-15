@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-unresolved, import/extensions
 import { DarkPatternsInfo } from '../../../types';
 import info from '../../../public/data/darkpatterns.json';
 

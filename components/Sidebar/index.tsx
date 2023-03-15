@@ -1,5 +1,7 @@
+/* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
 import React from 'react';
+// eslint-disable-next-line import/extensions
 import UserCard from './UserCard';
 
 interface Props {

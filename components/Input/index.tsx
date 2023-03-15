@@ -3,12 +3,13 @@
 import clsx from 'clsx';
 import React, { useRef, useState } from 'react';
 import Eye from './eye';
-import { validation } from '../../pages/Helpers/CredentialsValidation';
+import { validation } from '../../Helpers/CredentialsValidation';
 
 interface Props {
   type?: 'text' | 'email' | 'password';
   hint: string;
   value: string | number;
+  // eslint-disable-next-line no-unused-vars
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   isInvalid?: number;
