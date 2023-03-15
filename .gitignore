@@ -36,5 +36,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# firebase
-firebase.config.js
+# envoirement
+.env
