@@ -13,7 +13,7 @@ import {
   validateUsername,
   validateIsPasswordEqualToConfirmPassword,
   validation,
-} from './Helpers/CredentialsValidation';
+} from '../Helpers/CredentialsValidation';
 import { useAuth } from '../hook/useAuth';
 import Popup from '../components/Popup';
 
@@ -63,6 +63,7 @@ const signup: NextPage = () => {
       validateIsPasswordEqualToConfirmPassword(password, confirmPassword),
     );
     if (
+      // eslint-disable-next-line operator-linebreak
       validateIsPasswordEqualToConfirmPassword(password, confirmPassword) !==
       validation.VALID
     ) {

@@ -1,8 +1,11 @@
+/* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
-import Image from 'next/image';
 import React from 'react';
+// eslint-disable-next-line import/extensions
 import Avatar from '../Avatar';
+// eslint-disable-next-line import/extensions
 import IconButton from '../IconButton';
+// eslint-disable-next-line import/extensions
 import Toast from '../Toast';
 
 interface Props {

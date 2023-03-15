@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
 import React from 'react';
 import Button from '../Button';

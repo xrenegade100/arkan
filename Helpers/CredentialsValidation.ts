@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 const validation = {
   EMPTY: 1,
   INVALID: 2,

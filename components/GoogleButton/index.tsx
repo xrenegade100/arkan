@@ -5,7 +5,7 @@ interface Props {
   action: 'signup' | 'login';
   className?: string;
   onClick: () => {};
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 const GoogleButton: React.FC<Props> = ({
@@ -31,5 +31,9 @@ const GoogleButton: React.FC<Props> = ({
     </span>
   </button>
 );
+
+GoogleButton.defaultProps = {
+  disabled: false,
+};
 
 export default GoogleButton;

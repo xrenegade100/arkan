@@ -8,7 +8,7 @@ interface IAuthContext {
   loginWithEmail: (email: string, password: string) => void;
   singinWithEmail: (email: string, username: string, password: string) => void;
   authenticateWithGoogle: () => {};
-  firebaseError: FirebaseError;
+  firebaseError: FirebaseError | undefined;
   logout: () => {};
 }
 

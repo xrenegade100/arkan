@@ -60,8 +60,14 @@ const Navbar: React.FC<Props> = ({ onClick, isSidebarVisible }: Props) => {
                 isVisible={isOverlayVisible}
               >
                 <OverlaySection>
-                  <OverlayItem label="Analisi" onClick={() => {}} />
-                  <OverlayItem label="Interazioni" onClick={() => {}} />
+                  <OverlayItem
+                    label="Analisi"
+                    onClick={async () => console.log('ciao')}
+                  />
+                  <OverlayItem
+                    label="Interazioni"
+                    onClick={async () => console.log('ciao')}
+                  />
                 </OverlaySection>
                 <OverlaySection>
                   <OverlayItem label="Logout" onClick={logout} />
