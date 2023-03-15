@@ -1,9 +1,12 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
 import type { NextPage } from 'next';
 import { useRef, useState, Ref } from 'react';
 import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
 import { DarkPatternsInfo } from '../types';
+import handler from './api/darkpatterns/info';
 
 interface Props {
   darkPatternsInfo: DarkPatternsInfo;
@@ -47,7 +50,9 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
         className="py-14 flex flex-col justify-start items-start"
       >
         <section className="flex flex-col justify-start items-start text-justify px-4">
-          <span className="text-8xl font-body font-bold">Dark Patterns</span>
+          <span className="text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-body font-bold">
+            Dark Patterns
+          </span>
           <span className="px-8 py-4 font-body">
             {darkPatternsInfo.description}
           </span>
@@ -78,10 +83,10 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
 };
 
 export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/darkpatterns/info');
+  const response = await handler();
   let darkPatternsInfo;
-  if (response.ok) {
-    darkPatternsInfo = await response.json();
+  if (response) {
+    darkPatternsInfo = response;
   }
   return {
     props: {

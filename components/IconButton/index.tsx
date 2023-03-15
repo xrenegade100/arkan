@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 interface Props {
   icon: string;

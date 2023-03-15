@@ -14,13 +14,14 @@ const SidebarItem: React.FC<Props> = ({
   selected,
   onClick,
 }: Props) => (
-  <div
+  <button
     className={clsx(
       'w-11/12 flex justify-start items-center rounded-l-2xl py-2 hover:cursor-pointer',
       {
         'bg-primary-accent': selected,
       },
     )}
+    onClick={onClick}
   >
     <span className="text-white material-symbols-rounded md-32 mx-3">
       {icon}
@@ -28,7 +29,7 @@ const SidebarItem: React.FC<Props> = ({
     <span className="text-white font-body text-xl uppercase font-bold">
       {text}
     </span>
-  </div>
+  </button>
 );
 
 SidebarItem.defaultProps = {

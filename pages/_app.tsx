@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
+import ProvideAuth from '../hook/useAuth';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const route = useRouter();
@@ -16,14 +17,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" href="/arkan-logo.png" />
       </Head>
-      {route.pathname === '/login' || route.pathname === '/signup' ? (
-        <Component {...pageProps} />
-      ) : (
-        <Main>
+      <ProvideAuth>
+        {route.pathname === '/login' || route.pathname === '/signup' ? (
           <Component {...pageProps} />
-          <Footer />
-        </Main>
-      )}
+        ) : (
+          <Main>
+            <Component {...pageProps} />
+            <Footer />
+          </Main>
+        )}
+      </ProvideAuth>
     </>
   );
 }
