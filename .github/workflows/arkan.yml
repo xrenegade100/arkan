@@ -39,6 +39,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: install dependencies
-    - run: npm ci
-    - run: nom lint
+      run: npm ci
+    - run: npm lint
     - run: npm run build --if-present
