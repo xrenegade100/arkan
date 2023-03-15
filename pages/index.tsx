@@ -6,6 +6,7 @@ import { useRef, useState, Ref } from 'react';
 import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
 import { DarkPatternsInfo } from '../types';
+import handler from './api/darkpatterns/info';
 
 interface Props {
   darkPatternsInfo: DarkPatternsInfo;
@@ -82,10 +83,10 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
 };
 
 export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/darkpatterns/info');
+  const response = await handler();
   let darkPatternsInfo;
-  if (response.ok) {
-    darkPatternsInfo = await response.json();
+  if (response) {
+    darkPatternsInfo = response;
   }
   return {
     props: {
