@@ -2,17 +2,45 @@
 /* eslint-disable import/no-unresolved */
 import { NextPage } from 'next';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Typewriter, { TypewriterClass } from 'typewriter-effect';
+import AccountNotify from '../components/AccountNotify';
 import Button from '../components/Button';
 import GoogleButton from '../components/GoogleButton';
 import Input from '../components/Input';
 import { useAuth } from '../hook/useAuth';
+import { validation } from '../Helpers/CredentialsValidation';
 
 const login: NextPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { loginWithEmail, authenticateWithGoogle } = useAuth();
+  const { loginWithEmail, authenticateWithGoogle, firebaseError } = useAuth();
+
+  const [accountAlreadyExist, setAccountAlreadyExist] = useState(false);
+  const [isPasswordIncorrect, setIsPasswordIncorrect] = useState(
+    validation.VALID,
+  );
+  const [isEmailValid, setIsEmailValid] = useState(validation.VALID);
+
+  useEffect(() => {
+    setAccountAlreadyExist(false);
+    setIsEmailValid(validation.VALID);
+    setIsPasswordIncorrect(validation.VALID);
+  }, []);
+
+  useEffect(() => {
+    if (firebaseError) {
+      if (firebaseError.code === 'auth/user-not-found') {
+        setAccountAlreadyExist(true);
+      }
+      if (firebaseError.code === 'auth/invalid-email') {
+        setIsEmailValid(validation.INVALID);
+      }
+      if (firebaseError.code === 'auth/wrong-password') {
+        setIsPasswordIncorrect(validation.INVALID);
+      }
+    }
+  }, [firebaseError]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-white to-secondary-accent">
@@ -50,9 +78,10 @@ const login: NextPage = () => {
           <span className="font-logo text-5xl text-secondary-main mt-2 lg:mt-4">
             Benvenuto!
           </span>
-          <div className="w-full flex flex-col justify-center items-center">
+          <div className="w-10/12 lg:w-9/12 2xl:w-7/12 flex flex-col justify-center items-center">
             <div className="w-full flex flex-col justify-center items-center lg:my-4">
-              <div className="w-3/4 lg:w-2/4 lg:py-4">
+              <AccountNotify isVisible={accountAlreadyExist} />
+              <div className="w-full lg:py-4">
                 <span className="font-body text-sm font-bold">Username:</span>
                 <Input
                   hint="username"
@@ -61,9 +90,11 @@ const login: NextPage = () => {
                   }}
                   className="py-2"
                   value={email}
+                  isInvalid={isEmailValid}
+                  errorText="l'email inserita non è valida"
                 />
               </div>
-              <div className="w-3/4 lg:w-2/4 py-2 lg:py-4">
+              <div className="w-full py-2 lg:py-4">
                 <span className="font-body text-sm font-bold">Password:</span>
                 <Input
                   hint="password"
@@ -73,13 +104,27 @@ const login: NextPage = () => {
                   value={password}
                   className="py-2"
                   type="password"
+                  isInvalid={isPasswordIncorrect}
+                  errorText="la password inserita non è corretta"
                 />
               </div>
             </div>
-            <div className="w-3/4 lg:w-2/4 flex flex-col justify-around items-center my-2 lg:my-4">
+            <div className="w-full flex flex-col justify-around items-center my-2 lg:my-4">
               <Button
                 className="w-full py-3 my-2"
-                onClick={() => loginWithEmail(email, password)}
+                onClick={() => {
+                  setIsEmailValid(validation.VALID);
+                  if (email === '') {
+                    setIsEmailValid(validation.EMPTY);
+                    return;
+                  }
+
+                  if (password === '') {
+                    setIsPasswordIncorrect(validation.EMPTY);
+                    return;
+                  }
+                  loginWithEmail(email, password);
+                }}
               >
                 <span>ACCEDI</span>
               </Button>
