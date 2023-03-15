@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useAuth } from '../../hook/useAuth';
 import Avatar from '../Avatar';
 import Overlay from '../Overlay';
@@ -20,6 +21,9 @@ const Navbar: React.FC<Props> = ({ onClick, isSidebarVisible }: Props) => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const overlay = useRef<HTMLDivElement>(null);
   const outsideClick = useOutsideClick(overlay, isOverlayVisible);
+
+  // routing
+  const router = useRouter();
 
   useEffect(() => {
     if (outsideClick) setIsOverlayVisible(false);
@@ -62,11 +66,17 @@ const Navbar: React.FC<Props> = ({ onClick, isSidebarVisible }: Props) => {
                 <OverlaySection>
                   <OverlayItem
                     label="Analisi"
-                    onClick={async () => console.log('ciao')}
+                    onClick={() => {
+                      router.push(`/user/analisi/${user.uid}`);
+                      setIsOverlayVisible(false);
+                    }}
                   />
                   <OverlayItem
                     label="Interazioni"
-                    onClick={async () => console.log('ciao')}
+                    onClick={() => {
+                      router.push(`/user/interazioni/${user.uid}`);
+                      setIsOverlayVisible(false);
+                    }}
                   />
                 </OverlaySection>
                 <OverlaySection>

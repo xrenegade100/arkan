@@ -2,7 +2,7 @@ import React from 'react';
 
 interface Props {
   label: string;
-  onClick: () => {};
+  onClick: (() => {}) | (() => void);
 }
 
 const OverlayItem: React.FC<Props> = ({ label, onClick }: Props) => (

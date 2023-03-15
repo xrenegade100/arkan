@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+import { useRouter } from 'next/router';
 import React, { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../../hook/useAuth';
 import useOutsideClick from '../../hook/useOutsideClick';
@@ -16,6 +17,14 @@ const Main: React.FC<Props> = ({ children }: Props) => {
   const sidebar = useRef<HTMLDivElement>(null);
   const outsideClick = useOutsideClick(sidebar, isSidebarVisible);
   const { user, logout } = useAuth();
+
+  // routing
+  const router = useRouter();
+  const [path, setPath] = useState('');
+
+  useEffect(() => {
+    setPath(router.pathname);
+  }, [router.pathname]);
 
   useEffect(() => {
     if (outsideClick) setIsSidebarVisible(false);
@@ -43,31 +52,77 @@ const Main: React.FC<Props> = ({ children }: Props) => {
           {user ? (
             <div className="w-full flex flex-col justify-center items-end md:hidden ">
               <SidebarItem
+                selected={path.includes('/user/account')}
                 icon="account_circle"
                 text="account"
-                onClick={() => {}}
+                onClick={() => {
+                  router.push(`/user/account/${user.uid}`);
+                  setIsSidebarVisible(false);
+                }}
               />
-              <SidebarItem icon="analytics" text="analisi" onClick={() => {}} />
               <SidebarItem
+                selected={path.includes('/analisi')}
+                icon="analytics"
+                text="analisi"
+                onClick={() => {
+                  router.push(`/user/analisi/${user.uid}`);
+                  setIsSidebarVisible(false);
+                }}
+              />
+              <SidebarItem
+                selected={path.includes('/user/interazioni')}
                 icon="public"
                 text="interazioni"
-                onClick={() => {}}
+                onClick={() => {
+                  router.push(`/user/interazioni/${user.uid}`);
+                  setIsSidebarVisible(false);
+                }}
               />
               <SidebarItem icon="logout" text="logout" onClick={logout} />
               <hr className="w-full my-4" />
             </div>
           ) : (
             <div className="w-full flex flex-col justify-center items-end md:hidden ">
-              <SidebarItem icon="login" text="login" onClick={() => {}} />
-              <SidebarItem icon="person_add" text="sign up" onClick={logout} />
+              <SidebarItem
+                icon="login"
+                text="login"
+                onClick={() => {
+                  router.push('/login');
+                  setIsSidebarVisible(false);
+                }}
+              />
+              <SidebarItem
+                icon="person_add"
+                text="sign up"
+                onClick={() => {
+                  router.push('/signup');
+                  setIsSidebarVisible(false);
+                }}
+              />
               <hr className="w-full my-4" />
             </div>
           )}
-          <SidebarItem icon="report" text="segnala" onClick={() => {}} />
           <SidebarItem
+            selected={path === '/segnala'}
+            icon="report"
+            text="segnala"
+            onClick={() => {
+              if (user) {
+                router.push('/segnala');
+              } else {
+                router.push('/login');
+              }
+              setIsSidebarVisible(false);
+            }}
+          />
+          <SidebarItem
+            selected={path === '/hos'}
             icon="list_alt"
             text="Hall of Shame"
-            onClick={() => {}}
+            onClick={() => {
+              router.push('/hos');
+              setIsSidebarVisible(false);
+            }}
           />
         </Sidebar>
       </div>
