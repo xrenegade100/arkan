@@ -29,6 +29,10 @@ const useProvideAuth = () => {
         setIsLoggedIn(true);
       }
     })();
+
+    return () => {
+      setFirebaseError(undefined);
+    };
   }, []);
 
   useEffect(() => {
@@ -66,7 +70,8 @@ const useProvideAuth = () => {
         setIsLoggedIn(true);
       }
     } catch (error) {
-      alert('ERROR DURING GOOGLE AUTHENICATION');
+      console.log(error);
+      setFirebaseError(error as FirebaseError);
     }
   };
 
