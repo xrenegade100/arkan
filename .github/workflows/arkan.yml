@@ -5,13 +5,9 @@ name: Arkan 👁️
 
 on:
   push:
-      branches: 
-        - main
-        - develop
+      branches: [ "develop", "main" ]
   pull_request:
-      branches: 
-        - main
-        - develop
+      branches: [ "develop", "main" ]
 
 jobs:
   build:
