@@ -3,10 +3,8 @@
 import clsx from 'clsx';
 import type { NextPage } from 'next';
 import { useRef, useState, Ref } from 'react';
-import ImageInput from '../components/ImageInput';
 import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
-import RememberImage from '../hook/useImage';
 import { DarkPatternsInfo } from '../types';
 import handler from './api/darkpatterns/info';
 
