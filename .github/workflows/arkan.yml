@@ -15,7 +15,7 @@ on:
         - "feat/**" 
 
 env:
-      PUBLIC_NEXT_API_KEY: ${{ secrets.API__KEY }}
+      NEXT_PUBLIC_API_KEY: ${{ secrets.API__KEY }}
       NEXT_PUBLIC_AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
       NEXT_PUBLIC_PROJECT_ID: ${{ secrets.PROJECT_ID }}
       NEXT_PUBLIC_STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
@@ -30,7 +30,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
