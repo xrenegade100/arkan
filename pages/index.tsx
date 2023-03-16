@@ -71,7 +71,68 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
                 title={item.name}
                 sidePosition={change === 0 ? 'left' : 'right'}
               >
-                <div />
+                <div className="w-full md:w-11/12 2xl:w-3/6 m-auto">
+                  <div
+                    className={clsx('w-full flex flex-col', {
+                      'md:justify-start md:items-start': change === 0,
+                      'md:justify-end md:items-end': change !== 0,
+                    })}
+                  >
+                    <p className="text-gray-700 text-base text-justify mb-4">
+                      {item.description}
+                    </p>
+                    {item.categories.map((category) => (
+                      <div
+                        className={clsx(
+                          'my-8 w-full flex flex-col justify-center items-center',
+                          {
+                            'md:justify-start md:items-start': change === 0,
+                            'md:justify-end md:items-end': change !== 0,
+                          },
+                        )}
+                      >
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2 mx-4">
+                          {category.name}
+                        </h2>
+                        <div
+                          className={clsx('w-full flex flex-col items-start', {
+                            'md:flex-row md:justify-start ': change === 0,
+                            'md:flex-row-reverse md:justify-end': change !== 0,
+                          })}
+                        >
+                          <img
+                            className="w-full md:w-2/3 h-auto object-contain object-center md:mx-4 mb-4 md:mb-0"
+                            src={category.example_image}
+                            alt="Esempio sottocategoria 1"
+                          />
+                          <div
+                            className={clsx(
+                              'w-full md:w-1/3 md:mx-2 text-justify',
+                            )}
+                          >
+                            <p className="text-gray-700 text-base mb-4">
+                              {category.description}
+                            </p>
+                            <h3
+                              className={clsx(
+                                'text-lg font-bold text-gray-900 mb-2',
+                                {
+                                  'text-left': change === 0,
+                                  'text-right': change !== 0,
+                                },
+                              )}
+                            >
+                              Esempio
+                            </h3>
+                            <p className="text-gray-700 text-base">
+                              {category.example_description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </PostItem>
             </section>
           );
