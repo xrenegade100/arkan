@@ -30,7 +30,6 @@ const PostItem: React.FC<Props> = ({
           'flex-row-reverse': sidePosition === 'right',
         })}
       >
-        {/* rome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
         <span
           className={clsx(
             'font-body text-xl lg:text-2xl xl:text-4xl font-bold hover:cursor-pointer',
@@ -45,7 +44,6 @@ const PostItem: React.FC<Props> = ({
         >
           {title}
         </span>
-        {/* rome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
         <span
           className={clsx(
             'material-symbols-rounded md-36 lg:md-64 xl:md-64 hover:cursor-pointer',
@@ -70,7 +68,7 @@ const PostItem: React.FC<Props> = ({
           })}
         >
           <div className="w-3/4 border-t border-t-gray-600 mx-4 lg:mx-6 xl:mx-8" />
-          <div className="w-full flex justify-start items-start mt-4 lg:mt-6 xl:mt-8">
+          <div className="w-full mt-4 lg:mt-6 xl:mt-8">
             <div className="mx-4 lg:mx-6 xl:mx-8">{children}</div>
           </div>
         </div>
