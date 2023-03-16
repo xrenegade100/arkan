@@ -4,14 +4,12 @@ import React, { useState, useEffect } from 'react';
 import IconButton from '../IconButton';
 
 interface Props {
-  index: number;
   name: string;
   imageToShow: File;
   onClick: () => void;
 }
 
 const ImageHolder: React.FC<Props> = ({
-  index,
   name,
   imageToShow,
   onClick,
