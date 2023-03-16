@@ -13,8 +13,8 @@ const ImageInput: React.FC<Props> = ({ className }: Props) => {
 
   const { getRootProps, isDragActive } = useDropzone({
     accept: {
-      'image/png': ['png'],
-      'image/jpeg': ['jpg', 'jpeg'],
+      'image/png': ['.png'],
+      'image/jpeg': ['.jpg', '.jpeg'],
     },
     onDrop: (acceptedFiles: File[]) => {
       addImage(acceptedFiles[0]);

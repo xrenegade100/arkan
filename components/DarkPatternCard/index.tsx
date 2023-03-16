@@ -90,9 +90,13 @@ const UserDetectedCard: React.FC<Props> = ({
     </div>
     <div className="py-1 md:py-2 w-full flex justify-between items-end">
       <div className="flex justify-start items-center ml-4">
-        <IconButton icon="favorite" className="mr-1 md:mr-2" />
-        <IconButton icon="share" className="mr-1 md:mr-2" />
-        <IconButton icon="add_comment" />
+        <IconButton
+          icon="favorite"
+          className="mr-1 md:mr-2"
+          onClick={() => {}}
+        />
+        <IconButton icon="share" className="mr-1 md:mr-2" onClick={() => {}} />
+        <IconButton icon="add_comment" onClick={() => {}} />
       </div>
       <span className="mr-4 text-sm font-light font-body">{date}</span>
     </div>

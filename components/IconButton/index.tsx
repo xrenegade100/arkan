@@ -8,6 +8,7 @@ interface Props {
   size?: 'sm' | 'base' | 'lg';
   showTextOnHover?: boolean;
   className?: string;
+  onClick: () => void;
 }
 
 const IconButton: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const IconButton: React.FC<Props> = ({
   size,
   showTextOnHover,
   className,
+  onClick,
 }: Props) => {
   const span = useRef<HTMLSpanElement>(null);
 
@@ -25,6 +27,7 @@ const IconButton: React.FC<Props> = ({
 
   return (
     <button
+      onClick={onClick}
       className={clsx(
         `${className} rounded-full p-2 shadow-md transition-all ease-in flex justify-start items-center`,
         {

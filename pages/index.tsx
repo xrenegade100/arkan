@@ -65,7 +65,6 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
                 'justify-start items-start': change === 0,
                 'justify-end items-end': change !== 0,
               })}
-              // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               key={index}
             >
               <PostItem
