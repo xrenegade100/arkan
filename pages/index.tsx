@@ -3,11 +3,8 @@
 import clsx from 'clsx';
 import type { NextPage } from 'next';
 import { useRef, useState, Ref } from 'react';
-import ImageHolder from '../components/ImageHolder';
-import ImageInput from '../components/ImageInput';
 import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
-import RememberImage, { useImage } from '../hook/useImage';
 import { DarkPatternsInfo } from '../types';
 import handler from './api/darkpatterns/info';
 
@@ -18,7 +15,6 @@ interface Props {
 const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
   const [link, setLink] = useState('');
   const scrollPoint: Ref<HTMLDivElement> = useRef(null);
-  const { image, deleteImage } = useImage();
 
   const handleClick = () => {
     scrollPoint.current?.scrollIntoView({ behavior: 'smooth' });
