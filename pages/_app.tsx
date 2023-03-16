@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
 import ProvideAuth from '../hook/useAuth';
+import RememberImage from '../hook/useImage';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const route = useRouter();
@@ -21,10 +22,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         {route.pathname === '/login' || route.pathname === '/signup' ? (
           <Component {...pageProps} />
         ) : (
-          <Main>
-            <Component {...pageProps} />
-            <Footer />
-          </Main>
+          <RememberImage>
+            <Main>
+              <Component {...pageProps} />
+              <Footer />
+            </Main>
+          </RememberImage>
         )}
       </ProvideAuth>
     </>
