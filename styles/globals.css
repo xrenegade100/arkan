@@ -13,3 +13,17 @@
 .md-48 { font-size: 48px; }
 .md-56 { font-size: 56px; }
 .md-64 { font-size: 64px; }
+
+input[type=range] {
+  height: 1rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  position:relative;
+  -webkit-appearance: none;
+  background: #1976D2;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 100%;
+  box-shadow: 1px 5px 10px -1px rgba(0, 0, 0, 0.5);
+}
