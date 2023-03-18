@@ -26,3 +26,12 @@ export type Image = {
   webkitRelativePath: string;
   path: string;
 };
+
+export type DarkPatternType =
+  | 'Nagging'
+  | 'Obstruction'
+  | 'Sneaking'
+  | 'Interface Interference'
+  | 'Forced Action';
+
+export type DangerLevel = '1' | '2' | '3' | '4' | '5';

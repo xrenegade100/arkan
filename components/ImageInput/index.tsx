@@ -2,13 +2,16 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
+import clsx from 'clsx';
+import { validation } from '../../Helpers/CredentialsValidation';
 import { useImage } from '../../hook/useImage';
 
 interface Props {
   className?: string;
+  isInvalid: number;
 }
 
-const ImageInput: React.FC<Props> = ({ className }: Props) => {
+const ImageInput: React.FC<Props> = ({ className, isInvalid }: Props) => {
   const { addImage } = useImage();
 
   const { getRootProps, isDragActive } = useDropzone({
@@ -41,7 +44,13 @@ const ImageInput: React.FC<Props> = ({ className }: Props) => {
       />
       <label
         htmlFor="file"
-        className={`${className} w-full border-2 border-dashed border-gray-300 flex flex-col justify-center items-center rounded-md shadow-md hover:cursor-pointer transition-all`}
+        className={clsx(
+          `${className} w-full border-2 border-dashed border-gray-300 flex flex-col justify-center items-center rounded-md shadow-md hover:cursor-pointer transition-all`,
+          {
+            'border-red-500': isInvalid === validation.EMPTY,
+            'border-gray-300': isInvalid === validation.VALID,
+          },
+        )}
       >
         <h2 className="material-symbols-rounded w-full md-48 text-gray-300 text-center">
           {!isDragActive ? 'add_photo_alternate' : 'file_upload'}
