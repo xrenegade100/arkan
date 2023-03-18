@@ -11,7 +11,7 @@ const Footer: React.FC = () => (
   <div className="w-full bg-primary-main flex flex-col justify-between items-center py-8">
     <div className="flex flex-col justify-center items-center">
       <img src="/logo.png" className="w-40" alt="arkan" />
-      <span className="font-logo text-secondary-main text-3xl">
+      <span className="font-logo text-secondary-main text-3xl text-center">
         Dark Pattern Risk Evaluation
       </span>
     </div>
