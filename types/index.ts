@@ -17,16 +17,6 @@ export type DarkPatternsInfo = {
   taxonomy: Taxonomy[];
 };
 
-export type Image = {
-  lastModified: number;
-  lastModifiedDate?: Date;
-  name: string;
-  size: number;
-  type: string;
-  webkitRelativePath: string;
-  path: string;
-};
-
 export type DarkPatternType =
   | 'Nagging'
   | 'Obstruction'
@@ -35,3 +25,13 @@ export type DarkPatternType =
   | 'Forced Action';
 
 export type DangerLevel = '1' | '2' | '3' | '4' | '5';
+
+export type DetectedDarkPattern = {
+  'danger-level': string;
+  description: string;
+  'detected-dp-name': string;
+  'dp-image-path': string;
+  'site-link': string;
+  'site-name': string;
+  'user-id': string;
+};

@@ -145,7 +145,9 @@ const segnala: NextPage = () => {
           <Button
             variant="secondary"
             className="lg:self-end my-4"
-            onClick={submitReport}
+            onClick={async () => {
+              await submitReport();
+            }}
           >
             <span className="font-body text-white font-bold text-2xl">
               SEGNALA

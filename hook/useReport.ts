@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { validation } from '../Helpers/CredentialsValidation';
 import { DangerLevel, DarkPatternType } from '../types';
+import { useAuth } from './useAuth';
+import useDatabase from './useDatabase';
 
 const useReport = (image: File) => {
   const [siteLink, setSiteLink] = useState<URL>();
@@ -20,11 +22,21 @@ const useReport = (image: File) => {
   const [dangerLevel, setDangerLevel] = useState<DangerLevel>('1');
   const [isImageEmpty, setIsImageEmpty] = useState(validation.VALID);
 
+  const { user } = useAuth();
+
+  const { addReport, dbError } = useDatabase();
+
   useEffect(() => {
     if (siteLink && isUrlValid) {
       setSiteName(siteLink.hostname);
     }
   }, [siteLink]);
+
+  useEffect(() => {
+    if (dbError) {
+      alert(dbError);
+    }
+  }, [dbError]);
 
   const setURL = (url: string) => {
     try {
@@ -39,7 +51,7 @@ const useReport = (image: File) => {
     }
   };
 
-  const submitReport = () => {
+  const submitReport = async () => {
     // reset first
     setIsUrlValid(validation.VALID);
     setIsNameEmpty(validation.VALID);
@@ -69,7 +81,18 @@ const useReport = (image: File) => {
 
     if (description === '') {
       setIsDescriptionEmptiy(validation.EMPTY);
+      return;
     }
+
+    await addReport(
+      siteName,
+      siteLink.toString(),
+      description,
+      darkPatternType,
+      dangerLevel,
+      image,
+      user?.uid as string,
+    );
   };
 
   return {
