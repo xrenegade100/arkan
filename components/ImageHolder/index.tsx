@@ -29,9 +29,9 @@ const ImageHolder: React.FC<Props> = ({
       <img className="w-full h-full object-contain" src={url} />
       <div className="absolute w-full h-1/5 px-2 rounded-b-md flex justify-between items-center bottom-0 bg-primary-main/25 overflow-hidden">
         <span className="font-bold">
-          {name.length <= 10
+          {name.length <= 16
             ? imageToShow?.name
-            : `${imageToShow?.name.substring(0, 8)}...`}
+            : `${imageToShow?.name.substring(0, 11)}...`}
         </span>
         <div className="flex justify-end items-center">
           <IconButton icon="clear" size="sm" onClick={onClick} />

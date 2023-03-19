@@ -42,7 +42,7 @@ const Input: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex flex-col justify-start items-start">
+    <div className="w-full flex flex-col justify-start items-start">
       <div
         className={clsx(
           `${className} w-full flex justify-around items-center rounded-md border-2 transition-colors`,
