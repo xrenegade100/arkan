@@ -94,6 +94,7 @@ const useReport = (image: File) => {
         dangerLevel,
         image,
         user?.uid as string,
+        new Date().toDateString(),
       );
 
       return report;
