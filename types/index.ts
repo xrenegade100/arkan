@@ -37,4 +37,5 @@ export type DetectedDarkPattern = {
   'site-link': string;
   'site-name': string;
   'user-id': string;
+  date: string;
 };

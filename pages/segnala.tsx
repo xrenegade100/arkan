@@ -2,6 +2,7 @@
 /* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import Button from '../components/Button';
 import DangerLevelBar from '../components/DangerLevelBar';
 import ImageHolder from '../components/ImageHolder';
@@ -32,6 +33,8 @@ const segnala: NextPage = () => {
     isImageEmpty,
     submitReport,
   } = useReport(image as File);
+
+  const router = useRouter();
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
@@ -145,7 +148,10 @@ const segnala: NextPage = () => {
             variant="secondary"
             className="lg:self-end my-4"
             onClick={async () => {
-              await submitReport();
+              const report = await submitReport();
+              if (report) {
+                router.push(`/${report?.id}`);
+              }
             }}
           >
             <span className="font-body text-white font-bold text-2xl">

@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+import { DocumentData, DocumentReference } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { validation } from '../Helpers/CredentialsValidation';
 import { DangerLevel, DarkPatternType } from '../types';
@@ -51,49 +52,53 @@ const useReport = (image: File) => {
     }
   };
 
-  const submitReport = async () => {
-    // reset first
-    setIsUrlValid(validation.VALID);
-    setIsNameEmpty(validation.VALID);
-    setIsImageEmpty(validation.VALID);
-    setIsDarkPatternEmpty(validation.VALID);
-    setIsDescriptionEmptiy(validation.VALID);
+  const submitReport =
+    async (): Promise<DocumentReference<DocumentData> | null> => {
+      // reset first
+      setIsUrlValid(validation.VALID);
+      setIsNameEmpty(validation.VALID);
+      setIsImageEmpty(validation.VALID);
+      setIsDarkPatternEmpty(validation.VALID);
+      setIsDescriptionEmptiy(validation.VALID);
 
-    if (!siteLink) {
-      setIsUrlValid(validation.INVALID);
-      return;
-    }
+      if (!siteLink) {
+        setIsUrlValid(validation.INVALID);
+        return null;
+      }
 
-    if (siteName === '') {
-      setIsNameEmpty(validation.EMPTY);
-      return;
-    }
+      if (siteName === '') {
+        setIsNameEmpty(validation.EMPTY);
+        return null;
+      }
 
-    if (!image) {
-      setIsImageEmpty(validation.EMPTY);
-      return;
-    }
+      if (!image) {
+        setIsImageEmpty(validation.EMPTY);
+        return null;
+      }
 
-    if (!darkPatternType) {
-      setIsDarkPatternEmpty(validation.EMPTY);
-      return;
-    }
+      if (!darkPatternType) {
+        setIsDarkPatternEmpty(validation.EMPTY);
+        return null;
+      }
 
-    if (description === '') {
-      setIsDescriptionEmptiy(validation.EMPTY);
-      return;
-    }
+      if (description === '') {
+        setIsDescriptionEmptiy(validation.EMPTY);
+        return null;
+      }
 
-    await addReport(
-      siteName,
-      siteLink.toString(),
-      description,
-      darkPatternType,
-      dangerLevel,
-      image,
-      user?.uid as string,
-    );
-  };
+      const report = await addReport(
+        siteName,
+        siteLink.toString(),
+        description,
+        darkPatternType,
+        dangerLevel,
+        image,
+        user?.uid as string,
+        new Date().toDateString(),
+      );
+
+      return report;
+    };
 
   return {
     siteLink,
@@ -112,6 +117,7 @@ const useReport = (image: File) => {
     isDescriptionEmpty,
     isImageEmpty,
     submitReport,
+    dbError,
   };
 };
 
