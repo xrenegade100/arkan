@@ -5,27 +5,27 @@ name: Arkan 👁️
 
 on:
   push:
-      branches: 
-        - develop 
-        - main
+    branches:
+      - develop
+      - main
   pull_request:
-      branches: 
-        - develop
-        - main 
-        - "feat/**" 
+    branches:
+      - develop
+      - main
+      - 'feat/**'
+      - 'fix/**'
 
 env:
-      NEXT_PUBLIC_API_KEY: ${{ secrets.API__KEY }}
-      NEXT_PUBLIC_AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
-      NEXT_PUBLIC_PROJECT_ID: ${{ secrets.PROJECT_ID }}
-      NEXT_PUBLIC_STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
-      NEXT_PUBLIC_MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }}
-      NEXT_PUBLIC_APP_ID: ${{ secrets.APP_ID }}
-      NEXT_PUBLIC_MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }}
+  NEXT_PUBLIC_API_KEY: ${{ secrets.API__KEY }}
+  NEXT_PUBLIC_AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
+  NEXT_PUBLIC_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  NEXT_PUBLIC_STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
+  NEXT_PUBLIC_MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }}
+  NEXT_PUBLIC_APP_ID: ${{ secrets.APP_ID }}
+  NEXT_PUBLIC_MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }}
 
 jobs:
   build:
-    
     runs-on: ubuntu-latest
 
     strategy:
