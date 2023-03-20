@@ -85,7 +85,6 @@ const segnala: NextPage = () => {
               value={darkPatternType}
               onChange={(e) => {
                 setDarkPatternType(e.target.value as DarkPatternType);
-                console.log(e.target.value);
               }}
             >
               <option value="" selected>
