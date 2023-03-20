@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
