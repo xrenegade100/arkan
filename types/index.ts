@@ -27,10 +27,13 @@ export type DarkPatternType =
 export type DangerLevel = '1' | '2' | '3' | '4' | '5';
 
 export type DetectedDarkPattern = {
+  id?: string;
   'danger-level': string;
   description: string;
   'detected-dp-name': string;
-  'dp-image-path': string;
+  'dp-image-url': string;
+  'dp-image-name': string;
+  saved?: boolean;
   'site-link': string;
   'site-name': string;
   'user-id': string;
