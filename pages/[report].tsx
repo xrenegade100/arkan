@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import useDatabase from '../hook/useDatabase';
 import { DetectedDarkPattern } from '../types';
 import { useAuth } from '../hook/useAuth';
+import LoadingBanner from '../components/LoadingBanner';
 
 const report: NextPage = () => {
   const router = useRouter();
@@ -49,13 +50,17 @@ const report: NextPage = () => {
                   <span className="text-sm font-body font-bold">
                     Link del sito:
                   </span>
-                  <span className="font-body">{reportPost['site-link']}</span>
+                  <span className="font-body break-words">
+                    {reportPost['site-link']}
+                  </span>
                 </div>
                 <div className="w-full my-4 flex flex-col">
                   <span className="text-sm font-body font-bold">
                     Nome sito:
                   </span>
-                  <span className="font-body">{reportPost['site-name']}</span>
+                  <span className="font-body break-words">
+                    {reportPost['site-name']}
+                  </span>
                 </div>
                 <div className="my-4">
                   <span className="font-body font-bold rounded-md bg-secondary-main py-1 px-2 text-xl">
@@ -71,7 +76,9 @@ const report: NextPage = () => {
               </div>
             </div>
             <div className="w-4/5 flex flex-col justify-start items-start my-6">
-              <span className="text-sm font-body font-bold">Descrizione:</span>
+              <span className="text-sm font-body font-bold break-words">
+                Descrizione:
+              </span>
               <span>{reportPost.description}</span>
             </div>
             <div className="w-4/5 mb-6 flex flex-col justify-center items-center lg:justify-start lg:items-start">
@@ -113,7 +120,11 @@ const report: NextPage = () => {
     }
   }
 
-  return <div />;
+  return (
+    <div className="w-full h-full flex justify-center items-center">
+      <LoadingBanner />
+    </div>
+  );
 };
 
 export default report;

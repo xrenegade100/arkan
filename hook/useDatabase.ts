@@ -42,6 +42,7 @@ const useDatabase = () => {
     dangerLevel: string,
     image: File,
     userId: string,
+    date: string,
   ): Promise<DocumentReference<DocumentData> | null> => {
     try {
       const url = await uploadImage(image, userId);
@@ -55,6 +56,7 @@ const useDatabase = () => {
         'site-link': siteLink,
         'site-name': siteName,
         'user-id': userId,
+        date,
       });
 
       return report;
