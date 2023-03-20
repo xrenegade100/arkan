@@ -7,6 +7,9 @@ import {
   deleteDoc,
   doc,
   DocumentData,
+  DocumentReference,
+  DocumentSnapshot,
+  getDoc,
   getDocs,
   limit,
   orderBy,
@@ -39,11 +42,11 @@ const useDatabase = () => {
     dangerLevel: string,
     image: File,
     userId: string,
-  ) => {
+  ): Promise<DocumentReference<DocumentData> | null> => {
     try {
       const url = await uploadImage(image, userId);
 
-      await addDoc(detectedDarkPatternsCollection, {
+      const report = await addDoc(detectedDarkPatternsCollection, {
         'danger-level': dangerLevel,
         description,
         'detected-dp-name': darkPatternType,
@@ -53,9 +56,13 @@ const useDatabase = () => {
         'site-name': siteName,
         'user-id': userId,
       });
+
+      return report;
     } catch (error) {
       setDbError((error as FirebaseError).code);
     }
+
+    return null;
   };
 
   const deleteReport = async (
@@ -121,6 +128,28 @@ const useDatabase = () => {
         ...report.data(),
         id: report.id,
       })) as DetectedDarkPattern[];
+    }
+
+    return null;
+  };
+
+  const getReportById = async (
+    id: string,
+  ): Promise<DetectedDarkPattern | null> => {
+    let report: DocumentSnapshot<DocumentData> | null = null;
+
+    const ref = doc(firestore, 'user-detected-dp', id);
+
+    try {
+      report = await getDoc(ref);
+    } catch (error) {
+      setDbError((error as FirebaseError).code);
+    }
+    if (report) {
+      return {
+        ...report?.data(),
+        id: report.id,
+      } as DetectedDarkPattern;
     }
 
     return null;
@@ -199,6 +228,7 @@ const useDatabase = () => {
     getAllReportsWithPagination,
     getReportsIfIsSaved,
     getReportsByDpType,
+    getReportById,
     deleteReport,
     savePost,
     dbError,
