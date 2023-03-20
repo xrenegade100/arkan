@@ -10,6 +10,7 @@ import useDatabase from '../hook/useDatabase';
 import { DetectedDarkPattern } from '../types';
 import { useAuth } from '../hook/useAuth';
 import LoadingBanner from '../components/LoadingBanner';
+import AccessDeniedBanner from '../components/AccessDeniedBanner';
 
 const report: NextPage = () => {
   const router = useRouter();
@@ -119,6 +120,12 @@ const report: NextPage = () => {
         </div>
       );
     }
+
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <AccessDeniedBanner />
+      </div>
+    );
   }
 
   return (
