@@ -26,9 +26,9 @@ const useStorage = () => {
     return '';
   };
 
-  const deleteImage = async (image: File, userId: string) => {
-    if (image) {
-      const imageRef = ref(storage, `detected-dp/${userId}/${image.name}`);
+  const deleteImage = async (imageName: string, userId: string) => {
+    if (imageName !== '') {
+      const imageRef = ref(storage, `detected-dp/${userId}/${imageName}`);
       try {
         await deleteObject(imageRef);
       } catch (error) {
