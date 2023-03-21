@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import React, { useRef, useState } from 'react';
 import Eye from './eye';
-import { validation } from '../../Helpers/CredentialsValidation';
+import { validation } from '../../helpers/CredentialsValidation';
 
 interface Props {
   type?: 'text' | 'email' | 'password';

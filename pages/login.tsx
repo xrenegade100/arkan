@@ -9,7 +9,7 @@ import Button from '../components/Button';
 import GoogleButton from '../components/GoogleButton';
 import Input from '../components/Input';
 import { useAuth } from '../hook/useAuth';
-import { validation } from '../Helpers/CredentialsValidation';
+import { validation } from '../helpers/CredentialsValidation';
 
 const login: NextPage = () => {
   const [email, setEmail] = useState('');

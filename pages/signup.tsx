@@ -13,7 +13,7 @@ import {
   validateUsername,
   validateIsPasswordEqualToConfirmPassword,
   validation,
-} from '../Helpers/CredentialsValidation';
+} from '../helpers/CredentialsValidation';
 import { useAuth } from '../hook/useAuth';
 import Popup from '../components/Popup';
 

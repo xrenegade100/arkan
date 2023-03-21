@@ -8,7 +8,7 @@ import DangerLevelBar from '../components/DangerLevelBar';
 import ImageHolder from '../components/ImageHolder';
 import ImageInput from '../components/ImageInput';
 import Input from '../components/Input';
-import { validation } from '../Helpers/CredentialsValidation';
+import { validation } from '../helpers/CredentialsValidation';
 import { useImage } from '../hook/useImage';
 import useReport from '../hook/useReport';
 import { DangerLevel, DarkPatternType } from '../types';
