@@ -2,7 +2,7 @@
 /* eslint-disable import/no-unresolved */
 import { DocumentData, DocumentReference } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { validation } from '../Helpers/CredentialsValidation';
+import { validation } from '../helpers/CredentialsValidation';
 import { DangerLevel, DarkPatternType } from '../types';
 import { useAuth } from './useAuth';
 import useDatabase from './useDatabase';

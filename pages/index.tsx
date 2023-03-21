@@ -5,6 +5,7 @@ import type { NextPage } from 'next';
 import { useRef, useState, Ref } from 'react';
 import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
+import useAnalysis from '../hook/useAnalysis';
 import { DarkPatternsInfo } from '../types';
 import handler from './api/darkpatterns/info';
 
@@ -13,8 +14,9 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
-  const [link, setLink] = useState('');
   const scrollPoint: Ref<HTMLDivElement> = useRef(null);
+
+  const { url, makeRequest, setUrl, isUrlValid } = useAnalysis();
 
   const handleClick = () => {
     scrollPoint.current?.scrollIntoView({ behavior: 'smooth' });
@@ -24,11 +26,15 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
     <div>
       <header className="relative w-full h-screen flex justify-center items-center bg-header bg-no-repeat bg-cover">
         <SearchBar
-          value={link as string}
-          onClick={() => {}}
-          onChange={(e) => {
-            setLink(e.target.value);
+          value={url}
+          onClick={() => {
+            makeRequest();
           }}
+          onChange={(e) => {
+            setUrl(e.target.value);
+          }}
+          isInvalid={isUrlValid}
+          errorText="url inserito non valido"
         />
         <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-black to-transparent flex justify-center items-center">
           <button
