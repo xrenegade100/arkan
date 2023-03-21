@@ -3,8 +3,8 @@
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
 import clsx from 'clsx';
-import { validation } from '../../helpers/CredentialsValidation';
 import { useImage } from '../../hook/useImage';
+import { validation } from '../../helpers/CredentialsValidation';
 
 interface Props {
   className?: string;
