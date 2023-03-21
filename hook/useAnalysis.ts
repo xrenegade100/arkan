@@ -7,6 +7,7 @@ const useAnalysis = () => {
   const [url, setUrl] = useState('');
   const [, setUrlToAnalyze] = useState<URL | null>();
   const [isUrlValid, setIsUrlValid] = useState(validation.VALID);
+  // eslint-disable-next-line no-unused-vars
   const [analysis, setAnalysis] = useState();
 
   useEffect(() => {
