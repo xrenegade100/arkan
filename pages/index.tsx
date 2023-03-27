@@ -22,6 +22,7 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
 
   const { url, makeRequest, setUrl, isUrlValid } = useAnalysis();
   const [urlNotExist, setUrlNotExist] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
     scrollPoint.current?.scrollIntoView({ behavior: 'smooth' });
@@ -34,6 +35,7 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
           value={url}
           onClick={async () => {
             try {
+              setIsLoading(true);
               const analysis = await makeRequest();
               if (analysis !== null) {
                 if (JSON.stringify(analysis) !== '{}') {
@@ -62,11 +64,13 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
             } catch (error) {
               setUrlNotExist(true);
             }
+            setIsLoading(false);
           }}
           onChange={(e) => {
             setUrl(e.target.value);
           }}
           isInvalid={isUrlValid}
+          isLoading={isLoading}
           errorText="url inserito non valido"
         />
         <Popup
