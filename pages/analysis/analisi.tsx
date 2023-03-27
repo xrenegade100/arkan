@@ -15,7 +15,7 @@ import { AnalysisDarkPattern } from '../../types';
 import Popup from '../../components/Popup';
 import { validation } from '../../helpers/CredentialsValidation';
 
-const analisi: NextPage = () => {
+const Analisi: NextPage = () => {
   const router = useRouter();
   const { analysis, setAnalysis } = useAnalysis();
   const [analysisExist, setAnalysisExist] = useState(validation.VALID);
@@ -203,4 +203,4 @@ const analisi: NextPage = () => {
     </div>
   );
 };
-export default analisi;
+export default Analisi;
