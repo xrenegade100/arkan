@@ -91,12 +91,14 @@ const report: NextPage = () => {
                 <div
                   className={clsx('rounded-full w-6 h-6', {
                     'bg-red-500':
-                      reportPost['danger-level'] === '5' ||
-                      reportPost['danger-level'] === '4',
+                      Number(reportPost['danger-level']) <= 5 &&
+                      Number(reportPost['danger-level']) >= 4,
                     'bg-yellow-500':
-                      reportPost['danger-level'] === '3' ||
-                      reportPost['danger-level'] === '2',
-                    'bg-green-500': reportPost['danger-level'] === '1',
+                      Number(reportPost['danger-level']) < 4 &&
+                      Number(reportPost['danger-level']) >= 2,
+                    'bg-green-500':
+                      Number(reportPost['danger-level']) < 2 &&
+                      Number(reportPost['danger-level']) >= 0,
                   })}
                 />
                 <span className="text-lg font-bold ml-4">

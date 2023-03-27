@@ -10,6 +10,7 @@ interface Props {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
   isInvalid?: number;
+  isLoading?: boolean;
   errorText?: string;
 }
 
@@ -18,6 +19,7 @@ const SearchBar: React.FC<Props> = ({
   onChange,
   onClick,
   isInvalid,
+  isLoading,
   errorText,
 }: Props) => {
   const [searchBarWidth, setSearchBarWidth] = useState({
@@ -67,12 +69,16 @@ const SearchBar: React.FC<Props> = ({
                   buttonMargin: 'mr-0',
                   inputMargin: 'ml-0',
                 });
-              } else {
+              } else if (!isLoading) {
                 onClick();
               }
             }}
           >
-            search
+            {isLoading ? (
+              <div className="animate-spin h-12 w-12 rounded-full border-4 border-gray-300 border-t-4 border-t-primary-main" />
+            ) : (
+              'search'
+            )}
           </button>
         </div>
       </div>
@@ -88,6 +94,7 @@ const SearchBar: React.FC<Props> = ({
 SearchBar.defaultProps = {
   errorText: '',
   isInvalid: validation.VALID,
+  isLoading: false,
 };
 
 export default SearchBar;
