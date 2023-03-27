@@ -5,7 +5,8 @@ import clsx from 'clsx';
 import { DocumentData, DocumentReference } from 'firebase/firestore';
 import type { NextPage } from 'next';
 import Router from 'next/router';
-import { useRef, Ref } from 'react';
+import { useRef, Ref, useState } from 'react';
+import Popup from '../components/Popup';
 import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
 import useAnalysis from '../hook/useAnalysis';
@@ -20,6 +21,7 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
   const scrollPoint: Ref<HTMLDivElement> = useRef(null);
 
   const { url, makeRequest, setUrl, isUrlValid } = useAnalysis();
+  const [urlNotExist, setUrlNotExist] = useState(false);
 
   const handleClick = () => {
     scrollPoint.current?.scrollIntoView({ behavior: 'smooth' });
@@ -33,20 +35,32 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
           onClick={async () => {
             try {
               const analysis = await makeRequest();
-              if (JSON.stringify(analysis) !== '{}' && analysis !== null) {
-                Router.push(
-                  {
-                    pathname: '/analysis/analisi',
-                    query: {
-                      analysis: (analysis as DocumentReference<DocumentData>)
-                        .id,
+              if (analysis !== null) {
+                if (JSON.stringify(analysis) !== '{}') {
+                  Router.push(
+                    {
+                      pathname: '/analysis/analisi',
+                      query: {
+                        analysis: (analysis as DocumentReference<DocumentData>)
+                          .id,
+                      },
                     },
-                  },
-                  '/analysis/analisi',
-                );
+                    '/analysis/analisi',
+                  );
+                } else {
+                  Router.push(
+                    {
+                      pathname: '/analysis/analisi',
+                      query: {
+                        analysis: '{}',
+                      },
+                    },
+                    '/analysis/analisi',
+                  );
+                }
               }
             } catch (error) {
-              // void
+              setUrlNotExist(true);
             }
           }}
           onChange={(e) => {
@@ -54,6 +68,14 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
           }}
           isInvalid={isUrlValid}
           errorText="url inserito non valido"
+        />
+        <Popup
+          isVisible={urlNotExist}
+          title="Attenzione!"
+          message="L'url che hai inserito è insesistente"
+          onClick={() => {
+            setUrlNotExist(false);
+          }}
         />
         <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-black to-transparent flex justify-center items-center">
           <button
