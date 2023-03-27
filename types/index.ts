@@ -39,3 +39,21 @@ export type DetectedDarkPattern = {
   'user-id': string;
   date: string;
 };
+
+export type Phrase = {
+  text: string;
+  score: number;
+};
+
+export type AnalysisDarkPattern = {
+  id?: string;
+  'danger-level': string;
+  'analysis-dp-name': string;
+  saved?: boolean;
+  'is-shared': boolean;
+  'site-link': string;
+  'site-name': string;
+  'user-id': string;
+  date: string;
+  phrases: Phrase[];
+};

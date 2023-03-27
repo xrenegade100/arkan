@@ -21,7 +21,12 @@ import {
 } from 'firebase/firestore';
 import { useState } from 'react';
 import { firestore } from '../firebase.config';
-import { DarkPatternType, DetectedDarkPattern } from '../types';
+import {
+  AnalysisDarkPattern,
+  DarkPatternType,
+  DetectedDarkPattern,
+  Phrase,
+} from '../types';
 import useStorage from './useStorage';
 
 const useDatabase = () => {
@@ -29,6 +34,8 @@ const useDatabase = () => {
     firestore,
     'user-detected-dp',
   );
+
+  const analysisDarkPatternsCollection = collection(firestore, 'analysis-dp');
 
   const { uploadImage, deleteImage } = useStorage();
 
@@ -182,7 +189,7 @@ const useDatabase = () => {
     return null;
   };
 
-  const savePost = async (id: string): Promise<boolean> => {
+  const saveReportPost = async (id: string): Promise<boolean> => {
     try {
       const report = doc(firestore, 'user-detected-dp', id);
       await updateDoc(report, { saved: true });
@@ -224,15 +231,81 @@ const useDatabase = () => {
     return null;
   };
 
+  const addAnalysis = async (
+    siteLink: string,
+    darkPatternType: string,
+    dangerLevel: string,
+    userId: string,
+    date: string,
+    isShared: boolean,
+    phrases: Phrase[],
+  ): Promise<DocumentReference<DocumentData> | null> => {
+    try {
+      const analysis = await addDoc(analysisDarkPatternsCollection, {
+        'danger-level': dangerLevel,
+        'dp-name': darkPatternType,
+        'site-link': siteLink,
+        'site-name': new URL(siteLink).hostname,
+        'user-id': userId || '',
+        'is-shared': isShared,
+        date,
+        phrases,
+      });
+
+      return analysis;
+    } catch (error) {
+      setDbError((error as FirebaseError).code);
+    }
+
+    return null;
+  };
+
+  const getAnalysisById = async (
+    id: string,
+  ): Promise<AnalysisDarkPattern | null> => {
+    let report: DocumentSnapshot<DocumentData> | null = null;
+
+    const ref = doc(firestore, 'analysis-dp', id);
+
+    try {
+      report = await getDoc(ref);
+    } catch (error) {
+      setDbError((error as FirebaseError).code);
+    }
+    if (report) {
+      return {
+        ...report?.data(),
+        id: report.id,
+      } as AnalysisDarkPattern;
+    }
+
+    return null;
+  };
+
+  const shareAnalysisPost = async (id: string): Promise<boolean> => {
+    try {
+      const report = doc(firestore, 'analysis-dp', id);
+      await updateDoc(report, { 'is-shared': true });
+    } catch (error) {
+      setDbError((error as FirebaseError).code);
+      return false;
+    }
+
+    return true;
+  };
+
   return {
     addReport,
+    addAnalysis,
+    getAnalysisById,
     getReportsByUserId,
     getAllReportsWithPagination,
     getReportsIfIsSaved,
     getReportsByDpType,
     getReportById,
     deleteReport,
-    savePost,
+    saveReportPost,
+    shareAnalysisPost,
     dbError,
   };
 };

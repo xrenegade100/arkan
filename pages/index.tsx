@@ -2,7 +2,9 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import clsx from 'clsx';
+import { DocumentData, DocumentReference } from 'firebase/firestore';
 import type { NextPage } from 'next';
+import Router from 'next/router';
 import { useRef, Ref } from 'react';
 import PostItem from '../components/PostItem';
 import SearchBar from '../components/SearchBar';
@@ -28,8 +30,24 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
       <header className="relative w-full h-screen flex justify-center items-center bg-header bg-no-repeat bg-cover">
         <SearchBar
           value={url}
-          onClick={() => {
-            makeRequest();
+          onClick={async () => {
+            try {
+              const analysis = await makeRequest();
+              if (JSON.stringify(analysis) !== '{}' && analysis !== null) {
+                Router.push(
+                  {
+                    pathname: '/analysis/analisi',
+                    query: {
+                      analysis: (analysis as DocumentReference<DocumentData>)
+                        .id,
+                    },
+                  },
+                  '/analysis/analisi',
+                );
+              }
+            } catch (error) {
+              // void
+            }
           }}
           onChange={(e) => {
             setUrl(e.target.value);
