@@ -6,7 +6,6 @@ import { validation } from '../helpers/CredentialsValidation';
 import { AnalysisDarkPattern, Phrase } from '../types';
 import { useAuth } from './useAuth';
 import useDatabase from './useDatabase';
-// import useDatabase from './useDatabase';
 
 const useAnalysis = () => {
   const [url, setUrl] = useState('');
