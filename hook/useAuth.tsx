@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { FirebaseError } from 'firebase/app';
 import { AuthContext } from '../context';
 import { auth, googleProvider } from '../firebase.config';
+import useUserDAO from './useUserDAO';
 
 const useProvideAuth = () => {
   const router = useRouter();
@@ -20,6 +21,7 @@ const useProvideAuth = () => {
   const [user, setUser] = useState<User>();
   const [firebaseError, setFirebaseError] = useState<FirebaseError>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { createUser } = useUserDAO();
 
   useEffect(() => {
     (async () => {
@@ -54,6 +56,12 @@ const useProvideAuth = () => {
         await updateProfile(auth.currentUser as User, {
           displayName: username,
         });
+        createUser(
+          data.user.displayName as string,
+          data.user.email as string,
+          data.user.uid as string,
+          data.user.photoURL as string,
+        );
         setUser(data.user);
         setIsLoggedIn(true);
       }
@@ -68,9 +76,14 @@ const useProvideAuth = () => {
       if (data.user) {
         setUser(data.user);
         setIsLoggedIn(true);
+        createUser(
+          data.user.displayName as string,
+          data.user.email as string,
+          data.user.uid as string,
+          data.user.photoURL as string,
+        );
       }
     } catch (error) {
-      console.log(error);
       setFirebaseError(error as FirebaseError);
     }
   };
@@ -84,6 +97,21 @@ const useProvideAuth = () => {
       }
     } catch (error) {
       setFirebaseError(error as FirebaseError);
+    }
+  };
+
+  const modifyAccount = async (username: string) => {
+    try {
+      await updateProfile(auth.currentUser as User, {
+        displayName: username,
+      });
+      setUser({
+        ...(user as User),
+        displayName: username,
+      });
+    } catch (error) {
+      setFirebaseError(error as FirebaseError);
+      console.log(error);
     }
   };
 
@@ -101,6 +129,7 @@ const useProvideAuth = () => {
     loginWithEmail,
     singinWithEmail,
     authenticateWithGoogle,
+    modifyAccount,
     firebaseError,
     logout,
   };

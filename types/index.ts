@@ -1,3 +1,13 @@
+export type UserInfo = {
+  email: string;
+  name: string;
+  username: string;
+  bio: string;
+  uid: string;
+  data_id: string;
+  photo_url: string;
+};
+
 export type Category = {
   name: string;
   description: string;

@@ -56,7 +56,7 @@ const Main: React.FC<Props> = ({ children }: Props) => {
                 icon="account_circle"
                 text="account"
                 onClick={() => {
-                  router.push(`/user/account/${user.uid}`);
+                  router.push('/user/account');
                   setIsSidebarVisible(false);
                 }}
               />

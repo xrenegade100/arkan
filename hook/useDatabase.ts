@@ -41,6 +41,9 @@ const useDatabase = () => {
 
   const [dbError, setDbError] = useState<string>();
 
+  /*
+   * methods for report post
+   */
   const addReport = async (
     siteName: string,
     siteLink: string,
@@ -231,6 +234,9 @@ const useDatabase = () => {
     return null;
   };
 
+  /**
+   * methods for analysis post
+   */
   const addAnalysis = async (
     siteLink: string,
     darkPatternType: string,
@@ -293,6 +299,10 @@ const useDatabase = () => {
 
     return true;
   };
+
+  /**
+   * methods for user
+   */
 
   return {
     addReport,
