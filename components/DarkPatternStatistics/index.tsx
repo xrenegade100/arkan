@@ -14,8 +14,7 @@ interface Props {
         name: string;
         darkPatternCount: number;
         backgroundColor: string;
-      }[]
-    | undefined;
+      }[];
   reverse?: boolean;
   noDataMessage: string;
 }
