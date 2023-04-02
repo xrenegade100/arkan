@@ -1,3 +1,13 @@
+export type UserInfo = {
+  email: string;
+  name: string;
+  username: string;
+  bio: string;
+  uid: string;
+  data_id: string;
+  photo_url: string;
+};
+
 export type Category = {
   name: string;
   description: string;
@@ -15,6 +25,15 @@ export type DarkPatternsInfo = {
   description: string;
   image: string;
   taxonomy: Taxonomy[];
+};
+
+export type DarkPattern = {
+  id?: string;
+  'danger-level': string;
+  'detected-dp-name': string;
+  'site-link': string;
+  'site-name': string;
+  'user-id': string;
 };
 
 export type DarkPatternType =
@@ -48,7 +67,7 @@ export type Phrase = {
 export type AnalysisDarkPattern = {
   id?: string;
   'danger-level': string;
-  'analysis-dp-name': string;
+  'detected-dp-name': string;
   saved?: boolean;
   'is-shared': boolean;
   'site-link': string;
@@ -56,4 +75,10 @@ export type AnalysisDarkPattern = {
   'user-id': string;
   date: string;
   phrases: Phrase[];
+};
+
+export type DonutChartData = {
+  name: string;
+  darkPatternCount: number;
+  backgroundColor: string;
 };

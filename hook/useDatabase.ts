@@ -41,6 +41,9 @@ const useDatabase = () => {
 
   const [dbError, setDbError] = useState<string>();
 
+  /*
+   * methods for report post
+   */
   const addReport = async (
     siteName: string,
     siteLink: string,
@@ -231,6 +234,9 @@ const useDatabase = () => {
     return null;
   };
 
+  /**
+   * methods for analysis post
+   */
   const addAnalysis = async (
     siteLink: string,
     darkPatternType: string,
@@ -243,7 +249,7 @@ const useDatabase = () => {
     try {
       const analysis = await addDoc(analysisDarkPatternsCollection, {
         'danger-level': dangerLevel,
-        'dp-name': darkPatternType,
+        'detected-dp-name': darkPatternType,
         'site-link': siteLink,
         'site-name': new URL(siteLink).hostname,
         'user-id': userId || '',
@@ -294,6 +300,36 @@ const useDatabase = () => {
     return true;
   };
 
+  const getAnalysisByUserId = async (
+    userId: string,
+  ): Promise<AnalysisDarkPattern[] | null> => {
+    let reports: QuerySnapshot<DocumentData> | null = null;
+
+    if (userId) {
+      const reportsQuery = query(
+        collection(firestore, 'analysis-dp'),
+        where('user-id', '==', userId),
+      );
+
+      try {
+        reports = await getDocs(reportsQuery);
+      } catch (error) {
+        setDbError((error as FirebaseError).code);
+      }
+
+      return reports?.docs.map((report) => ({
+        ...report.data(),
+        id: report.id,
+      })) as AnalysisDarkPattern[];
+    }
+
+    return null;
+  };
+
+  /**
+   * methods for user
+   */
+
   return {
     addReport,
     addAnalysis,
@@ -306,6 +342,7 @@ const useDatabase = () => {
     deleteReport,
     saveReportPost,
     shareAnalysisPost,
+    getAnalysisByUserId,
     dbError,
   };
 };

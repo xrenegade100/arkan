@@ -70,7 +70,7 @@ const useAnalysis = () => {
 
     const analysisObject: AnalysisDarkPattern = {
       'danger-level': dpScore.toString(),
-      'analysis-dp-name': 'Trick Questions',
+      'detected-dp-name': 'Trick Questions',
       'site-link': url,
       'site-name': urlToAnalyze?.hostname as string,
       'user-id': user?.uid || '',
@@ -106,7 +106,7 @@ const useAnalysis = () => {
         );
         const firebaseDocument = await addAnalysis(
           composedAnalysis['site-link'],
-          composedAnalysis['analysis-dp-name'],
+          composedAnalysis['detected-dp-name'],
           composedAnalysis['danger-level'],
           composedAnalysis['user-id'],
           composedAnalysis.date,

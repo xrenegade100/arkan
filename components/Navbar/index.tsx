@@ -62,6 +62,10 @@ const Navbar: React.FC<Props> = ({ onClick, isSidebarVisible }: Props) => {
                 email={user?.email as string}
                 username={user?.displayName as string}
                 isVisible={isOverlayVisible}
+                onClick={() => {
+                  router.push(`/user/account/${user.uid}`);
+                  setIsOverlayVisible(false);
+                }}
               >
                 <OverlaySection>
                   <OverlayItem
