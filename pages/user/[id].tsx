@@ -6,11 +6,10 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import {
   Chart as ChartJS,
-  ArcElement,
-  Tooltip,
   CategoryScale,
   LinearScale,
   BarElement,
+  Tooltip,
   Title,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
@@ -20,9 +19,9 @@ import useAccount from '../../hook/useAccount';
 import Input from '../../components/Input';
 import { validation } from '../../helpers/CredentialsValidation';
 import DarkPatternStatistics from '../../components/DarkPatternStatistics';
+import { DonutChartData } from '../../types';
 
 ChartJS.register(
-  ArcElement,
   Tooltip,
   CategoryScale,
   LinearScale,
@@ -33,26 +32,6 @@ ChartJS.register(
   Title,
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart',
-    },
-  },
-};
-
-export const data = {
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [1, 2, 4],
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-  ],
-};
-
 const User: NextPage = () => {
   const {
     user,
@@ -60,6 +39,8 @@ const User: NextPage = () => {
     updateInfo,
     isOwner,
     isUsernameValid,
+    getReportsStatistycs,
+    getAnalysisStatistics,
     setIsUsernameValid,
   } = useAccount();
 
@@ -70,6 +51,12 @@ const User: NextPage = () => {
   const route = useRouter();
   const { id } = route.query;
 
+  const [reportStatistycs, setReportStatystics] = useState<DonutChartData[]>();
+  const [analysisStatistycs, setAnalysisStatystics] =
+    useState<DonutChartData[]>();
+
+  const [barChartData, setBarChartData] = useState<any>();
+
   useEffect(() => {
     (async () => {
       if (id) {
@@ -79,13 +66,32 @@ const User: NextPage = () => {
   }, [id]);
 
   useEffect(() => {
-    if (user) {
-      setUsername(user.username as string);
-      setEmail(user.email as string);
-      setName(user.name as string);
-      setBio(user.bio as string);
-    }
+    (async () => {
+      if (user) {
+        setUsername(user.username as string);
+        setEmail(user.email as string);
+        setName(user.name as string);
+        setBio(user.bio as string);
+        setReportStatystics(await getReportsStatistycs());
+        setAnalysisStatystics(await getAnalysisStatistics());
+      }
+    })();
   }, [user]);
+
+  useEffect(() => {
+    if (reportStatistycs && analysisStatistycs) {
+      setBarChartData({
+        labels: ['Dark Patterns'],
+        datasets: [...reportStatistycs, ...analysisStatistycs].map(
+          (statistic) => ({
+            label: statistic.name,
+            data: [statistic.darkPatternCount],
+            backgroundColor: statistic.backgroundColor,
+          }),
+        ),
+      });
+    }
+  }, [reportStatistycs, analysisStatistycs]);
 
   const [isModifyDisabled, setIsModifyDisabled] = useState(true);
 
@@ -219,40 +225,36 @@ const User: NextPage = () => {
           </div>
           <DarkPatternStatistics
             title="Analisi"
-            darkPatternsStatisctycs={[
-              {
-                name: 'Trick Questions',
-                darkPatternCount: 2,
-                backgroundColor: '#0f0',
-              },
-            ]}
+            darkPatternsStatisctycs={analysisStatistycs}
             reverse
             noDataMessage="Non sono ancora disponibili Analisi"
           />
           <DarkPatternStatistics
             title="Segnalazioni"
-            darkPatternsStatisctycs={[
-              {
-                name: 'Trick Questions',
-                darkPatternCount: 2,
-                backgroundColor: '#0f0',
-              },
-              {
-                name: 'Misdirection',
-                darkPatternCount: 6,
-                backgroundColor: '#f00',
-              },
-              {
-                name: 'Emotions',
-                darkPatternCount: 7,
-                backgroundColor: '#00f',
-              },
-            ]}
+            darkPatternsStatisctycs={reportStatistycs}
             noDataMessage="Non sono ancora disponibili Segnalazioni"
           />
         </section>
         <div className="flex  justify-center lg:justify-start items-start lg:items-stretch border-2 border-gray-300 rounded-lg w-full lg:w-3/12 mb-4">
-          <Bar data={data} options={options} className="m-4" />
+          {barChartData && (
+            <Bar
+              data={barChartData}
+              options={{
+                responsive: true,
+                indexAxis: 'y',
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                  title: {
+                    display: true,
+                    text: 'Totale dei Dark Patterns',
+                  },
+                },
+              }}
+              className="m-4"
+            />
+          )}
         </div>
       </section>
       <section className="flex flex-col-reverse lg:flex-row justify-center lg:justify-between items-center lg:items-stretch border-2 border-gray-300 rounded-lg w- mb-4"></section>

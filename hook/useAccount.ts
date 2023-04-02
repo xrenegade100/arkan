@@ -3,14 +3,16 @@
 import { useState, useEffect } from 'react';
 import { auth } from '../firebase.config';
 import { validation } from '../helpers/CredentialsValidation';
-import { UserInfo } from '../types';
+import { DarkPattern, DonutChartData, UserInfo } from '../types';
 import useUserDAO from './useUserDAO';
+import useDatabase from './useDatabase';
 
 const useAccount = () => {
   const [user, setUser] = useState<UserInfo>();
   const [isOwner, setIsOwner] = useState(false);
 
   const { getUserDataById, modifyUserInfo, firebaseError } = useUserDAO();
+  const { getReportsByUserId, getAnalysisByUserId } = useDatabase();
 
   const [isUsernameValid, setIsUsernameValid] = useState(validation.VALID);
 
@@ -63,12 +65,72 @@ const useAccount = () => {
     return false;
   };
 
+  const generateRandomColor = () => {
+    const maxVal = 0xffffff; // 16777215
+    let randomNumber = Math.random() * maxVal;
+    randomNumber = Math.floor(randomNumber);
+    const convert = randomNumber.toString(16);
+    const randColor = convert.padStart(6, '0');
+    return `#${randColor.toUpperCase()}`;
+  };
+
+  const createStructure = (
+    darkPatternList: DarkPattern[],
+  ): DonutChartData[] | undefined => {
+    const statistycs: DonutChartData[] | undefined = [];
+    darkPatternList?.forEach((darkPattern) => {
+      const index = statistycs?.findIndex(
+        (statistyc) => statistyc.name === darkPattern['detected-dp-name'],
+      );
+      if (index !== -1) {
+        statistycs[index].darkPatternCount += 1;
+      } else {
+        statistycs.push({
+          name: darkPattern['detected-dp-name'],
+          darkPatternCount: 1,
+          backgroundColor: generateRandomColor(),
+        });
+      }
+      console.log(statistycs);
+    });
+    return statistycs;
+  };
+
+  const getReportsStatistycs = async (): Promise<
+    DonutChartData[] | undefined
+  > => {
+    const reports: DarkPattern[] | null = await getReportsByUserId(
+      user?.uid as string,
+    );
+    console.log(reports);
+    if (reports?.length !== 0) {
+      return createStructure(reports as DarkPattern[]);
+    }
+
+    return undefined;
+  };
+
+  const getAnalysisStatistics = async (): Promise<
+    DonutChartData[] | undefined
+  > => {
+    const analysis: DarkPattern[] | null = await getAnalysisByUserId(
+      user?.uid as string,
+    );
+    if (analysis?.length !== 0) {
+      return createStructure(analysis as DarkPattern[]);
+    }
+
+    return undefined;
+  };
+
   return {
     user,
     getUserById,
     updateInfo,
     isUsernameValid,
     setIsUsernameValid,
+    getReportsStatistycs,
+    getAnalysisStatistics,
     isOwner,
     firebaseError,
   };
