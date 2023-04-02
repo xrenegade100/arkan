@@ -42,6 +42,8 @@ const useProvideAuth = () => {
       if (router.pathname === '/login' || router.pathname === '/signup') {
         router.push('/');
       }
+    } else if (router.pathname.includes('/user')) {
+      router.push('/');
     }
   }, [isLoggedIn]);
 

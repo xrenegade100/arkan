@@ -33,14 +33,14 @@ const useUserDAO = () => {
       setFirebaseError((error as FirebaseError).code);
     }
 
-    if (user) {
+    if (user?.docs[0]) {
       return {
         ...(user.docs[0].data() as UserInfo),
         data_id: user.docs[0].id,
       };
     }
 
-    return null;
+    throw Error('user do not exist');
   };
 
   const createUser = async (

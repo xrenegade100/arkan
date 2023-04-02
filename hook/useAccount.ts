@@ -10,6 +10,7 @@ import useDatabase from './useDatabase';
 const useAccount = () => {
   const [user, setUser] = useState<UserInfo>();
   const [isOwner, setIsOwner] = useState(false);
+  const [userExist, setUserExist] = useState(true);
 
   const { getUserDataById, modifyUserInfo, firebaseError } = useUserDAO();
   const { getReportsByUserId, getAnalysisByUserId } = useDatabase();
@@ -23,9 +24,13 @@ const useAccount = () => {
   }, [firebaseError]);
 
   const getUserById = async (id: string) => {
-    setUser((await getUserDataById(id)) as UserInfo);
-    if (id === auth.currentUser?.uid) {
-      setIsOwner(true);
+    try {
+      setUser((await getUserDataById(id)) as UserInfo);
+      if (id === auth.currentUser?.uid) {
+        setIsOwner(true);
+      }
+    } catch (error) {
+      setUserExist(false);
     }
   };
 
@@ -49,7 +54,7 @@ const useAccount = () => {
     } as UserInfo;
 
     if (user) {
-      const isUpdated = await modifyUserInfo(user.data_id, pojo);
+      const isUpdated = await modifyUserInfo((user as UserInfo).data_id, pojo);
       if (isUpdated) {
         setUser({
           ...user,
@@ -91,7 +96,6 @@ const useAccount = () => {
           backgroundColor: generateRandomColor(),
         });
       }
-      console.log(statistycs);
     });
     return statistycs;
   };
@@ -100,9 +104,9 @@ const useAccount = () => {
     DonutChartData[] | undefined
   > => {
     const reports: DarkPattern[] | null = await getReportsByUserId(
-      user?.uid as string,
+      (user as UserInfo).uid as string,
     );
-    console.log(reports);
+
     if (reports?.length !== 0) {
       return createStructure(reports as DarkPattern[]);
     }
@@ -114,7 +118,7 @@ const useAccount = () => {
     DonutChartData[] | undefined
   > => {
     const analysis: DarkPattern[] | null = await getAnalysisByUserId(
-      user?.uid as string,
+      (user as UserInfo).uid as string,
     );
     if (analysis?.length !== 0) {
       return createStructure(analysis as DarkPattern[]);
@@ -132,6 +136,7 @@ const useAccount = () => {
     getReportsStatistycs,
     getAnalysisStatistics,
     isOwner,
+    userExist,
     firebaseError,
   };
 };
