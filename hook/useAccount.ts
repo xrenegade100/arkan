@@ -4,16 +4,18 @@ import { useState, useEffect } from 'react';
 import { auth } from '../firebase.config';
 import { validation } from '../helpers/CredentialsValidation';
 import { DarkPattern, DonutChartData, UserInfo } from '../types';
-import useUserDAO from './useUserDAO';
-import useDatabase from './useDatabase';
+import UserDAO from '../dao/UserDAO';
+import ReportDAO from '../dao/ReportDAO';
+import AnalysisDAO from '../dao/AnalysisDAO';
 
 const useAccount = () => {
   const [user, setUser] = useState<UserInfo>();
   const [isOwner, setIsOwner] = useState(false);
   const [userExist, setUserExist] = useState(true);
 
-  const { getUserDataById, modifyUserInfo, firebaseError } = useUserDAO();
-  const { getReportsByUserId, getAnalysisByUserId } = useDatabase();
+  const { getUserDataById, modifyUserInfo, firebaseError } = UserDAO();
+  const { getReportsByUserId } = ReportDAO();
+  const { getAnalysisByUserId } = AnalysisDAO();
 
   const [isUsernameValid, setIsUsernameValid] = useState(validation.VALID);
 

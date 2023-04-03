@@ -6,15 +6,15 @@ import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from '../components/Button';
-import useDatabase from '../hook/useDatabase';
 import { DetectedDarkPattern } from '../types';
 import { useAuth } from '../hook/useAuth';
 import LoadingBanner from '../components/LoadingBanner';
 import AccessDeniedBanner from '../components/AccessDeniedBanner';
+import ReportDAO from '../dao/ReportDAO';
 
 const report: NextPage = () => {
   const router = useRouter();
-  const { getReportById, dbError } = useDatabase();
+  const { getReportById, dbError } = ReportDAO();
   const [reportPost, setReportPost] = useState<DetectedDarkPattern | null>();
   const { user } = useAuth();
 

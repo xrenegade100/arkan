@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+// eslint-disable-next-line object-curly-newline
 import React, { useState, useEffect, ReactElement, useContext } from 'react';
 import {
   createUserWithEmailAndPassword,
@@ -13,7 +14,7 @@ import { useRouter } from 'next/router';
 import { FirebaseError } from 'firebase/app';
 import { AuthContext } from '../context';
 import { auth, googleProvider } from '../firebase.config';
-import useUserDAO from './useUserDAO';
+import UserDAO from '../dao/UserDAO';
 
 const useProvideAuth = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const useProvideAuth = () => {
   const [user, setUser] = useState<User>();
   const [firebaseError, setFirebaseError] = useState<FirebaseError>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { createUser } = useUserDAO();
+  const { createUser } = UserDAO();
 
   useEffect(() => {
     (async () => {
@@ -113,7 +114,6 @@ const useProvideAuth = () => {
       });
     } catch (error) {
       setFirebaseError(error as FirebaseError);
-      console.log(error);
     }
   };
 

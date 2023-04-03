@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { validation } from '../helpers/CredentialsValidation';
 import { AnalysisDarkPattern, Phrase } from '../types';
 import { useAuth } from './useAuth';
-import useDatabase from './useDatabase';
+import AnalysisDAO from '../dao/AnalysisDAO';
 
 const useAnalysis = () => {
   const [url, setUrl] = useState('');
@@ -15,7 +15,7 @@ const useAnalysis = () => {
 
   const { user } = useAuth();
 
-  const { addAnalysis } = useDatabase();
+  const { addAnalysis } = AnalysisDAO();
 
   useEffect(() => {
     try {

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { validation } from '../helpers/CredentialsValidation';
 import { DangerLevel, DarkPatternType } from '../types';
 import { useAuth } from './useAuth';
-import useDatabase from './useDatabase';
+import ReportDAO from '../dao/ReportDAO';
 
 const useReport = (image: File) => {
   const [siteLink, setSiteLink] = useState<URL>();
@@ -26,7 +26,7 @@ const useReport = (image: File) => {
 
   const { user } = useAuth();
 
-  const { addReport, dbError } = useDatabase();
+  const { addReport, dbError } = ReportDAO();
 
   useEffect(() => {
     if (siteLink && isUrlValid) {

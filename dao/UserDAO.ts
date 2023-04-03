@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { firestore } from '../firebase.config';
 import { UserInfo } from '../types';
 
-const useUserDAO = () => {
+const UserDAO = () => {
   const userCollection = collection(firestore, 'users');
   const [firebaseError, setFirebaseError] = useState<string>();
 
@@ -103,4 +103,4 @@ const useUserDAO = () => {
   };
 };
 
-export default useUserDAO;
+export default UserDAO;
