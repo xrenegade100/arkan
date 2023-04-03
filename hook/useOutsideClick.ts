@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable operator-linebreak */
 import { useState, useEffect, Ref, MutableRefObject } from 'react';
 
 const useOutsideClick = (

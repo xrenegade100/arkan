@@ -10,16 +10,16 @@ import Button from '../../components/Button';
 import LoadingBanner from '../../components/LoadingBanner';
 import Toast from '../../components/Toast';
 import useAnalysis from '../../hook/useAnalysis';
-import useDatabase from '../../hook/useDatabase';
 import { AnalysisDarkPattern } from '../../types';
 import Popup from '../../components/Popup';
 import { validation } from '../../helpers/CredentialsValidation';
+import AnalysisDAO from '../../dao/AnalysisDAO';
 
 const Analisi: NextPage = () => {
   const router = useRouter();
   const { analysis, setAnalysis } = useAnalysis();
   const [analysisExist, setAnalysisExist] = useState(validation.VALID);
-  const { getAnalysisById, shareAnalysisPost, dbError } = useDatabase();
+  const { getAnalysisById, shareAnalysisPost, dbError } = AnalysisDAO();
 
   const [isPostShared, setIsPostShared] = useState(false);
 

@@ -150,6 +150,7 @@ const segnala: NextPage = () => {
             onClick={async () => {
               const report = await submitReport();
               if (report) {
+                deleteImage();
                 router.push(`/${report?.id}`);
               }
             }}
