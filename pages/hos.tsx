@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
 
-const hos: NextPage = () => <div />;
+const Hos: NextPage = () => <div />;
 
-export default hos;
+export default Hos;
