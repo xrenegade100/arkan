@@ -1,11 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0");
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Rules for sizing the icon. */
-.md-18 { font-size: 18px; }
+.md-18 { font-size: 16px; }
 .md-24 { font-size: 24px; }
+.md-32 { font-size: 32px; }
 .md-36 { font-size: 36px; }
 .md-48 { font-size: 48px; }
+.md-56 { font-size: 56px; }
+.md-64 { font-size: 64px; }
+
+input[type=range] {
+  height: 1rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  position:relative;
+  -webkit-appearance: none;
+  background: #1976D2;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 100%;
+  box-shadow: 1px 5px 10px -1px rgba(0, 0, 0, 0.5);
+}

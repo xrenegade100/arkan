@@ -19,6 +19,7 @@ const Button: React.FC<Props> = ({
   className,
 }: Props) => (
   <button
+    data-cy="button"
     disabled={disabled || isLoading}
     onClick={onClick}
     type="button"
@@ -29,7 +30,7 @@ const Button: React.FC<Props> = ({
       },
       {
         'hover:bg-primary-accent':
-          !disabled && !isLoading && variant === 'primary',
+          !(disabled || isLoading) && variant === 'primary',
       },
       {
         'bg-primary-main': variant === 'primary',
@@ -39,13 +40,14 @@ const Button: React.FC<Props> = ({
       },
       {
         'hover:bg-secondary-accent':
-          !disabled && !isLoading && variant === 'secondary',
+          !(disabled || isLoading) && variant === 'secondary',
       },
       className,
     )}
   >
     {isLoading ? (
       <div
+        data-cy="loading"
         style={{
           border: '3px solid transparent',
           borderTop: '3px solid #ffffff',

@@ -1,22 +1,29 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import clsx from 'clsx';
 import React from 'react';
 
 interface Props {
   imageUrl: string;
-  dimen?: 'xs' | 'sm' | 'md' | 'xl';
+  dimen?: 'xs' | 'sm' | 'md' | 'xl' | 'xxl';
   user?: string;
   onClick?: () => void;
+  className?: string;
 }
 
-const Avatar: React.FC<Props> = ({ imageUrl, dimen, user, onClick }: Props) => (
+// eslint-disable-next-line object-curly-newline
+const Avatar: React.FC<Props> = ({
+  imageUrl,
+  dimen,
+  user,
+  onClick,
+  className,
+}: Props) => (
+  // rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
   <img
     src={imageUrl}
     alt={user}
     title={user}
     className={clsx(
-      'rounded-full object-cover object-center hover:cursor-pointer',
+      `${className} rounded-full object-cover object-center hover:cursor-pointer`,
       {
         'w-8 h-8': dimen === 'xs',
       },
@@ -28,6 +35,9 @@ const Avatar: React.FC<Props> = ({ imageUrl, dimen, user, onClick }: Props) => (
       },
       {
         'w-20 h-20': dimen === 'xl',
+      },
+      {
+        'w-44 h-44': dimen === 'xxl',
       },
     )}
     onClick={onClick}
