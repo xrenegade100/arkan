@@ -25,24 +25,16 @@ env:
   NEXT_PUBLIC_MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }}
 
 jobs:
-  build:
+  cypress-run:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - name: install dependencies
-        run: npm ci
-      - name: check linting
-        run: npm run lint
-      - name: project build
-        run: npm run build --if-present
+          component: true
+          build: npm run build
+          start: npm start
