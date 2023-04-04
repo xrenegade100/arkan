@@ -19,6 +19,7 @@ const Button: React.FC<Props> = ({
   className,
 }: Props) => (
   <button
+    data-cy="button"
     disabled={disabled || isLoading}
     onClick={onClick}
     type="button"
@@ -46,6 +47,7 @@ const Button: React.FC<Props> = ({
   >
     {isLoading ? (
       <div
+        data-cy="loading"
         style={{
           border: '3px solid transparent',
           borderTop: '3px solid #ffffff',
