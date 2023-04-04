@@ -17,7 +17,7 @@ import {
 import { useAuth } from '../hook/useAuth';
 import Popup from '../components/Popup';
 
-const signup: NextPage = () => {
+const Signup: NextPage = () => {
   // value variables
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -207,4 +207,4 @@ const signup: NextPage = () => {
   );
 };
 
-export default signup;
+export default Signup;

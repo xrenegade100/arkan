@@ -12,7 +12,7 @@ import LoadingBanner from '../components/LoadingBanner';
 import AccessDeniedBanner from '../components/AccessDeniedBanner';
 import ReportDAO from '../dao/ReportDAO';
 
-const report: NextPage = () => {
+const Report: NextPage = () => {
   const router = useRouter();
   const { getReportById, dbError } = ReportDAO();
   const [reportPost, setReportPost] = useState<DetectedDarkPattern | null>();
@@ -137,4 +137,4 @@ const report: NextPage = () => {
   );
 };
 
-export default report;
+export default Report;

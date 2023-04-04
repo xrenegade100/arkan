@@ -13,7 +13,7 @@ import { useImage } from '../hook/useImage';
 import useReport from '../hook/useReport';
 import { DangerLevel, DarkPatternType } from '../types';
 
-const segnala: NextPage = () => {
+const Segnala: NextPage = () => {
   const { image, deleteImage } = useImage();
   const {
     siteLink,
@@ -165,4 +165,4 @@ const segnala: NextPage = () => {
   );
 };
 
-export default segnala;
+export default Segnala;

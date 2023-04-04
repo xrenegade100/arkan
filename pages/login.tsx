@@ -11,7 +11,7 @@ import Input from '../components/Input';
 import { useAuth } from '../hook/useAuth';
 import { validation } from '../helpers/CredentialsValidation';
 
-const login: NextPage = () => {
+const Login: NextPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { loginWithEmail, authenticateWithGoogle, firebaseError } = useAuth();
@@ -147,4 +147,4 @@ const login: NextPage = () => {
   );
 };
 
-export default login;
+export default Login;
