@@ -72,9 +72,16 @@ const useAccount = () => {
     return false;
   };
 
+  function cryptoRandom() {
+    const typedArray = new Uint8Array(10);
+    const randomValue = Math.sqrt(crypto.getRandomValues(typedArray)[0]);
+    const randomFloat = randomValue / 2 ** 8;
+    return randomFloat;
+  }
+
   const generateRandomColor = () => {
     const maxVal = 0xffffff; // 16777215
-    let randomNumber = Math.random() * maxVal;
+    let randomNumber = cryptoRandom() * maxVal;
     randomNumber = Math.floor(randomNumber);
     const convert = randomNumber.toString(16);
     const randColor = convert.padStart(6, '0');
@@ -106,7 +113,7 @@ const useAccount = () => {
     DonutChartData[] | undefined
   > => {
     const reports: DarkPattern[] | null = await getReportsByUserId(
-      (user as UserInfo).uid as string,
+      user?.uid as string,
     );
 
     if (reports?.length !== 0) {
@@ -120,7 +127,7 @@ const useAccount = () => {
     DonutChartData[] | undefined
   > => {
     const analysis: DarkPattern[] | null = await getAnalysisByUserId(
-      (user as UserInfo).uid as string,
+      user?.uid as string,
     );
     if (analysis?.length !== 0) {
       return createStructure(analysis as DarkPattern[]);
