@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-undef */
-import Button from '../../components/Button';
+import Button from '.';
 
 describe('Button', () => {
   it('showld be clickable', () => {
