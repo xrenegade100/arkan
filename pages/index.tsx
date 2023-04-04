@@ -194,7 +194,7 @@ const Home: NextPage<Props> = ({ darkPatternsInfo }: Props) => {
 };
 
 export async function getStaticProps() {
-  const response = await handler();
+  const response = handler();
   let darkPatternsInfo;
   if (response) {
     darkPatternsInfo = response;
